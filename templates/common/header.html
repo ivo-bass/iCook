@@ -1,0 +1,79 @@
+{% load bootstrap_icons %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+{#            {% bs_icon 'egg-fried' size='2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}#}
+            iCook
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+                aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link2 active" href="#">
+                        {% bs_icon 'house' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                        Начало
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link2" href="#">
+                        {% bs_icon 'list-task' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                        Рецепти
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        {% bs_icon 'check2-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                        Предложения
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Закуска</a>
+                        <a class="dropdown-item" href="#">Салата</a>
+                        <a class="dropdown-item" href="#">Супа</a>
+                        <a class="dropdown-item" href="#">Основно</a>
+                        <a class="dropdown-item" href="#">Десерт</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Произволно</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link2" href="#">
+                        {% bs_icon 'info-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-top" %}
+                        За нас
+                    </a>
+                </li>
+            </ul>
+            <form class="d-flex" method="get" action="">
+                <input class="form-control me-sm-2" type="text" placeholder="Търси...">
+                <button type="button" class="btn btn-primary btn-sm">
+                    {% bs_icon 'search' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                </button>
+            </form>
+
+            {#    IF NOT LOGGED IN: SIGN IN / SIGN UP#}
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link2" href="#">
+                        {% bs_icon 'box-arrow-in-right' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-top" %}
+                        Вход
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link2" href="#">
+                        {% bs_icon 'pencil-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-top" %}
+                        Регистрация
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
