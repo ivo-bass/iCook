@@ -3,9 +3,11 @@
 {% block content %}
     <div class="container-fluid d-flex justify-content-center">
         <div class="row">
-            <div class="col d-flex justify-content-center">
-                {% include 'recipes/todays_pick.html' %}
-            </div>
+            {% for recipe in recipes %}
+                <div class="col d-flex justify-content-center">
+                    {% include 'recipes/short-details.html' with r=recipe %}
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

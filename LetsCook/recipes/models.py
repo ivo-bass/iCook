@@ -4,6 +4,22 @@ from django.db import models
 from LetsCook.core.validators import validate_digits_not_in_string
 
 
+class MealType(models.Model):
+    meal_type = models.CharField(
+        max_length=20,
+        # choices=(
+        #     ('salad', 'salad'),
+        #     ('soup', 'soup'),
+        #     ('main', 'main'),
+        #     ('dessert', 'dessert'),
+        #     ('breakfast', 'breakfast'),
+        # )
+    )
+
+    def __str__(self):
+        return self.meal_type
+
+
 class Recipe(models.Model):
     # author = models.ForeignKey(User, on_delete=models.PROTECT)
     title = models.CharField(
@@ -13,19 +29,29 @@ class Recipe(models.Model):
             validate_digits_not_in_string,
         ],
     )
+
+    meal_type = models.ForeignKey(
+        MealType,
+        on_delete=models.PROTECT,
+        null=True,
+    )
+
     image = models.ImageField(
+        default='food-default.png',
         upload_to='recipes',
         blank=True,
     )
+
     description = models.CharField(
-        max_length=200,
-        blank=True,
+        max_length=100,
     )
+
     time = models.IntegerField(
         validators=[
             MinValueValidator(1),
         ]
     )
+
     servings = models.IntegerField(
         validators=[
             MinValueValidator(1),
@@ -42,7 +68,7 @@ class Recipe(models.Model):
         default=True,
     )
 
-    upload_time = models.DateTimeField(
+    created_on = models.DateTimeField(
         auto_now_add=True,
     )
 
@@ -58,20 +84,30 @@ class Ingredient(models.Model):
     name = models.CharField(
         max_length=30
     )
-    quantity = models.FloatField()
+
+    quantity = models.FloatField(
+        blank=True,
+    )
+
     measure = models.CharField(
         max_length=20,
+        blank=True,
         choices=(
-            ('gr', 'gr'),
+            ('g', 'g'),
             ('kg', 'kg'),
             ('ml', 'ml'),
             ('l', 'l'),
-            ('tea spoon', 'tea spoon'),
-            ('table spoon', 'table spoon'),
+            ('tsp', 'tsp'),
+            ('tbsp', 'tbsp'),
             ('cup', 'cup'),
+            ('pcs', 'pcs'),
         )
     )
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE
+    )
 
     def __str__(self):
-        return f"{self.name} - {self.quantity}{self.measure}"
+        return f"{self.name} - {self.quantity} {self.measure}"

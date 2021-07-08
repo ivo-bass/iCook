@@ -5,13 +5,20 @@ from LetsCook.recipes.models import Recipe
 
 
 def index(request):
-    r = Recipe.objects.first()
-    recipe = RecipeForm(instance=r)
-    form = IngredientFormSet(instance=r)
+    recipes = Recipe.objects.all()
+    # recipe = RecipeForm(instance=r)
+    # form = IngredientFormSet(instance=r)
     context = {
-        'r': r,
-        'recipe': recipe,
-        'form': form,
+        'recipes': recipes,
     }
-    pass
     return render(request, 'index.html', context)
+
+
+def details_recipe(request, pk):
+    recipe = Recipe.objects.get(pk=pk)
+    ingredients = recipe.ingredients.split(', ')
+    context = {
+        'recipe': recipe,
+        'ingredients': ingredients,
+    }
+    return render(request, 'recipes/details.html', context)

@@ -60,12 +60,18 @@ body {
     font-weight: 400;
     line-height: 1.5;
     color: #444;
-    background-color: lightgray;
+    /*background-color: lightgray;*/
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.4)
+    ),
+    url(/static/images/main-bg.jpg);
+
 }
 
 hr {
@@ -635,6 +641,7 @@ progress {
     padding-left: var(--bs-gutter-x, 0.75rem);
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 10vh;
 }
 
 @media (min-width: 576px) {
@@ -5008,13 +5015,22 @@ fieldset:disabled .btn {
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
-    min-width: 0;
-    max-width: 50%;
     word-wrap: break-word;
     background-color: white;
     background-clip: border-box;
     border: 0 solid transparent;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
+    /*box-shadow: 5px 5px 10px 5px black;*/
+}
+
+.card-small {
+    min-width: 35vh;
+    max-width: 35vh;
+}
+
+.card-big {
+    min-width: 70vh;
+    max-width: 80%;
 }
 
 .card > hr {
@@ -5118,6 +5134,9 @@ fieldset:disabled .btn {
 .card-img-top,
 .card-img-bottom {
     width: 100%;
+    height: 15vw;
+    size: inherit;
+    object-fit: cover;
 }
 
 .card-img,
@@ -13549,7 +13568,7 @@ select.form-control[multiple] {
 /*}*/
 
 .main {
-    margin-left: 12rem;
+    margin-left: 10rem;
     flex: 1;
     transition: margin-left .5s;
     /*padding: 20px;*/
@@ -13580,9 +13599,14 @@ footer {
     border: none;
     border-bottom-right-radius: 1rem;
     box-shadow: 2px 1px 6px rgba(0, 0, 0, 0.5), 4px 2px 12px 2px rgba(0, 0, 0, 0.3);
-    background-color: var(--bs-primary);
+    background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.4)
+    ),
+    url(/static/images/side-bg.jpg);
     height: 100%;
-    width: 12rem;
+    width: 10rem;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -13597,7 +13621,7 @@ footer {
 .sidebar a {
     /*padding: 8px 8px 8px 32px;*/
     color: var(--bs-secondary);
-    text-decoration: none;
+    text-decoration: underline var(--bs-primary);
     font-size: 1rem;
     display: block;
     transition: 0.3s;
@@ -13605,7 +13629,7 @@ footer {
 
 .sidebar a:hover {
     /*padding: 8px 8px 8px 32px;*/
-    color: var(--bs-gray);
+    color: var(--bs-primary);
     text-decoration: none;
     font-size: 1rem;
     display: block;
@@ -13658,8 +13682,9 @@ footer {
 .control-panel {
     position: center;
     font-size: 1.2rem;
-    color: white;
-    text-decoration: underline;
+    font-weight: 1000;
+    color: var(--bs-primary);
+    /*text-decoration: underline;*/
     padding-right: 0;
     padding-left: 0.5rem;
 }
@@ -13668,4 +13693,26 @@ footer {
 .bi-valign-text-top,
 .bi-valign-text-bottom {
     margin-right: 2px;
+}
+
+.wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.wrapper:after {
+    content: '';
+    display: block;
+    padding-top: 80%;
+    margin-bottom: -20%;
+}
+
+.wrapper img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
 }

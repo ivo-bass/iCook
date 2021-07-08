@@ -18,8 +18,8 @@
     </a>
 
     <a class="openbtn" id="openbtn" hidden onclick="function openNav() {
-        document.getElementById('mySidebar').style.width = '12rem';
-        document.getElementById('main').style.marginLeft = '12rem';
+        document.getElementById('mySidebar').style.width = '10rem';
+        document.getElementById('main').style.marginLeft = '10rem';
         document.getElementById('closebtn').hidden = false;
         document.getElementById('openbtn').hidden = true;
         document.getElementById('control-panel').style.fontSize = '1.2rem';
@@ -34,7 +34,7 @@
 
     <br/>
     <hr/>
-    <span class="control-panel" id="control-panel">Контролен Панел</span>
+    <span class="control-panel" id="control-panel">CONTROL PANEL</span>
     <hr/>
     <ul class="navbar-nav me-auto flex-column mb-lg-auto justify-content-center">
         <li>
@@ -44,14 +44,14 @@
             <a href="{{ test }}"
                class="nav-link {% if request.path == test %}active{% endif %}">
                 {% bs_icon 'calendar-check' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                За днес
+                Today's
             </a>
         </li>
         <li>
             <a href="{{ test }}"
                class="nav-link {% if request.path == test %}active{% endif %}">
                 {% bs_icon 'clock-history' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                История
+                History
             </a>
         </li>
         <li>
@@ -61,7 +61,7 @@
             <a href="{{ test }}"
                class="nav-link {% if request.path == test %}active{% endif %}">
                 {% bs_icon 'journal-bookmark-fill' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                Бележник
+                Note Pad
             </a>
         </li>
         {#        <li>#}
@@ -79,7 +79,7 @@
             <a href="{{ test }}"
                class="nav-link {% if request.path == test %}active{% endif %}">
                 {% bs_icon 'file-earmark-plus' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                Добави рецепта
+                Add Recipe
             </a>
         </li>
         <li>
@@ -91,8 +91,8 @@
     <div class="nav-item dropdown">
         <a href="#" class="d-flex dropdown-toggle"
            data-bs-toggle="dropdown" aria-expanded="false" onclick="function openNav() {
-        document.getElementById('mySidebar').style.width = '12rem';
-        document.getElementById('main').style.marginLeft = '12rem';
+        document.getElementById('mySidebar').style.width = '10rem';
+        document.getElementById('main').style.marginLeft = '10rem';
         document.getElementById('closebtn').hidden = false;
         document.getElementById('openbtn').hidden = true;
         document.getElementById('control-panel').style.fontSize = '1.2rem';
@@ -110,16 +110,17 @@
             <li>
                 <a class="dropdown-item" href="#">
                     {% bs_icon 'file-earmark-person' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                    Профил
+                    Profile
                 </a>
             </li>
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="#">
-                {% bs_icon 'box-arrow-left' size='1.2rem' color='currentColor' extra_classes="bi-valign-top icons" %}
-                Изход
-            </a>
+            <li>
+                <a class="dropdown-item" href="#">
+                    {% bs_icon 'box-arrow-left' size='1.2rem' color='currentColor' extra_classes="bi-valign-top icons" %}
+                    Sign Out
+                </a>
             </li>
         </ul>
     </div>
