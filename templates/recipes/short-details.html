@@ -1,8 +1,8 @@
 {% load bootstrap_icons %}
 
-<div class="card card-small border-dark mb-3">
-    <div class="wrapper card-header">
-        <a href="{% url 'details-recipe' r.pk %}">
+<a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
+    <div class="card border-dark mb-3" id="card-small">
+        <div class="wrapper card-header">
             {% if not r.image %}
                 <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200"
                      aria-label="Placeholder: Image cap" focusable="false" role="img"
@@ -14,38 +14,38 @@
             {% else %}
                 <img class="img-fluid" src="{{ r.image.url }}" alt="image">
             {% endif %}
-        </a>
+        </div>
+        <div class="card-body">
+{#            <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">#}
+                <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
+{#            </a>#}
+            <h6 class="card-subtitle text-muted center">{{ r.meal_type }}</h6>
+        </div>
+        <hr>
+        <div class="card-body">
+            <p class="card-text">
+                {{ r.description|capfirst|truncatechars:40 }}
+            </p>
+        </div>
+        <hr>
+        <div class="card-body">
+            <ul class="list-group list-group-horizontal center">
+                <li class="list-group-item">
+                    <small class="text-warning">
+                        {% bs_icon 'people' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                        Servings: {{ r.servings }}
+                    </small>
+                </li>
+                <li class="list-group-item">
+                    <small class="text-success">
+                        {% bs_icon 'watch' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                        Time: {{ r.time }} min
+                    </small>
+                </li>
+            </ul>
+        </div>
+        <div class="card-footer text-muted">
+            <small>{{ r.created_on|date }}</small>
+        </div>
     </div>
-    <div class="card-body">
-        <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
-            <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
-        </a>
-        <h6 class="card-subtitle text-muted center">{{ r.meal_type }}</h6>
-    </div>
-    <hr>
-    <div class="card-body">
-        <p class="card-text">
-            {{ r.description|capfirst }}
-        </p>
-    </div>
-    <hr>
-    <div class="card-body">
-        <ul class="list-group list-group-horizontal center">
-            <li class="list-group-item">
-                <small class="text-warning">
-                    {% bs_icon 'people' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
-                    Servings: {{ r.servings }}
-                </small>
-            </li>
-            <li class="list-group-item">
-                <small class="text-success">
-                    {% bs_icon 'watch' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
-                    Time: {{ r.time }} min
-                </small>
-            </li>
-        </ul>
-    </div>
-    <div class="card-footer text-muted">
-        <small>{{ r.created_on|date }}</small>
-    </div>
-</div>
+</a>

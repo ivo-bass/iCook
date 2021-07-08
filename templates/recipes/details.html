@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container-fluid d-flex justify-content-center">
-        <div class="card card-big border-dark mb-3">
+        <div class="card border-dark mb-3" id="card-big">
 
             <div class="card-header">
                 <h4 class="card-title text-primary">{{ recipe.title|capfirst }}</h4>
@@ -12,9 +12,7 @@
 
             <div class="card-body">
                 <h6 class="card-title text-primary">Description:</h6>
-                <p class="card-text">
-                    {{ recipe.description|capfirst }}
-                </p>
+                {{ recipe.description|capfirst }}
             </div>
 
             {% if not recipe.image %}
@@ -35,13 +33,14 @@
                     {% for ingredient in ingredients %}
                         <li class="list-group-item">{{ ingredient|capfirst }}</li>
                     {% endfor %}
+
                 </ul>
             </div>
 
             <div class="card-body">
                 <h6 class="card-title text-primary">Preparation:</h6>
                 <p class="card-text">
-                    {{ recipe.preparation|capfirst }}
+                    {{ recipe.preparation|linenumbers|linebreaks }}
                 </p>
             </div>
 
@@ -75,7 +74,7 @@
                 </a>
             </div>
             <div class="card-footer text-muted">
-                <small>{{ recipe.created_on|date }}</small>
+                <small>{{ recipe.created_on|timesince }} ago</small>
             </div>
         </div>
     </div>

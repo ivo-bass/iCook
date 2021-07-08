@@ -40,6 +40,77 @@
         <li>
             <hr>
         </li>
+        <li onclick="function openNav() {
+        document.getElementById('mySidebar').style.width = '10rem';
+        document.getElementById('main').style.marginLeft = '10rem';
+        document.getElementById('closebtn').hidden = false;
+        document.getElementById('openbtn').hidden = true;
+        document.getElementById('control-panel').style.fontSize = '1.2rem';
+        let elements = document.getElementsByClassName('nav-link');
+        for (let i = 0; i < elements.length; i++) {
+            let element = elements[i];
+            element.style.fontSize = '1.1rem';
+        }}
+    openNav()">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+               aria-haspopup="true" aria-expanded="false">
+                {% bs_icon 'check2-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                Suggest
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark justify-content-start text-small shadow">
+                <li>
+                    <a class="dropdown-item" href="#">
+                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
+                        Breakfast
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
+                        Salad
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
+                        Appetizer
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
+                        Soup
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
+                        Main
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
+                        Dessert
+                    </a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#">
+                        {% bs_icon 'shuffle' size='1.1rem' color='currentColor' extra_classes="bi-valign-text-bottom icons" %}
+                        Random
+                    </a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+            </ul>
+        </li>
+        <li>
+            <hr>
+        </li>
         <li>
             <a href="{{ test }}"
                class="nav-link {% if request.path == test %}active{% endif %}">
@@ -64,17 +135,6 @@
                 Note Pad
             </a>
         </li>
-        {#        <li>#}
-        {#            <a href="{{ test }}"#}
-        {#               class="nav-link {% if request.path == test %}active{% endif %}">#}
-        {#                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"#}
-        {#                     class="bi bi-receipt-cutoff" viewBox="0 0 16 16">#}
-        {#                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"></path>#}
-        {#                    <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z"></path>#}
-        {#                </svg>#}
-        {#                Добави ястие#}
-        {#            </a>#}
-        {#        </li>#}
         <li>
             <a href="{{ test }}"
                class="nav-link {% if request.path == test %}active{% endif %}">
@@ -100,13 +160,11 @@
         for (let i = 0; i < elements.length; i++) {
             let element = elements[i];
             element.style.fontSize = '1.1rem';
-        }
-    }
+        }}
     openNav()">
             <img src="" alt="user.photo" width="32" height="32" class="rounded-circle me-2">
         </a>
-        <ul class="dropdown-menu dropdown-menu-dark justify-content-start text-small shadow"
-            aria-labelledby="dropdownUser1">
+        <ul class="dropdown-menu dropdown-menu-dark justify-content-start text-small shadow">
             <li>
                 <a class="dropdown-item" href="#">
                     {% bs_icon 'file-earmark-person' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
