@@ -1,5 +1,6 @@
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
+from django_resized import ResizedImageField
 
 from LetsCook.core.validators import validate_digits_not_in_string
 
@@ -7,13 +8,6 @@ from LetsCook.core.validators import validate_digits_not_in_string
 class MealType(models.Model):
     meal_type = models.CharField(
         max_length=20,
-        # choices=(
-        #     ('salad', 'salad'),
-        #     ('soup', 'soup'),
-        #     ('main', 'main'),
-        #     ('dessert', 'dessert'),
-        #     ('breakfast', 'breakfast'),
-        # )
     )
 
     def __str__(self):
@@ -36,7 +30,12 @@ class Recipe(models.Model):
         null=True,
     )
 
-    image = models.ImageField(
+    # 1920 / 1080
+    # 340 / 191
+    # 680 / 382
+    image = ResizedImageField(
+        size=[680, 382],
+        crop=['middle', 'center'],
         default='food-default.png',
         upload_to='recipes',
         blank=True,
