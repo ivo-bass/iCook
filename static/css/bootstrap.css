@@ -2426,8 +2426,8 @@ progress {
     -webkit-margin-end: 0;
     -moz-margin-end: 0;
     margin-inline-end: 0;
-    color: #666;
-    background-color: transparent;
+    color: var(--bs-secondary);
+    background-color: var(--bs-primary);
     background-image: var(--bs-gradient);
     pointer-events: none;
     border-color: inherit;

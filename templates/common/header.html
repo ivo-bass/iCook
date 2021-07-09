@@ -1,4 +1,5 @@
 {% load bootstrap_icons %}
+{% url 'home' as home %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -14,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link2 active" href="#">
+                    <a class="nav-link2 {% if request.path == home %}active{% endif %}" href="{% url 'home' %}">
                         {% bs_icon 'house' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
                         Home
                         <span class="visually-hidden">(current)</span>

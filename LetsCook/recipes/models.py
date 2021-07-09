@@ -6,12 +6,12 @@ from LetsCook.core.validators import validate_digits_not_in_string
 
 
 class MealType(models.Model):
-    meal_type = models.CharField(
+    name = models.CharField(
         max_length=20,
     )
 
     def __str__(self):
-        return self.meal_type
+        return self.name
 
 
 class Recipe(models.Model):

@@ -18,6 +18,3 @@ class RecipeForm(AddBootstrapFormControlMixin, forms.ModelForm):
     class Meta:
         model = Recipe
         fields = '__all__'
-        widgets = {
-            'image': forms.ImageField(),
-        }
