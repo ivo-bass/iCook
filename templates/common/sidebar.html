@@ -136,7 +136,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ test }}"
+            <a href="{% url 'create-recipe' %}"
                class="nav-link {% if request.path == test %}active{% endif %}">
                 {% bs_icon 'file-earmark-plus' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
                 Add Recipe

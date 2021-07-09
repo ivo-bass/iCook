@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # 'django.contrib.postgres',
     'django_bootstrap_icons',
     # "django_admin_hstore_widget",
+    'crispy_forms',
     'LetsCook.recipes',
 ]
 
@@ -142,3 +143,5 @@ DJANGORESIZED_DEFAULT_KEEP_META = True
 DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
 DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

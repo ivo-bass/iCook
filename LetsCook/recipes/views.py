@@ -1,37 +1,24 @@
+from django.db import transaction
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 from LetsCook.recipes.forms import RecipeForm, IngredientFormSet
 from LetsCook.recipes.models import Recipe, MealType
 
 
 def home(request):
-    if request.method == 'POST':
-        r_form = RecipeForm(request.POST, request.FILES)
-        if r_form.is_valid():
-            r_form.save()
-            return redirect('home')
-        r_form = RecipeForm(request.POST, request.FILES)
-        i_form = IngredientFormSet()
-        meal_types = MealType.objects.all()
-        context = {
-            # 'recipes': recipes,
-            'r_form': r_form,
-            'i_form': i_form,
-            'meal_types': meal_types,
-        }
-        return render(request, 'home.html', context)
-    else:
-        # recipes = Recipe.objects.all()
-        r_form = RecipeForm()
-        i_form = IngredientFormSet()
-        meal_types = MealType.objects.all()
-        context = {
-            # 'recipes': recipes,
-            'r_form': r_form,
-            'i_form': i_form,
-            'meal_types': meal_types,
-        }
-        return render(request, 'home.html', context)
+    recipes = Recipe.objects.all()
+    # r_form = RecipeForm()
+    # i_form = IngredientFormSet()
+    # meal_types = MealType.objects.all()
+    context = {
+        'recipes': recipes,
+        # 'r_form': r_form,
+        # 'i_form': i_form,
+        # 'meal_types': meal_types,
+    }
+    return render(request, 'home.html', context)
 
 
 def details_recipe(request, pk):
@@ -42,3 +29,33 @@ def details_recipe(request, pk):
         'ingredients': ingredients,
     }
     return render(request, 'recipes/details.html', context)
+
+
+class RecipeCreate(CreateView):
+    model = Recipe
+    template_name = 'create-recipe.html'
+    form_class = RecipeForm
+    success_url = None
+
+    def get_context_data(self, **kwargs):
+        data = super(RecipeCreate, self).get_context_data(**kwargs)
+        if self.request.POST:
+            data['ingredients'] = IngredientFormSet(self.request.POST)
+        else:
+            data['ingredients'] = IngredientFormSet()
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        ingredients = context['ingredients']
+        with transaction.atomic():
+            # form.instance.created_by = self.request.user
+            self.object = form.save()
+            if ingredients.is_valid():
+                ingredients.instance = self.object
+                ingredients.save()
+        return super(RecipeCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        # return reverse_lazy('details', kwargs={'pk': self.object.pk})
+        return reverse_lazy('details-recipe', kwargs={'pk': self.object.pk})

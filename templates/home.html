@@ -3,12 +3,11 @@
 {% block content %}
     <div class="container-fluid d-flex justify-content-center">
         <div class="row">
-            {% include 'recipes/create_recipe.html' %}
-{#            {% for recipe in recipes %}#}
-{#                <div class="col d-flex justify-content-center">#}
-{#                    {% include 'recipes/short-details.html' with r=recipe %}#}
-{#                </div>#}
-{#            {% endfor %}#}
+            {% for recipe in recipes %}
+                <div class="col d-flex justify-content-center">
+                    {% include 'recipes/short-details.html' with r=recipe %}
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
