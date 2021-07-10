@@ -1,185 +1,96 @@
-{% load bootstrap_icons %}
+{% url 'home' as home %}
+{% url 'create-recipe' as create %}
 
-<div class="sidebar d-flex flex-column flex-shrink-0 p-1" id="mySidebar">
+<div class="navigation">
+    <ul>
+        <li class="list mb-5">
+            <a class="brand" href="#">iCook</a>
+        </li>
+        <li class="list {% if request.path == home %}active{% endif %}">
+            <a href="{% url 'home' %}">
+                <span class="icon">
+                    <ion-icon name="home-outline"></ion-icon>
+                </span>
+                <span class="title">Home</span>
+            </a>
+        </li>
 
-    <a class="closebtn" id="closebtn" onclick="function closeNav() {
-        document.getElementById('mySidebar').style.width = '3rem';
-        document.getElementById('main').style.marginLeft = '3rem';
-        document.getElementById('closebtn').hidden = true;
-        document.getElementById('openbtn').hidden = false;
-        document.getElementById('control-panel').style.fontSize = '0';
-        let elements = document.getElementsByClassName('nav-link');
-        for (let i = 0; i < elements.length; i++) {
-            let element = elements[i];
-            element.style.fontSize = '0';
-        }}
-    closeNav()">
-        {% bs_icon 'x' size='2rem' color='currentColor' extra_classes="bi-valign-text-top" %}
-    </a>
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="shuffle-outline"></ion-icon>
+                </span>
+                <span class="title">Suggest</span>
+            </a>
+        </li>
 
-    <a class="openbtn" id="openbtn" hidden onclick="function openNav() {
-        document.getElementById('mySidebar').style.width = '10rem';
-        document.getElementById('main').style.marginLeft = '10rem';
-        document.getElementById('closebtn').hidden = false;
-        document.getElementById('openbtn').hidden = true;
-        document.getElementById('control-panel').style.fontSize = '1.2rem';
-        let elements = document.getElementsByClassName('nav-link');
-        for (let i = 0; i < elements.length; i++) {
-            let element = elements[i];
-            element.style.fontSize = '1.1rem';
-        }}
-    openNav()">
-        {% bs_icon 'list' size='1.5rem' color='currentColor' extra_classes="bi-valign-text-top" %}
-    </a>
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                <ion-icon name="calendar-clear-outline"></ion-icon>
+                </span>
+                <span class="title">Today's</span>
+            </a>
+        </li>
 
-    <br/>
-    <hr/>
-    <span class="control-panel" id="control-panel">CONTROL PANEL</span>
-    <hr/>
-    <ul class="navbar-nav me-auto flex-column mb-lg-auto justify-content-center">
-        <li>
-            <hr>
-        </li>
-        <li onclick="function openNav() {
-        document.getElementById('mySidebar').style.width = '10rem';
-        document.getElementById('main').style.marginLeft = '10rem';
-        document.getElementById('closebtn').hidden = false;
-        document.getElementById('openbtn').hidden = true;
-        document.getElementById('control-panel').style.fontSize = '1.2rem';
-        let elements = document.getElementsByClassName('nav-link');
-        for (let i = 0; i < elements.length; i++) {
-            let element = elements[i];
-            element.style.fontSize = '1.1rem';
-        }}
-    openNav()">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-               aria-haspopup="true" aria-expanded="false">
-                {% bs_icon 'check2-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
-                Suggest
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark justify-content-start text-small shadow">
-                <li>
-                    <a class="dropdown-item" href="#">
-                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
-                        Breakfast
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
-                        Salad
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
-                        Appetizer
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
-                        Soup
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
-                        Main
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        {% bs_icon 'caret-right-fill' size='1rem' color='currentColor' extra_classes="icons" %}
-                        Dessert
-                    </a>
-                </li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">
-                        {% bs_icon 'shuffle' size='1.1rem' color='currentColor' extra_classes="bi-valign-text-bottom icons" %}
-                        Random
-                    </a>
-                </li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-            </ul>
-        </li>
-        <li>
-            <hr>
-        </li>
-        <li>
-            <a href="{{ test }}"
-               class="nav-link {% if request.path == test %}active{% endif %}">
-                {% bs_icon 'calendar-check' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                Today's
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                </span>
+                <span class="title">History</span>
             </a>
         </li>
-        <li>
-            <a href="{{ test }}"
-               class="nav-link {% if request.path == test %}active{% endif %}">
-                {% bs_icon 'clock-history' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                History
+
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="clipboard-outline"></ion-icon>
+                </span>
+                <span class="title">Recipes</span>
             </a>
         </li>
-        <li>
-            <hr>
-        </li>
-        <li>
-            <a href="{{ test }}"
-               class="nav-link {% if request.path == test %}active{% endif %}">
-                {% bs_icon 'journal-bookmark-fill' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                Note Pad
+
+        <li class="list {% if request.path == create %}active{% endif %}">
+            <a href="{{ create }}">
+                <span class="icon">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                </span>
+                <span class="title">Add Recipe</span>
             </a>
         </li>
-        <li>
-            <a href="{% url 'create-recipe' %}"
-               class="nav-link {% if request.path == test %}active{% endif %}">
-                {% bs_icon 'file-earmark-plus' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                Add Recipe
+
+    </ul>
+    <ul class="ul-bottom">
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="person-outline"></ion-icon>
+                </span>
+                <span class="title">Profile</span>
             </a>
         </li>
-        <li>
-            <hr>
+
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="log-out-outline"></ion-icon>
+                </span>
+                <span class="title">Sign Out</span>
+            </a>
         </li>
     </ul>
-
-
-    <div class="nav-item dropdown">
-        <a href="#" class="d-flex dropdown-toggle"
-           data-bs-toggle="dropdown" aria-expanded="false" onclick="function openNav() {
-        document.getElementById('mySidebar').style.width = '10rem';
-        document.getElementById('main').style.marginLeft = '10rem';
-        document.getElementById('closebtn').hidden = false;
-        document.getElementById('openbtn').hidden = true;
-        document.getElementById('control-panel').style.fontSize = '1.2rem';
-        let elements = document.getElementsByClassName('nav-link');
-        for (let i = 0; i < elements.length; i++) {
-            let element = elements[i];
-            element.style.fontSize = '1.1rem';
-        }}
-    openNav()">
-            <img src="" alt="user.photo" width="32" height="32" class="rounded-circle me-2">
-        </a>
-        <ul class="dropdown-menu dropdown-menu-dark justify-content-start text-small shadow">
-            <li>
-                <a class="dropdown-item" href="#">
-                    {% bs_icon 'file-earmark-person' size='1.2rem' color='currentColor' extra_classes="bi-valign-top" %}
-                    Profile
-                </a>
-            </li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li>
-                <a class="dropdown-item" href="#">
-                    {% bs_icon 'box-arrow-left' size='1.2rem' color='currentColor' extra_classes="bi-valign-top icons" %}
-                    Sign Out
-                </a>
-            </li>
-        </ul>
-    </div>
 </div>
+
+{#<script>#}
+{#    const list = document.querySelectorAll('.list');#}
+{##}
+{#    function activeLink() {#}
+{#        list.forEach((item) =>#}
+{#            item.classList.remove('active'));#}
+{#        this.classList.add('active');#}
+{#    }#}
+{##}
+{#    list.forEach((item) =>#}
+{#        item.addEventListener('click', activeLink));#}
+{#</script>#}

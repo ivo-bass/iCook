@@ -1,10 +1,8 @@
-{% load bootstrap_icons %}
 {% url 'home' as home %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-{#            {% bs_icon 'egg-fried' size='2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}#}
             iCook
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
@@ -14,40 +12,38 @@
 
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link2 {% if request.path == home %}active{% endif %}" href="{% url 'home' %}">
-                        {% bs_icon 'house' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
-                        Home
-                        <span class="visually-hidden">(current)</span>
-                    </a>
-                </li>
+{#                <li class="nav-item">#}
+                {#                    <a class="nav-link2 {% if request.path == home %}active{% endif %}" href="{% url 'home' %}">#}
+                {#                        Home#}
+                {#                        <span class="visually-hidden">(current)</span>#}
+                {#                    </a>#}
+                {#                </li>#}
                 <li class="nav-item">
                     <a class="nav-link2" href="#">
-                        {% bs_icon 'list-task' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
                         Recipes
                     </a>
                 </li>
-{#                <li class="nav-item dropdown">#}
-{#                    <a class="nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"#}
-{#                       aria-haspopup="true" aria-expanded="false">#}
-{#                        {% bs_icon 'check2-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}#}
-{#                        Suggestions#}
-{#                    </a>#}
-{#                    <div class="dropdown-menu">#}
-{#                        <a class="dropdown-item" href="#">Breakfast</a>#}
-{#                        <a class="dropdown-item" href="#">Salad</a>#}
-{#                        <a class="dropdown-item" href="#">Soup</a>#}
-{#                        <a class="dropdown-item" href="#">Main</a>#}
-{#                        <a class="dropdown-item" href="#">Dessert</a>#}
-{#                        <div class="dropdown-divider"></div>#}
-{#                        <a class="dropdown-item" href="#">Random</a>#}
-{#                    </div>#}
-{#                </li>#}
+                {#                <li class="nav-item dropdown">#}
+                {#                    <a class="nav-link2 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"#}
+                {#                       aria-haspopup="true" aria-expanded="false">#}
+                {#                        {% bs_icon 'check2-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}#}
+                {#                        Suggestions#}
+                {#                    </a>#}
+                {#                    <div class="dropdown-menu">#}
+                {#                        <a class="dropdown-item" href="#">Breakfast</a>#}
+                {#                        <a class="dropdown-item" href="#">Salad</a>#}
+                {#                        <a class="dropdown-item" href="#">Soup</a>#}
+                {#                        <a class="dropdown-item" href="#">Main</a>#}
+                {#                        <a class="dropdown-item" href="#">Dessert</a>#}
+                {#                        <div class="dropdown-divider"></div>#}
+                {#                        <a class="dropdown-item" href="#">Random</a>#}
+                {#                    </div>#}
+                {#                </li>#}
             </ul>
             <form class="d-flex" method="get" action="">
                 <input class="form-control me-sm-2" type="text" placeholder="Search...">
                 <button type="button" class="btn btn-primary btn-sm">
-                    {% bs_icon 'search' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                    <ion-icon name="search-outline" size="large"></ion-icon>
                 </button>
             </form>
 
@@ -55,13 +51,11 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link2" href="#">
-                        {% bs_icon 'box-arrow-in-right' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-top" %}
                         Sign In
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link2" href="#">
-                        {% bs_icon 'pencil-square' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-top" %}
                         Sign Up
                     </a>
                 </li>
