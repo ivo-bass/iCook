@@ -26,6 +26,7 @@
     --bs-cyan: #9c27b0;
     --bs-white: #fff;
     --bs-gray: #666;
+    --bs-gray-light: #ddd;
     --bs-gray-dark: #222;
     --bs-primary: #2196f3;
     --bs-secondary: #fff;
@@ -34,10 +35,15 @@
     --bs-warning: #ff9800;
     --bs-danger: #e51c23;
     --bs-light: #f8f9fa;
-    --bs-dark: #222;
-    --bs-font-sans-serif: Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --bs-dark: #111;
+    --bs-font-sans-serif: 'Fira Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, serif;
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0));
+    --bs-backgroud: var(--bs-gray-light);
+    --bs-backgroud-nav: var(--bs-gray);
+    --bs-background-card: var(--bs-light);
+    --bs-font-color: #222;
+    --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0))
 }
 
 *,
@@ -52,34 +58,28 @@
     }
 }
 
+* {
+    font-family: 'Fira Sans', sans-serif;
+}
 
-/*body {*/
-/*    margin: 0;*/
-/*    font-family: var(--bs-font-sans-serif);*/
-/*    font-size: 1rem;*/
-/*    font-weight: 400;*/
-/*    line-height: 1.5;*/
-/*    color: #444;*/
-/*    !*background-color: lightgray;*!*/
-/*    -webkit-text-size-adjust: 100%;*/
-/*    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    min-height: 100%;*/
-/*    background: linear-gradient(*/
-/*            rgba(0, 0, 0, 0.2),*/
-/*            rgba(0, 0, 0, 0.2)*/
-/*    ),*/
-/*    url(/static/images/main-bg.jpg);*/
-/*    background-size: cover;*/
-/*}*/
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.oblique {
+    font-style: oblique;
+}
 
 html {
-  background:url(/static/images/main-bg.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    background: url(/static/images/main-bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 body {
@@ -87,15 +87,25 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    font-family: var(--bs-font-sans-serif);
+    font-family: 'Fira Sans', sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #444;
+    color: var(--bs-font-color);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     flex-direction: column;
+    height: 100vh;
+    width: 100vw;
     min-height: 100%;
+    background: var(--bs-bg-gradient);
+}
+
+.dark-mode {
+    --bs-backgroud: var(--bs-gray-dark);
+    --bs-backgroud-nav: var(--bs-dark);
+    --bs-background-card: var(--bs-gray-light);
+    --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))
 }
 
 .navigation {
@@ -105,13 +115,7 @@ body {
     left: 0;
     height: 100%;
     width: 80px;
-    /*background: linear-gradient(*/
-    /*        90deg,*/
-    /*        rgba(0, 0, 0, 0.6),*/
-    /*        rgba(0, 0, 0, 0.6)*/
-    /*),*/
-    /*url(/static/images/side-bg.jpg);*/
-    background: var(--bs-dark);
+    background: var(--bs-backgroud-nav);
     background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15));
     box-shadow: 5px 0 0 var(--bs-primary);
     border-left: 5px solid var(--bs-dark);
@@ -135,7 +139,7 @@ body {
 }
 
 .navigation ul.ul-bottom {
-    top: 80%;
+    top: 70%;
 }
 
 .navigation ul li {
@@ -144,10 +148,6 @@ body {
     width: 100%;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-}
-
-.navigation ul li a:hover {
-    color: var(--bs-gray);
 }
 
 .navigation ul li.active {
@@ -160,6 +160,14 @@ body {
     display: flex;
     text-decoration: none;
     color: white;
+}
+
+.navigation ul li a:hover {
+    color: var(--bs-primary);
+}
+
+.navigation ul li.active a:hover {
+    color: var(--bs-gray);
 }
 
 .navigation ul li.active a::before {
@@ -4736,7 +4744,7 @@ fieldset:disabled .btn {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 0.5rem 1rem 0.5rem 2rem;
-    background: var(--bs-dark);
+    background: var(--bs-backgroud-nav);
     background-image: var(--bs-gradient);
     border-bottom-right-radius: 1.5rem;
     margin-bottom: 2rem;
@@ -5164,10 +5172,10 @@ fieldset:disabled .btn {
     -ms-flex-direction: column;
     flex-direction: column;
     word-wrap: break-word;
-    background-color: white;
+    background-color: var(--bs-background-card);
     background-clip: border-box;
     border: 0 solid transparent;
-    border-radius: 0.5rem;
+    border-radius: 10px;
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.8);
 }
 
@@ -13692,42 +13700,24 @@ select.form-control[multiple] {
     color: inherit;
 }
 
-/*#footer {*/
-/*    position: fixed;*/
-/*    padding: 0.5rem 0.5rem 0 0.5rem;*/
-/*    bottom: 0;*/
-/*    width: 100%;*/
-/*    height: 40px;*/
-/*    background: var(--bs-primary);*/
-/*    display: -ms-flexbox;*/
-/*    display: flex;*/
-/*    -ms-flex-wrap: wrap;*/
-/*    flex-wrap: wrap;*/
-/*    -ms-flex-align: center;*/
-/*    align-items: center;*/
-/*    -ms-flex-pack: justify;*/
-/*    justify-content: space-between;*/
-/*    background-image: var(--bs-gradient);*/
-/*}*/
-
 .main {
     /*margin-left: 10rem;*/
     margin: 20px 20px 20px 100px;
     flex: 1;
     transition: margin-left .5s;
-    /*padding: 20px;*/
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 footer {
     text-align: center;
     justify-content: center;
     align-content: center;
-    position: relative;
     padding-top: 5px;
     bottom: 0;
     width: 100%;
     height: 35px;
-    background: var(--bs-dark);
+    background: var(--bs-backgroud-nav);
     display: -ms-flexbox;
     display: flex;
     -ms-flex-wrap: wrap;
@@ -13735,6 +13725,9 @@ footer {
     -ms-flex-align: center;
     -ms-flex-pack: justify;
     background-image: var(--bs-gradient);
+    position: fixed;
+    left: 0;
+    color: #ddd;
 }
 
 
@@ -13859,4 +13852,5 @@ footer {
     left: 50%;
     top: 0;
     transform: translateX(-50%);
+    border-radius: 10px;
 }

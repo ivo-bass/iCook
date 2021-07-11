@@ -79,8 +79,29 @@
                 <span class="title">Sign Out</span>
             </a>
         </li>
+
+        <li class="list">
+            <a href="#">
+                <span class="icon" onclick="darkMode()">
+                    <ion-icon name="moon-outline" id="dark"></ion-icon>
+                    <ion-icon name="sunny-outline" id="light" hidden></ion-icon>
+                </span>
+                <span class="title"></span>
+            </a>
+        </li>
     </ul>
 </div>
+
+<script>
+    function darkMode() {
+        let element = document.body;
+        element.classList.toggle("dark-mode");
+        let darkToggler = document.getElementById("dark");
+        darkToggler.toggleAttribute('hidden');
+        let lightToggler = document.getElementById("light");
+        lightToggler.toggleAttribute('hidden');
+    }
+</script>
 
 {#<script>#}
 {#    const list = document.querySelectorAll('.list');#}
