@@ -1,5 +1,6 @@
 {% url 'home' as home %}
 {% url 'create-recipe' as create %}
+{% url 'list-recipes' as list %}
 
 <div class="navigation">
     <ul>
@@ -15,7 +16,7 @@
             </a>
         </li>
 
-        <li class="list">
+        <li class="list {% if request.path == suggest %}active{% endif %}">
             <a href="#">
                 <span class="icon">
                     <ion-icon name="shuffle-outline"></ion-icon>
@@ -24,7 +25,7 @@
             </a>
         </li>
 
-        <li class="list">
+        <li class="list {% if request.path == today %}active{% endif %}">
             <a href="#">
                 <span class="icon">
                 <ion-icon name="calendar-clear-outline"></ion-icon>
@@ -33,7 +34,7 @@
             </a>
         </li>
 
-        <li class="list">
+        <li class="list {% if request.path == history %}active{% endif %}">
             <a href="#">
                 <span class="icon">
                     <ion-icon name="calendar-outline"></ion-icon>
@@ -42,8 +43,8 @@
             </a>
         </li>
 
-        <li class="list">
-            <a href="#">
+        <li class="list {% if request.path == list %}active{% endif %}">
+            <a href="{{ list }}">
                 <span class="icon">
                     <ion-icon name="clipboard-outline"></ion-icon>
                 </span>
@@ -62,7 +63,7 @@
 
     </ul>
     <ul class="ul-bottom">
-        <li class="list">
+        <li class="list {% if request.path == profile %}active{% endif %}">
             <a href="#">
                 <span class="icon">
                     <ion-icon name="person-outline"></ion-icon>
@@ -71,7 +72,7 @@
             </a>
         </li>
 
-        <li class="list">
+        <li class="list {% if request.path == sign_out %}active{% endif %}">
             <a href="#">
                 <span class="icon">
                     <ion-icon name="log-out-outline"></ion-icon>
@@ -83,8 +84,8 @@
         <li class="list">
             <a href="#">
                 <span class="icon" onclick="darkMode()">
-                    <ion-icon name="moon-outline" id="dark"></ion-icon>
-                    <ion-icon name="sunny-outline" id="light" hidden></ion-icon>
+                    <ion-icon name="moon-outline" id="dark" hidden></ion-icon>
+                    <ion-icon name="sunny-outline" id="light"></ion-icon>
                 </span>
                 <span class="title"></span>
             </a>

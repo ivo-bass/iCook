@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 
 from LetsCook.recipes.forms import RecipeForm, IngredientFormSet
 from LetsCook.recipes.models import Recipe, MealType
@@ -28,12 +28,21 @@ def details_recipe(request, pk):
         'recipe': recipe,
         'ingredients': ingredients,
     }
-    return render(request, 'recipes/details.html', context)
+    return render(request, 'recipes/common/details.html', context)
+
+
+def list_recipes(request):
+    recipes = Recipe.objects.all()
+    context = {
+        'recipes': recipes,
+    }
+    return render(request, 'recipes/../../templates/recipes/recipes.html', context)
+
 
 
 class RecipeCreate(CreateView):
     model = Recipe
-    template_name = 'create-recipe.html'
+    template_name = 'recipes/create.html'
     form_class = RecipeForm
     success_url = None
 

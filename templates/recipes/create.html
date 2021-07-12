@@ -51,15 +51,24 @@
 {#</form>#}
 
 
+{% extends 'common/base.html' %}
 {% load crispy_forms_tags %}
 
-<div class="container-fluid">
-    <div class="card border-primary mb-3">
-        <div class="card-header">
-            Create Recipe
-        </div>
-        <div class="card-body">
-             {% crispy form %}
+{% block content %}
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="container-fluid mt-5 mb-5">
+                <div class="card border-primary mt-5 mb-5">
+                    <div class="card-header">
+                        Create Recipe
+                    </div>
+                    <div class="card-body">
+                        {% crispy form %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+{% endblock %}
+
+

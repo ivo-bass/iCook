@@ -26,7 +26,7 @@
     --bs-cyan: #9c27b0;
     --bs-white: #fff;
     --bs-gray: #666;
-    --bs-gray-light: #ddd;
+    --bs-gray-light: #eee;
     --bs-gray-dark: #222;
     --bs-primary: #2196f3;
     --bs-secondary: #fff;
@@ -80,6 +80,7 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    height: 100%;
 }
 
 body {
@@ -95,9 +96,8 @@ body {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
-    min-height: 100%;
     background: var(--bs-bg-gradient);
 }
 
@@ -110,7 +110,7 @@ body {
 
 .navigation {
     position: fixed;
-    z-index: 1;
+    z-index: 3;
     top: 0;
     left: 0;
     height: 100%;
@@ -786,13 +786,78 @@ progress {
 .container-lg,
 .container-xl,
 .container-xxl {
+    position: relative;
     display: flex;
     width: 100%;
     padding-right: var(--bs-gutter-x, 0.75rem);
     padding-left: var(--bs-gutter-x, 0.75rem);
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 10vh;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+.card-container .new-card {
+    position: relative;
+    width: 340px;
+    height: 220px;
+    background: var(--bs-background-card);
+    margin: 40px 10px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.6);
+    transition: 0.3s ease-in-out;
+    border-radius: 5px;
+    border: solid 1px black;
+}
+
+.card-container .new-card:hover {
+    height: 380px;
+}
+
+.card-container .new-card .imgBx {
+    position: relative;
+    width: 280px;
+    height: 150px;
+    top: -60px;
+    left: 20px;
+    z-index: 1;
+    border-radius: 10px;
+    box-shadow: 0 15px 20px 1px rgba(0, 0, 0, 0.5);
+}
+
+.card-container .new-card .imgBx img {
+    width: 280px;
+    border-radius: 10px;
+}
+
+.card-container .new-card .card-content {
+    position: relative;
+    margin-top: -180px;
+    padding: 10px 0 10px;
+    text-align: center;
+    color: #111;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+}
+
+.card-container .new-card:hover .card-content {
+    visibility: visible;
+    opacity: 1;
+    margin-top: -20px;
+    transition-delay: 0.3s;
 }
 
 @media (min-width: 576px) {
@@ -5169,6 +5234,7 @@ fieldset:disabled .btn {
     position: relative;
     display: -ms-flexbox;
     display: flex;
+    padding: 10px;
     -ms-flex-direction: column;
     flex-direction: column;
     word-wrap: break-word;
@@ -5260,6 +5326,8 @@ card:hover {
     margin-bottom: 0;
     background-color: rgba(0, 0, 0, 0.03);
     border-bottom: 0 solid transparent;
+    color: var(--bs-primary);
+    font-size: 1.25rem;
 }
 
 .card-header:first-child {
@@ -13700,15 +13768,6 @@ select.form-control[multiple] {
     color: inherit;
 }
 
-.main {
-    /*margin-left: 10rem;*/
-    margin: 20px 20px 20px 100px;
-    flex: 1;
-    transition: margin-left .5s;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
 footer {
     text-align: center;
     justify-content: center;
@@ -13728,6 +13787,7 @@ footer {
     position: fixed;
     left: 0;
     color: #ddd;
+    z-index: 2;
 }
 
 
@@ -13853,4 +13913,12 @@ footer {
     top: 0;
     transform: translateX(-50%);
     border-radius: 10px;
+}
+
+.create-label {
+    color: var(--bs-primary);
+}
+
+.create-field {
+    background: var(--bs-white);
 }

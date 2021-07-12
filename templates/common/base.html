@@ -12,19 +12,18 @@
     <link rel="stylesheet" href="{% static 'bootstrap_icons/css/bootstrap_icons.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
 </head>
-<body>
+<body class="dark-mode">
 
-{% include 'common/sidebar.html' %}
 
 {#{% include 'common/header.html' %}#}
-<div class="main" id="main">
+{% include 'common/sidebar.html' %}
 
-    {% block content %}
-        This should not appear
-    {% endblock %}
+{% block content %}
+    This should not appear
+{% endblock %}
 
-</div>
 {% include 'common/footer.html' %}
+
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

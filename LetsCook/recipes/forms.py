@@ -14,19 +14,25 @@ class IngredientForm(AddBootstrapFormControlMixin, forms.ModelForm):
         fields = '__all__'
 
 
-# class RecipeForm(AddBootstrapFormControlMixin, forms.ModelForm):
-#     class Meta:
-#         model = Recipe
-#         fields = '__all__'
-
-
 IngredientFormSet = inlineformset_factory(
     Recipe,
     Ingredient,
     form=IngredientForm,
     fields=['name', 'quantity', 'measure'],
-    extra=1,
+    min_num=1,
+    extra=0,
     can_delete=True,
+    widgets={
+        'name': forms.TextInput(
+            attrs={'class': 'create-field'}
+        ),
+        'quantity': forms.NumberInput(
+            attrs={'class': 'create-field'}
+        ),
+        'measure': forms.Select(
+            attrs={'class': 'create-field'}
+        )
+    }
 )
 
 
@@ -41,7 +47,7 @@ class RecipeForm(forms.ModelForm):
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-md-3 create-label'
-        self.helper.field_class = 'col-md-9'
+        self.helper.field_class = 'col-md-9 create-field'
         self.helper.layout = Layout(
             Div(
                 Field('title'),
@@ -51,11 +57,14 @@ class RecipeForm(forms.ModelForm):
                 Field('time'),
                 Field('servings'),
                 Field('preparation'),
+                HTML("<br>"),
                 Field('vegetarian'),
                 Field('public'),
+                HTML("<hr>"),
+                HTML("<br>"),
                 Fieldset('Add ingredients',
                          Formset('ingredients')),
-                HTML("<br>"),
+                HTML("<hr>"),
                 ButtonHolder(Submit('submit', 'save')),
             )
         )

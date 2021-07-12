@@ -50,43 +50,39 @@
 {#    </div>#}
 {#</a>#}
 
-<a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
-    <div class="container">
-        <div class="card">
-            <div class="imgBx">
-                <img src="{{ r.image.url }}">
-            </div>
-            <div class="card-content">
-                <div class="card-body">
-                    <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
-                        <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
-                    </a>
-                    <h6 class="card-subtitle text-muted center">{{ r.meal_type }}</h6>
-                </div>
-                <hr>
-                <div class="card-body">
-                    <p class="card-text">
-                        {{ r.description|capfirst|truncatechars:35 }}
-                    </p>
-                </div>
-                <hr>
-                <div class="card-body">
-                    <ul class="list-group list-group-horizontal center">
-                        <li class="list-group-item">
-                            <small class="text-warning">
-                                {% bs_icon 'people' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
-                                Servings: {{ r.servings }}
-                            </small>
-                        </li>
-                        <li class="list-group-item">
-                            <small class="text-success">
-                                {% bs_icon 'watch' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
-                                Time: {{ r.time }} min
-                            </small>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
+<div class="card-container">
+    <div class="new-card">
+        <div class="imgBx">
+            <img src="{{ r.image.url }}">
+        </div>
+        <div class="card-content">
+            <p class="card-text">
+                {{ r.description|capfirst|truncatechars:35 }}
+            </p>
+            <hr>
+            <ul class="list-group list-group-horizontal center">
+                <li class="list-group-item">
+                    <small class="text-warning">
+                        {% bs_icon 'people' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                        Servings: {{ r.servings }}
+                    </small>
+                </li>
+                <li class="list-group-item">
+                    <small class="text-success">
+                        {% bs_icon 'watch' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                        Time: {{ r.time }} min
+                    </small>
+                </li>
+            </ul>
+            <hr>
+        </div>
+        <div>
+            <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
+                <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
+            </a>
+            <h6 class="card-subtitle text-muted center">{{ r.meal_type }}</h6>
+
         </div>
     </div>
-</a>
+</div>
