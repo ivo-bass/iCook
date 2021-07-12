@@ -11,7 +11,8 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+/*@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");*/
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
 :root {
     --bs-blue: #2196f3;
@@ -43,7 +44,9 @@
     --bs-backgroud-nav: var(--bs-gray);
     --bs-background-card: var(--bs-light);
     --bs-font-color: #222;
-    --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0))
+    --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
+    --bs-field-bg: #eee;
+    --bs-field-color: #222;
 }
 
 *,
@@ -80,10 +83,13 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    height: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
 body {
+    /*height: 100%;*/
+    /*width: 100%;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -105,20 +111,25 @@ body {
     --bs-backgroud: var(--bs-gray-dark);
     --bs-backgroud-nav: var(--bs-dark);
     --bs-background-card: var(--bs-gray-light);
-    --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))
+    --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+    --bs-field-bg: var(--bs-gray);
+    --bs-field-color: #eee;
 }
 
 main {
     padding-left: 100px;
+    margin-bottom: 35px;
 }
 
 .navigation {
     position: fixed;
+    /*display: flex;*/
     z-index: 3;
     top: 0;
     left: 0;
     height: 100%;
-    width: 80px;
+    width: 64px;
+    /*justify-items: stretch;*/
     background: var(--bs-backgroud-nav);
     background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.15));
     box-shadow: 5px 0 0 var(--bs-primary);
@@ -130,7 +141,7 @@ main {
 }
 
 .navigation:hover {
-    width: 200px;
+    width: 180px;
 }
 
 .navigation ul {
@@ -138,12 +149,12 @@ main {
     top: 0;
     left: 0;
     width: 100%;
-    padding-left: 5px;
-    padding-top: 50px;
+    padding-left: 1px;
+    padding-top: 40px;
 }
 
 .navigation ul.ul-bottom {
-    top: 70%;
+    top: calc(100% - 240px);
 }
 
 .navigation ul li {
@@ -224,6 +235,8 @@ main {
 }
 
 .navigation ul li a.brand {
+    margin-left: 70px;
+    right: 0;
     font-size: 1.5rem;
     text-decoration: solid underline var(--bs-primary);
     white-space: nowrap;
@@ -2576,7 +2589,7 @@ progress {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #666;
+    color: var(--bs-field-color);
     background-color: transparent;
     background-clip: padding-box;
     border: 0 solid transparent;
@@ -13928,7 +13941,8 @@ footer {
 }
 
 .create-field {
-    background: var(--bs-white);
+    background: var(--bs-field-bg);
+    color: var(--bs-field-color);
 }
 
 ion-icon {
