@@ -13,13 +13,17 @@
 </head>
 <body class="dark-mode">
 
+{% if request.user.is_authenticated %}
+    {% include 'common/sidebar.html' %}
+{% else %}
+    {% include 'common/navbar.html' %}
+{% endif %}
 
-{#{% include 'common/header.html' %}#}
-{% include 'common/sidebar.html' %}
-
-{% block content %}
-    This should not appear
-{% endblock %}
+<main>
+    {% block content %}
+        This should not appear
+    {% endblock %}
+</main>
 
 {% include 'common/footer.html' %}
 

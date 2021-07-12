@@ -7,18 +7,10 @@ from LetsCook.recipes.forms import RecipeForm, IngredientFormSet
 from LetsCook.recipes.models import Recipe, MealType
 
 
-def home(request):
-    recipes = Recipe.objects.all()
-    # r_form = RecipeForm()
-    # i_form = IngredientFormSet()
-    # meal_types = MealType.objects.all()
+def index(request):
     context = {
-        'recipes': recipes,
-        # 'r_form': r_form,
-        # 'i_form': i_form,
-        # 'meal_types': meal_types,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'index.html', context)
 
 
 def details_recipe(request, pk):
@@ -31,7 +23,7 @@ def details_recipe(request, pk):
     return render(request, 'recipes/common/details.html', context)
 
 
-def list_recipes(request):
+def all_recipes(request):
     recipes = Recipe.objects.all()
     context = {
         'recipes': recipes,

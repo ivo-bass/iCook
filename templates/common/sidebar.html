@@ -1,6 +1,9 @@
 {% url 'home' as home %}
 {% url 'create-recipe' as create %}
-{% url 'list-recipes' as list %}
+{% url 'all-recipes' as all_recipes %}
+{% url 'sign-out' as sign_out %}
+{% url 'show-profile' as show_profile %}
+{% url 'my-recipes' as my_recipes %}
 
 <div class="navigation">
     <ul>
@@ -43,19 +46,28 @@
             </a>
         </li>
 
-        <li class="list {% if request.path == list %}active{% endif %}">
-            <a href="{{ list }}">
+        <li class="list {% if request.path == all_recipes %}active{% endif %}">
+            <a href="{{ all_recipes }}">
+                <span class="icon">
+                    <ion-icon name="library-outline"></ion-icon>
+                </span>
+                <span class="title">All Recipes</span>
+            </a>
+        </li>
+
+        <li class="list {% if request.path == my_recipes %}active{% endif %}">
+            <a href="{{ my_recipes }}">
                 <span class="icon">
                     <ion-icon name="clipboard-outline"></ion-icon>
                 </span>
-                <span class="title">Recipes</span>
+                <span class="title">My Recipes</span>
             </a>
         </li>
 
         <li class="list {% if request.path == create %}active{% endif %}">
             <a href="{{ create }}">
                 <span class="icon">
-                    <ion-icon name="pencil-outline"></ion-icon>
+                    <ion-icon name="create-outline"></ion-icon>
                 </span>
                 <span class="title">Add Recipe</span>
             </a>
@@ -63,17 +75,17 @@
 
     </ul>
     <ul class="ul-bottom">
-        <li class="list {% if request.path == profile %}active{% endif %}">
-            <a href="#">
+        <li class="list {% if request.path == show_profile %}active{% endif %}">
+            <a href="{{ show_profile }}">
                 <span class="icon">
                     <ion-icon name="person-outline"></ion-icon>
                 </span>
-                <span class="title">Profile</span>
+                <span class="title">{{ user.username }}</span>
             </a>
         </li>
 
         <li class="list {% if request.path == sign_out %}active{% endif %}">
-            <a href="#">
+            <a href="{{ sign_out }}">
                 <span class="icon">
                     <ion-icon name="log-out-outline"></ion-icon>
                 </span>
