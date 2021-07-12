@@ -92,6 +92,7 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
+    padding-left: 100px;
     color: var(--bs-font-color);
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -207,6 +208,7 @@ body {
     position: relative;
     font-size: 1.5rem;
     z-index: 1;
+    vertical-align: inherit;
 }
 
 .navigation ul li a .title {
@@ -812,7 +814,7 @@ progress {
     width: 340px;
     height: 220px;
     background: var(--bs-background-card);
-    margin: 40px 10px;
+    margin: 10px 10px;
     padding: 20px 10px;
     display: flex;
     flex-direction: column;
@@ -891,7 +893,7 @@ progress {
 }
 
 .row {
-    --bs-gutter-x: 1.5rem;
+    --bs-gutter-x: 1rem;
     --bs-gutter-y: 0;
     display: -ms-flexbox;
     display: flex;
@@ -900,6 +902,8 @@ progress {
     margin-top: calc(var(--bs-gutter-y) * -1);
     margin-right: calc(var(--bs-gutter-x) * -.5);
     margin-left: calc(var(--bs-gutter-x) * -.5);
+    align-items: center;
+    justify-content: center;
 }
 
 .row > * {
@@ -13921,4 +13925,9 @@ footer {
 
 .create-field {
     background: var(--bs-white);
+}
+
+ion-icon {
+    font-size: 18px;
+    vertical-align: middle;
 }

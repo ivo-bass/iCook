@@ -1,5 +1,4 @@
 {% extends 'common/base.html' %}
-{% load bootstrap_icons %}
 
 {% block content %}
     <div class="row">
@@ -53,13 +52,13 @@
                         <ul class="list-group list-group-horizontal center">
                             <li class="list-group-item">
                                 <small class="text-warning">
-                                    {% bs_icon 'people' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                                    <ion-icon name="people-outline"></ion-icon>
                                     Servings: {{ recipe.servings }}
                                 </small>
                             </li>
                             <li class="list-group-item">
                                 <small class="text-success">
-                                    {% bs_icon 'watch' size='1.2rem' color='currentColor' extra_classes="bi-valign-text-bottom" %}
+                                    <ion-icon name="time-outline"></ion-icon>
                                     Time: {{ recipe.time }} min
                                 </small>
                             </li>
