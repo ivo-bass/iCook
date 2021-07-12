@@ -36,9 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.contrib.postgres',
-    'django_bootstrap_icons',
-    # "django_admin_hstore_widget",
     'crispy_forms',
     'LetsCook.recipes',
 ]
