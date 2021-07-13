@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -31,7 +32,7 @@ def all_recipes(request):
     return render(request, 'recipes/../../templates/recipes/recipes.html', context)
 
 
-
+@login_required(login_url=reverse_lazy('sign-in'))
 class RecipeCreate(CreateView):
     model = Recipe
     template_name = 'recipes/create.html'
