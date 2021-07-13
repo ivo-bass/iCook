@@ -4,7 +4,7 @@
         <div class="row row-cols-auto">
             {% for recipe in recipes %}
                 <div class="col d-flex justify-content-center">
-                    {% include 'recipes/common/short-details.html' with r=recipe %}
+                    {% include 'recipes/short-details.html' with r=recipe %}
                 </div>
             {% endfor %}
         </div>

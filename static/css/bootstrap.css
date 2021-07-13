@@ -15,7 +15,7 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
 
 :root {
-    --bs-blue: #2196f3;
+    --bs-blue: #0184ec;
     --bs-indigo: #6610f2;
     --bs-purple: #6f42c1;
     --bs-pink: #e83e8c;
@@ -29,7 +29,7 @@
     --bs-gray: #666;
     --bs-gray-light: #eee;
     --bs-gray-dark: #222;
-    --bs-primary: #2196f3;
+    --bs-primary: var(--bs-blue);
     --bs-secondary: #fff;
     --bs-success: #4caf50;
     --bs-info: #9c27b0;
@@ -114,6 +114,8 @@ body {
     --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     --bs-field-bg: var(--bs-gray);
     --bs-field-color: #eee;
+    --bs-primary: #2196f3;
+    --bs-font-color: var(--bs-secondary);
 }
 
 main {
@@ -5297,7 +5299,7 @@ card:hover {
 
 #card-big {
     min-width: 40vw;
-    max-width: 80vw;
+    max-width: 680px;
 }
 
 .card > hr {

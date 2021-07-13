@@ -1,0 +1,31 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <form class="d-flex" method="post" action="{{ search }}">
+        {% csrf_token %}
+        <input class="form-control me-sm-2" type="text" placeholder="Search..." name="searched">
+        <button type="submit" class="btn btn-primary btn-sm">
+            <ion-icon name="search-outline" size="large"></ion-icon>
+        </button>
+    </form>
+
+    {% if not searched %}
+        <h2>Please, write a keyword in the field!</h2>
+    {% else %}
+        <h2>You searched for '{{ searched }}'.</h2>
+        {% if not recipes %}
+            <p>We have found no results. Please try again.</p>
+        {% else %}
+            <div class="row row-cols-auto">
+                {% for recipe in recipes %}
+                    <div class="col d-flex justify-content-center">
+                        {% include 'recipes/short-details.html' with r=recipe %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
+
+
+
+{% endblock %}

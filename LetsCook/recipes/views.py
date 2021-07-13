@@ -3,6 +3,7 @@ from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from LetsCook.recipes.forms import RecipeForm, IngredientFormSet
 from LetsCook.recipes.models import Recipe, MealType
@@ -14,6 +15,30 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched'].lower()
+        in_title = Recipe.objects.filter(
+            title__icontains=searched,
+            public=True,
+        )
+        in_description = Recipe.objects.filter(
+            description__icontains=searched,
+            public=True,
+        )
+        in_ingredients = Recipe.objects.filter(
+            ingredient__name__icontains=searched,
+            public=True,
+        )
+        recipes = set(in_title | in_description | in_ingredients)
+        context = {
+            'searched': searched,
+            'recipes': recipes,
+        }
+        return render(request, 'recipes/search.html', context)
+    return render(request, 'recipes/search.html')
+
+
 def details_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
     ingredients = recipe.ingredients.split(', ')
@@ -21,7 +46,7 @@ def details_recipe(request, pk):
         'recipe': recipe,
         'ingredients': ingredients,
     }
-    return render(request, 'recipes/common/details.html', context)
+    return render(request, 'recipes/details.html', context)
 
 
 def all_recipes(request):
@@ -32,8 +57,9 @@ def all_recipes(request):
     return render(request, 'recipes/../../templates/recipes/recipes.html', context)
 
 
-@login_required(login_url=reverse_lazy('sign-in'))
-class RecipeCreate(CreateView):
+class RecipeCreate(LoginRequiredMixin, CreateView):
+    login_url = 'sign-in'
+    # redirect_field_name = '/recipe/create'
     model = Recipe
     template_name = 'recipes/create.html'
     form_class = RecipeForm
@@ -59,5 +85,4 @@ class RecipeCreate(CreateView):
         return super(RecipeCreate, self).form_valid(form)
 
     def get_success_url(self):
-        # return reverse_lazy('details', kwargs={'pk': self.object.pk})
         return reverse_lazy('details-recipe', kwargs={'pk': self.object.pk})

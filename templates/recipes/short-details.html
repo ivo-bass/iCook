@@ -51,9 +51,11 @@
 
 <div class="card-container">
     <div class="new-card">
-        <div class="imgBx">
-            <img src="{{ r.image.url }}">
-        </div>
+        <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
+            <div class="imgBx">
+                <img src="{{ r.image.url }}">
+            </div>
+        </a>
         <div class="card-content">
             <p class="card-text">
                 {{ r.description|capfirst|truncatechars:35 }}
