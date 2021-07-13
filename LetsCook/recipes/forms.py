@@ -1,5 +1,5 @@
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Field, Fieldset, HTML, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Div, Field, Fieldset, HTML, ButtonHolder, Submit, Column
 from django import forms
 from django.forms import inlineformset_factory
 
@@ -22,18 +22,28 @@ IngredientFormSet = inlineformset_factory(
     min_num=1,
     extra=0,
     can_delete=True,
-    widgets={
-        'name': forms.TextInput(
-            attrs={'class': 'create-field'}
-        ),
-        'quantity': forms.NumberInput(
-            attrs={'class': 'create-field'}
-        ),
-        'measure': forms.Select(
-            attrs={'class': 'create-field'}
-        )
-    }
+    # widgets={
+    #     'name': forms.TextInput(
+    #         attrs={'class': 'create-field'}
+    #     ),
+    #     'quantity': forms.NumberInput(
+    #         attrs={'class': 'create-field'}
+    #     ),
+    #     'measure': forms.Select(
+    #         attrs={'class': 'create-field'}
+    #     )
+    # }
 )
+
+
+class Row(Div):
+    css_class = "row d-flex flex-row justify-content-between align-items-bottom"
+    pass
+
+
+class MyColumn(Column):
+    css_class = 'col d-flex justify-content-between align-items-bottom'
+    pass
 
 
 class RecipeForm(forms.ModelForm):
@@ -46,25 +56,58 @@ class RecipeForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = True
         self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-3 create-label'
-        self.helper.field_class = 'col-md-9 create-field'
+        self.helper.form_group_wrapper_class = 'form-control'
+        self.helper.help_text_inline = True
+        self.helper.error_text_inline = True
         self.helper.layout = Layout(
-            Div(
-                Field('title'),
-                Field('meal_type'),
-                Field('image'),
-                Field('description'),
-                Field('time'),
-                Field('servings'),
+            Row(
+                MyColumn(Field('title')),
+                MyColumn(Field('meal_type'))
+            ),
+            HTML("<hr>"),
+            Row(
+                MyColumn(Field('description')),
+                MyColumn(Field('image')),
+            ),
+            HTML("<hr>"),
+            Row(
+                MyColumn(Field('time')),
+                MyColumn(Field('servings')),
+            ),
+            HTML("<hr>"),
+            Row(
                 Field('preparation'),
-                HTML("<br>"),
-                Field('vegetarian'),
-                Field('public'),
-                HTML("<hr>"),
-                HTML("<br>"),
+            ),
+            HTML("<hr>"),
+            Row(
                 Fieldset('Add ingredients',
                          Formset('ingredients')),
-                HTML("<hr>"),
-                ButtonHolder(Submit('submit', 'save')),
-            )
+            ),
+            HTML("<hr>"),
+            Row(
+                MyColumn(Field('vegetarian')),
+                MyColumn(Field('public')),
+                MyColumn(ButtonHolder(Submit('submit', 'save'))),
+            ),
+
         )
+
+        # self.helper.layout = Layout(
+        #     Div(
+        #         Row(
+        #             Column('email', css_class='form-group col-md-6 mb-0'),
+        #             Column('password', css_class='form-group col-md-6 mb-0'),
+        #             css_class='form-row'
+        #         ),
+        #         'address_1',
+        #         'address_2',
+        #         Row(
+        #             Column('city', css_class='form-group col-md-6 mb-0'),
+        #             Column('state', css_class='form-group col-md-4 mb-0'),
+        #             Column('zip_code', css_class='form-group col-md-2 mb-0'),
+        #             css_class='form-row'
+        #         ),
+        #         'check_me_out',
+        #         Submit('submit', 'Sign in')
+        #     )
+        # )

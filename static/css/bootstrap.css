@@ -2576,27 +2576,31 @@ progress {
     font-size: 0.875rem;
 }
 
-.form-text {
-    margin-top: 0.25rem;
-    font-size: 0.875em;
-    color: #666;
-}
+/*.form-text {*/
+/*    margin-top: 0.25rem;*/
+/*    font-size: 0.875em;*/
+/*    color: #666;*/
+/*}*/
 
-.form-control {
+.form-control,
+.custom-file,
+.custom-select {
     display: block;
-    width: 100%;
-    padding: 1rem 0;
+    height: 50px;
+    min-width: 300px;
+    text-align: center;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: var(--bs-field-color);
-    background-color: transparent;
+    color: var(--bs-dark);
+    border-radius: 5px;
+    background: rgba(33, 150, 243, 0.3);
     background-clip: padding-box;
-    border: 0 solid transparent;
+    border: 1px solid #90cbf9;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    border-radius: 0;
+    outline: 0;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -2605,6 +2609,12 @@ progress {
         transition: none;
     }
 }
+
+
+.form-control .custom-file-label {
+    font-size: 0;
+}
+
 
 .form-control[type="file"] {
     overflow: hidden;
@@ -2615,11 +2625,11 @@ progress {
 }
 
 .form-control:focus {
-    color: #666;
-    background-color: transparent;
-    border-color: #90cbf9;
+    color: white;
+    background: rgba(33, 150, 243, 0.5);
+    border-color: #46a6ff;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(33, 150, 243, 0.25);
+    box-shadow: 0 0 5px 2px rgba(33, 150, 243, 0.25);
 }
 
 .form-control::-webkit-date-and-time-value {
@@ -2776,6 +2786,8 @@ progress {
 
 textarea.form-control {
     min-height: calc(1.5em + 2rem);
+    width: 100%;
+    height: 100%;
 }
 
 textarea.form-control-sm {
@@ -5284,8 +5296,8 @@ card:hover {
 }
 
 #card-big {
-    min-width: 50vh;
-    max-width: 70vh;
+    min-width: 40vw;
+    max-width: 80vw;
 }
 
 .card > hr {
@@ -13936,14 +13948,14 @@ footer {
     border-radius: 10px;
 }
 
-.create-label {
-    color: var(--bs-primary);
-}
+/*.create-label {*/
+/*    color: var(--bs-primary);*/
+/*}*/
 
-.create-field {
-    background: var(--bs-field-bg);
-    color: var(--bs-field-color);
-}
+/*.create-field {*/
+/*    background: var(--bs-field-bg);*/
+/*    color: var(--bs-field-color);*/
+/*}*/
 
 ion-icon {
     font-size: 18px;
