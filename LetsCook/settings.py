@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'LetsCook.recipes',
-    'LetsCook.users',
+    'LetsCook.icook_auth',
 ]
 
 MIDDLEWARE = [

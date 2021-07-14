@@ -110,7 +110,7 @@ body {
 .dark-mode {
     --bs-backgroud: var(--bs-gray-dark);
     --bs-backgroud-nav: var(--bs-dark);
-    --bs-background-card: var(--bs-gray-light);
+    --bs-background-card: var(--bs-gray-dark);
     --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     --bs-field-bg: var(--bs-gray);
     --bs-field-color: #eee;
@@ -867,7 +867,7 @@ progress {
     margin-top: -180px;
     padding: 10px 0 10px;
     text-align: center;
-    color: #111;
+    color: var(--bs-font-color);
     visibility: hidden;
     opacity: 0;
     transition: 0.3s ease-in-out;

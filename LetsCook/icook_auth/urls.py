@@ -1,7 +1,7 @@
 from django.urls import path
 
 
-from LetsCook.users import views
+from LetsCook.icook_auth import views
 
 
 urlpatterns = [
