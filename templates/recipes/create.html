@@ -55,18 +55,16 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-{#    <div class="row">#}
-{#        <div class="col d-flex justify-content-center">#}
-{#            <div class="container-fluid mt-5 mb-5">#}
-                <div class="card border-primary mt-5 mb-5" id="card-big">
-                    <div class="card-header">
-                        Create Recipe
-                    </div>
-                    <div class="card-body">
-                        {% crispy form %}
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="card" id="card-form">
+                <div class="card-header">
+                    Create Recipe
                 </div>
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+                <div class="card-body">
+                    {% crispy form %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

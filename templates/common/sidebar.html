@@ -1,8 +1,6 @@
 {% url 'home' as home %}
 {% url 'create-recipe' as create %}
 {% url 'all-recipes' as all_recipes %}
-{% url 'sign-out' as sign_out %}
-{% url 'show-profile' as show_profile %}
 {% url 'my-recipes' as my_recipes %}
 {% url 'search' as search %}
 
@@ -11,6 +9,7 @@
         {#        <li class="list mb-5">#}
         {#            <a class="brand" href="">iCook</a>#}
         {#        </li>#}
+
         <li class="list {% if request.path == home %}active{% endif %}">
             <a href="{% url 'home' %}">
                 <span class="icon">
@@ -47,14 +46,14 @@
             </a>
         </li>
 
-        <li class="list {% if request.path == all_recipes %}active{% endif %}">
-            <a href="{{ all_recipes }}">
-                <span class="icon">
-                    <ion-icon name="library-outline"></ion-icon>
-                </span>
-                <span class="title">All Recipes</span>
-            </a>
-        </li>
+{#        <li class="list {% if request.path == all_recipes %}active{% endif %}">#}
+{#            <a href="{{ all_recipes }}">#}
+{#                <span class="icon">#}
+{#                    <ion-icon name="library-outline"></ion-icon>#}
+{#                </span>#}
+{#                <span class="title">All Recipes</span>#}
+{#            </a>#}
+{#        </li>#}
 
         <li class="list {% if request.path == my_recipes %}active{% endif %}">
             <a href="{{ my_recipes }}">
@@ -74,67 +73,56 @@
             </a>
         </li>
 
-        <li class="list {% if request.path == search %}active{% endif %}">
-            <a href="{{ search }}">
-                <span class="icon">
-                    <ion-icon name="search-outline"></ion-icon>
-                </span>
-                <span class="title">Search</span>
-            </a>
-        </li>
+{#        <li class="list {% if request.path == search %}active{% endif %}">#}
+{#            <a href="{{ search }}">#}
+{#                <span class="icon">#}
+{#                    <ion-icon name="search-outline"></ion-icon>#}
+{#                </span>#}
+{#                <span class="title">Search</span>#}
+{#            </a>#}
+{#        </li>#}
 
     </ul>
-    <ul class="ul-bottom">
-        <li class="list {% if request.path == show_profile %}active{% endif %}">
-            <a href="{{ show_profile }}">
-                <span class="icon">
-                    <ion-icon name="person-outline"></ion-icon>
-                </span>
-                <span class="title">{{ user.username }}</span>
-            </a>
-        </li>
+    {#    <ul class="ul-bottom">#}
+    {#        <li class="list {% if request.path == show_profile %}active{% endif %}">#}
+    {#            <a href="{{ show_profile }}">#}
+    {#                <span class="icon">#}
+    {#                    <ion-icon name="person-outline"></ion-icon>#}
+    {#                </span>#}
+    {#                <span class="title">{{ user.username }}</span>#}
+    {#            </a>#}
+    {#        </li>#}
+    {##}
+    {#        <li class="list {% if request.path == sign_out %}active{% endif %}">#}
+    {#            <a href="{{ sign_out }}">#}
+    {#                <span class="icon">#}
+    {#                    <ion-icon name="log-out-outline"></ion-icon>#}
+    {#                </span>#}
+    {#                <span class="title">Sign Out</span>#}
+    {#            </a>#}
+    {#        </li>#}
+    {##}
+    {#        <li class="list">#}
+    {#            <a href="#">#}
+    {#                <span class="icon" onclick="darkMode()">#}
+    {#                    <ion-icon name="moon-outline" id="dark" hidden></ion-icon>#}
+    {#                    <ion-icon name="sunny-outline" id="light"></ion-icon>#}
+    {#                </span>#}
+    {#                <span class="title"></span>#}
+    {#            </a>#}
+    {#        </li>#}
+    {#    </ul>#}
+    </div>
 
-        <li class="list {% if request.path == sign_out %}active{% endif %}">
-            <a href="{{ sign_out }}">
-                <span class="icon">
-                    <ion-icon name="log-out-outline"></ion-icon>
-                </span>
-                <span class="title">Sign Out</span>
-            </a>
-        </li>
-
-        <li class="list">
-            <a href="#">
-                <span class="icon" onclick="darkMode()">
-                    <ion-icon name="moon-outline" id="dark" hidden></ion-icon>
-                    <ion-icon name="sunny-outline" id="light"></ion-icon>
-                </span>
-                <span class="title"></span>
-            </a>
-        </li>
-    </ul>
-</div>
-
-<script>
-    function darkMode() {
-        let element = document.body;
-        element.classList.toggle("dark-mode");
-        let darkToggler = document.getElementById("dark");
-        darkToggler.toggleAttribute('hidden');
-        let lightToggler = document.getElementById("light");
-        lightToggler.toggleAttribute('hidden');
-    }
-</script>
-
-{#<script>#}
-{#    const list = document.querySelectorAll('.list');#}
-{##}
-{#    function activeLink() {#}
-{#        list.forEach((item) =>#}
-{#            item.classList.remove('active'));#}
-{#        this.classList.add('active');#}
-{#    }#}
-{##}
-{#    list.forEach((item) =>#}
-{#        item.addEventListener('click', activeLink));#}
-{#</script>#}
+    {#<script>#}
+    {#    const list = document.querySelectorAll('.list');#}
+    {##}
+    {#    function activeLink() {#}
+    {#        list.forEach((item) =>#}
+    {#            item.classList.remove('active'));#}
+    {#        this.classList.add('active');#}
+    {#    }#}
+    {##}
+    {#    list.forEach((item) =>#}
+    {#        item.addEventListener('click', activeLink));#}
+    {#</script>#}

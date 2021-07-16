@@ -1,31 +1,43 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <form class="d-flex" method="post" action="{{ search }}">
-        {% csrf_token %}
-        <input class="form-control me-sm-2" type="text" placeholder="Search..." name="searched">
-        <button type="submit" class="btn btn-primary btn-sm">
-            <ion-icon name="search-outline" size="large"></ion-icon>
-        </button>
-    </form>
+    <div class="container">
+        <form class="d-flex" method="post" action="{{ search }}">
+            {% csrf_token %}
+            <input class="form-control me-sm-2" type="text" placeholder="Search..." name="searched">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <ion-icon name="search-outline" size="large"></ion-icon>
+            </button>
+        </form>
 
-    {% if not searched %}
-        <h2>Please, write a keyword in the field!</h2>
-    {% else %}
-        <h2>You searched for '{{ searched }}'.</h2>
-        {% if not recipes %}
-            <p>We have found no results. Please try again.</p>
-        {% else %}
-            <div class="row row-cols-auto">
-                {% for recipe in recipes %}
-                    <div class="col d-flex justify-content-center">
-                        {% include 'recipes/short-details.html' with r=recipe %}
-                    </div>
-                {% endfor %}
+    </div>
+    <div class="container">
+        {% if not searched %}
+            <div class="row">
+                <h2>Please, write a keyword in the field!</h2>
             </div>
+        {% else %}
+            <div class="row">
+                <h2>You searched for '{{ searched }}'.</h2>
+            </div>
+            </div>
+
+            <div class="container">
+            {% if not recipes %}
+                <div class="row">
+                    <p>We have found no results. Please try again.</p>
+                </div>
+
+            {% else %}
+                <div class="row">
+                    {% for recipe in recipes %}
+                        <div class="col-lg-4 col-sm-6">
+                            {% include 'recipes/short-details.html' with r=recipe %}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         {% endif %}
-    {% endif %}
-
-
+        </div>
 
 {% endblock %}

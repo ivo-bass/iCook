@@ -1,3 +1,23 @@
 <footer>
-    <p class="">IvoBass | DjangoExam@SoftUni | 2021</p>
+    <a class="text-decoration-none" href="https://github.com/ivo-bass">IvoBass</a>
+    <p class="text-center">DjangoExam@SoftUni | 2021</p>
+
+    <span class="icon" onclick="darkMode()">
+        <ion-icon class="switch-icon" name="moon-outline" id="dark" hidden></ion-icon>
+        <ion-icon class="switch-icon" name="sunny-outline" id="light"></ion-icon>
+    </span>
+
+
+    <script>
+        function darkMode() {
+            let element = document.body;
+            element.classList.toggle("dark-mode");
+            let darkToggler = document.getElementById("dark");
+            darkToggler.toggleAttribute('hidden');
+            let lightToggler = document.getElementById("light");
+            lightToggler.toggleAttribute('hidden');
+        }
+    </script>
+
 </footer>
+

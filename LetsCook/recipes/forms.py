@@ -42,7 +42,7 @@ class Row(Div):
 
 
 class MyColumn(Column):
-    css_class = 'col d-flex justify-content-between align-items-bottom'
+    # css_class = 'col d-flex justify-content-between align-items-bottom'
     pass
 
 
@@ -91,23 +91,3 @@ class RecipeForm(forms.ModelForm):
             ),
 
         )
-
-        # self.helper.layout = Layout(
-        #     Div(
-        #         Row(
-        #             Column('email', css_class='form-group col-md-6 mb-0'),
-        #             Column('password', css_class='form-group col-md-6 mb-0'),
-        #             css_class='form-row'
-        #         ),
-        #         'address_1',
-        #         'address_2',
-        #         Row(
-        #             Column('city', css_class='form-group col-md-6 mb-0'),
-        #             Column('state', css_class='form-group col-md-4 mb-0'),
-        #             Column('zip_code', css_class='form-group col-md-2 mb-0'),
-        #             css_class='form-row'
-        #         ),
-        #         'check_me_out',
-        #         Submit('submit', 'Sign in')
-        #     )
-        # )
