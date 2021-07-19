@@ -9,8 +9,9 @@ class IngredientInlineAdmin(admin.TabularInline):
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    list_display = ['title', 'ingredients', 'created_on', 'public']
+    list_display = ('title', 'ingredients', 'created_on', 'public')
     inlines = [IngredientInlineAdmin, ]
+    readonly_fields = ('author',)
 
 
 @admin.register(MealType)

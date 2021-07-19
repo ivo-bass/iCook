@@ -12,6 +12,6 @@ urlpatterns = [
 
     path('recipe/', include('LetsCook.recipes.urls')),
 
-    path('user/', include('LetsCook.icook_auth.urls')),
+    path('profile/', include('LetsCook.profiles.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

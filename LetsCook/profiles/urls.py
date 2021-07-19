@@ -1,7 +1,7 @@
 from django.urls import path
 
 
-from LetsCook.icook_auth import views
+from LetsCook.profiles import views
 
 
 urlpatterns = [
@@ -17,3 +17,6 @@ urlpatterns = [
 
     path('my-recipes/', views.my_recipes, name='my-recipes'),
 ]
+
+
+from ..core.signals import *

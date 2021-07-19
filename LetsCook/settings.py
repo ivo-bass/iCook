@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'LetsCook.recipes',
-    'LetsCook.icook_auth',
+    'LetsCook.profiles',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +148,5 @@ DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
 DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+AUTH_USER_MODEL = 'profiles.ICookUser'
