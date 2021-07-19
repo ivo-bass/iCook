@@ -10,7 +10,7 @@ def home(request):
     context = {
 
     }
-    return render(request, 'users/home.html', context)
+    return render(request, 'profiles/home.html', context)
 
 
 def sign_in(request):
@@ -29,7 +29,7 @@ def sign_up(request):
     context = {
 
     }
-    return render(request, 'users/sign-up.html', context)
+    return render(request, 'profiles/sign-up.html', context)
 
 
 @login_required(login_url=reverse_lazy('sign-in'))
@@ -37,7 +37,7 @@ def show_profile(request):
     context = {
 
     }
-    return render(request, 'users/show-profile.html', context)
+    return render(request, 'profiles/show-profile.html', context)
 
 
 @login_required(login_url=reverse_lazy('sign-in'))
@@ -45,4 +45,4 @@ def my_recipes(request):
     context = {
 
     }
-    return render(request, 'users/my-recipes.html', context)
+    return render(request, 'profiles/my-recipes.html', context)
