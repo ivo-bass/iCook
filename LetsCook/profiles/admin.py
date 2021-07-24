@@ -32,4 +32,4 @@ class ICookUserAdmin(UserAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('user',)

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'LetsCook.recipes',
     'LetsCook.profiles',
+    'LetsCook.common',
 ]
 
 MIDDLEWARE = [

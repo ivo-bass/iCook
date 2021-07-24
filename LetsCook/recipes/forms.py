@@ -49,7 +49,7 @@ class MyColumn(Column):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        exclude = ['created_by', ]
+        exclude = ('author', )
 
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)

@@ -9,6 +9,9 @@
                     <div class="card-header">
                         <h4 class="card-title text-primary">{{ recipe.title|capfirst }}</h4>
                         <h6 class="card-subtitle text-muted">{{ recipe.meal_type }}</h6>
+                        <hr>
+                        <a href="path to profile">{{ recipe.author }}</a>
+                        <hr>
                     </div>
 
                     <div class="card-body">
@@ -66,21 +69,78 @@
                     </div>
 
                     <hr>
-                    <div class="card-body center">
-                        <a href="#">
-                            <button class="btn btn-primary btn-sm">
-                                Edit
-                            </button>
-                        </a>
-                        <a href="#">
-                            <button class="btn btn-danger btn-sm">
-                                Delete
-                            </button>
-                        </a>
+                    <div class="card-footer row row-cols-2 justify-content-between text-muted ">
+                        <div class="col text-start">
+                            <small class="mt-2">likes: {{ recipe.likes_count }}</small>
+                            <a href="{% url 'like-recipe' recipe.id %}">
+                                {% if is_liked %}
+                                    <span>
+                                        <ion-icon name="heart"></ion-icon>
+                                    </span>
+                                {% else %}
+                                    <span>
+                                        <ion-icon name="heart-outline"></ion-icon>
+                                    </span>
+                                {% endif %}
+                            </a>
+
+                        </div>
+
+                        <div class="col text-end">
+                            <small>Created: {{ recipe.created_on|timesince }} ago</small>
+                        </div>
                     </div>
-                    <div class="card-footer text-muted">
-                        <small>{{ recipe.created_on|timesince }} ago</small>
-                    </div>
+
+
+                    {% if is_owner %}
+                        <div class="card-body center">
+                            <a href="#">
+                                <button class="btn btn-primary btn-sm">
+                                    Edit
+                                </button>
+                            </a>
+                            <a href="#">
+                                <button class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h3>Comments</h3>
+                        <hr>
+                        {% if comments %}
+                            {% for comment in comments %}
+                                <div class="card-body">
+                                    <div class="row row-cols-2 justify-content-between">
+                                        <div class="col text-start">
+                                            <a href="path to user profile">{{ comment.user.profile.username }}</a>
+                                        </div>
+                                        <div class="col text-end">
+                                            <small class="text-muted">{{ comment.time|timesince }} ago</small>
+                                        </div>
+                                    </div>
+                                    <p>{{ comment.text }}</p>
+                                    <hr>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="container">
+                                <h5>There are no comments for this recipe. </h5>
+                            </div>
+                        {% endif %}
+                        {% if not is_owner %}
+                            <div class="container">
+                                <form method="post" action="{% url 'comment-recipe' recipe.id %}">
+                                    {% csrf_token %}
+                                    {{ comment_form }}
+                                    <br>
+                                    <button class="btn btn-primary btn-sm" type="submit">Add comment</button>
+                                </form>
+                            </div>
+                            </div>
+                        {% endif %}
                 </div>
             </div>
         </div>

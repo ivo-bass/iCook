@@ -126,19 +126,3 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return f"{self.name} - {self.quantity} {self.measure}"
-
-
-class Like(models.Model):
-    recipe = models.ForeignKey(
-        Recipe,
-        on_delete=models.CASCADE,
-    )
-    user = None
-
-
-class Comment(models.Model):
-    recipe = models.ForeignKey(
-        Recipe,
-        on_delete=models.CASCADE,
-    )
-    user = None

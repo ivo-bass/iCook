@@ -40,7 +40,7 @@
                     <li class="nav-item">
                         <a class="nav-link2 {% if request.path == show_profile %}active{% endif %}"
                            href="{{ show_profile }}">
-                            Profile
+                            {{ request.user.profile.username }}
                         </a>
                     </li>
                     <li class="nav-item">

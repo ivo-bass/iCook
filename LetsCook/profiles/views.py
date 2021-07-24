@@ -13,7 +13,7 @@ def home(request):
 
 
 def sign_in(request):
-    user = authenticate(email='ivo@abv.bg', password='7878')
+    user = authenticate(email='admin@admin.bg', password='85.abuza')
     login(request, user)
     return redirect('home')
 
