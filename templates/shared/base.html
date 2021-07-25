@@ -8,23 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iCook</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <!-- CSS only -->
-    {#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"#}
-    {#          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">#}
 </head>
 <body class="dark-mode">
 
 {% if request.user.is_authenticated %}
-    {% include 'common/sidebar.html' %}
+    {% include 'shared/sidebar.html' %}
 {% endif %}
 
-{% include 'common/navbar.html' %}
+{% include 'shared/navbar.html' %}
 
 {% block content %}
     This should not appear
 {% endblock %}
 
-{% include 'common/footer.html' %}
+{% include 'shared/footer.html' %}
 
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

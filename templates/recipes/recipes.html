@@ -1,4 +1,4 @@
-{% extends 'common/base.html' %}
+{% extends 'shared/base.html' %}
 
 {% block content %}
     <h2 class="text-center mt-5 mb-3">Recipes</h2>
@@ -12,4 +12,6 @@
             {% endfor %}
         </div>
     </div>
+
+    {% include 'shared/pagination.html' %}
 {% endblock %}

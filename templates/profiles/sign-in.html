@@ -1,25 +1,22 @@
 {% extends 'shared/base.html' %}
-
-{% url 'sign-up' as sign_up %}
+{% url 'sign-in' as sign_in %}
 
 {% block content %}
-
     <div class="container">
         <div class="row">
             <div class="card" id="card-form">
                 <div class="card-header">
-                    <h3 class="text-center">Sign Up</h3>
+                    <h3 class="text-center">Sign In</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ sign_up }}" method="post">
+                    <form action="{{ sign_in }}" method="post">
                         {% csrf_token %}
-                        {{ form }}
+                        {{ form.as_p }}
                         <br>
-                        <button class="btn btn-primary">Sign up</button>
+                        <button class="btn btn-primary">Sign In</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

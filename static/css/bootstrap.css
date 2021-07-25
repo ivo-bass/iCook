@@ -5585,8 +5585,8 @@ fieldset:disabled .btn {
     display: block;
     color: #2196f3;
     text-decoration: none;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
+    background-color: var(--bs-background-card);
+    border: 1px solid var(--bs-background-card);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
@@ -5626,8 +5626,6 @@ fieldset:disabled .btn {
 .page-item.disabled .page-link {
     color: #666;
     pointer-events: none;
-    background-color: #fff;
-    border-color: #dee2e6;
 }
 
 .page-link {

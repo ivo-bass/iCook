@@ -41,11 +41,6 @@ class Row(Div):
     pass
 
 
-class MyColumn(Column):
-    # css_class = 'col d-flex justify-content-between align-items-bottom'
-    pass
-
-
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
@@ -61,18 +56,18 @@ class RecipeForm(forms.ModelForm):
         self.helper.error_text_inline = True
         self.helper.layout = Layout(
             Row(
-                MyColumn(Field('title')),
-                MyColumn(Field('meal_type'))
+                Column(Field('title')),
+                Column(Field('meal_type'))
             ),
             HTML("<hr>"),
             Row(
-                MyColumn(Field('description')),
-                MyColumn(Field('image')),
+                Column(Field('description')),
+                Column(Field('image')),
             ),
             HTML("<hr>"),
             Row(
-                MyColumn(Field('time')),
-                MyColumn(Field('servings')),
+                Column(Field('time')),
+                Column(Field('servings')),
             ),
             HTML("<hr>"),
             Row(
@@ -85,9 +80,9 @@ class RecipeForm(forms.ModelForm):
             ),
             HTML("<hr>"),
             Row(
-                MyColumn(Field('vegetarian')),
-                MyColumn(Field('public')),
-                MyColumn(ButtonHolder(Submit('submit', 'save'))),
+                Column(Field('vegetarian')),
+                Column(Field('public')),
+                Column(ButtonHolder(Submit('submit', 'save'))),
             ),
 
         )

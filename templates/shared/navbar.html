@@ -4,7 +4,7 @@
 {% url 'sign-in' as sign_in %}
 {% url 'sign-up' as sign_up %}
 {% url 'sign-out' as sign_out %}
-{% url 'show-profile' as show_profile %}
+{% url 'my-profile' as my_profile %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 {#    <div class="container-fluid">#}
@@ -38,8 +38,8 @@
                 {% if request.user.is_authenticated %}
 
                     <li class="nav-item">
-                        <a class="nav-link2 {% if request.path == show_profile %}active{% endif %}"
-                           href="{{ show_profile }}">
+                        <a class="nav-link2 {% if request.path == my_profile %}active{% endif %}"
+                           href="{{ my_profile }}">
                             {{ request.user.profile.username }}
                         </a>
                     </li>
