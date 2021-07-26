@@ -7,7 +7,8 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView, RedirectView
+from django.views.generic import CreateView, RedirectView, ListView
+from django.views.generic.detail import SingleObjectMixin
 
 from LetsCook.profiles.forms import SignUpForm, SignInForm
 
@@ -55,6 +56,25 @@ def my_profile(request):
 
     }
     return render(request, 'profiles/show-profile.html', context)
+
+
+class UserRecipesListView(SingleObjectMixin, ListView):
+    model = UserModel
+    template_name = 'profiles/my-recipes.html'
+    object = None
+    paginate_by = 3
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.request.user
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.object
+        return context
+
+    def get_queryset(self):
+        return self.object.recipe_set.all()
 
 
 @login_required(login_url=reverse_lazy('sign-in'))

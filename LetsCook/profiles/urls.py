@@ -15,7 +15,7 @@ urlpatterns = [
 
     path('my-profile/', views.my_profile, name='my-profile'),
 
-    path('my-recipes/', views.my_recipes, name='my-recipes'),
+    path('my-recipes/', views.UserRecipesListView.as_view(), name='my-recipes'),
 ]
 
 

@@ -31,6 +31,15 @@
                 <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
             </a>
             <h6 class="card-subtitle text-muted center">{{ r.meal_type }}</h6>
+            <hr>
+            <div class="row row-cols-2 justify-content-between">
+                <div class="col text-center">
+                    <small class="text-muted">likes: {{ r.like_set.count }}</small>
+                </div>
+                <div class="col text-center">
+                    <small class="text-muted">comments: {{ r.comment_set.count }}</small>
+                </div>
+            </div>
 
         </div>
     </div>

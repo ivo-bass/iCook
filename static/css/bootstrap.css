@@ -5182,7 +5182,7 @@ fieldset:disabled .btn {
 .card-container .new-card {
     position: relative;
     width: 340px;
-    height: 220px;
+    height: 260px;
     background: var(--bs-background-card);
     margin: 10px 10px;
     padding: 20px 10px;
@@ -5195,7 +5195,7 @@ fieldset:disabled .btn {
 }
 
 .card-container .new-card:hover {
-    height: 380px;
+    height: 420px;
 }
 
 .card-container .new-card .imgBx {
@@ -13873,4 +13873,11 @@ ion-icon {
 .switch-icon:hover {
     transform: scale(2);
     transition-duration: 0.3s;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
 }
