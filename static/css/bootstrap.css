@@ -132,11 +132,11 @@ main {
     z-index: 3;
     top: 25%;
     /*left: 0;*/
-    height: 50%;
+    height: 60%;
     width: 10px;
     background: var(--bs-backgroud-nav);
     background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.30));
-    box-shadow: 5px 0 0 var(--bs-primary);
+    box-shadow: 5px 0 0 var(--bs-primary), 5px 0 10px 1px black;
     overflow-x: hidden;
     transition: width 0.5s;
     border-top-right-radius: 20px;
@@ -2543,7 +2543,7 @@ progress {
     /*min-width: 300px;*/
     /*max-width: 300px;*/
     text-align: center;
-    color: var(--bs-dark);
+    color: var(--bs-font-color);
     border-radius: 5px;
     background: rgba(33, 150, 243, 0.3);
     background-clip: padding-box;
@@ -4750,7 +4750,7 @@ fieldset:disabled .btn {
     background-image: var(--bs-gradient);
     border-bottom-right-radius: 2rem;
     margin-bottom: 2rem;
-    padding: 0.5rem 30px 0.5rem 160px;
+    padding: 0.5rem 30px 0.5rem 30px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -5244,7 +5244,7 @@ fieldset:disabled .btn {
     background: var(--bs-background-card);
     background-clip: border-box;
     border: 0 solid transparent;
-    border-radius: 0.25rem;
+    border-radius: 10px;
 }
 
 .card > hr {
@@ -13880,4 +13880,15 @@ ion-icon {
     justify-content: center;
     align-content: center;
     margin: auto;
+}
+
+.profile-image img {
+    border-radius: 10px;
+}
+
+.avatar {
+  /*vertical-align: middle;*/
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }

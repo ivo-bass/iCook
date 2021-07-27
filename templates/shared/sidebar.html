@@ -2,6 +2,7 @@
 {% url 'create-recipe' as create %}
 {% url 'all-recipes' as all_recipes %}
 {% url 'my-recipes' as my_recipes %}
+{% url 'liked-recipes' as liked_recipes %}
 {% url 'search' as search %}
 
 <div class="navigation">
@@ -64,6 +65,15 @@
             </a>
         </li>
 
+        <li class="list {% if request.path == liked_recipes %}active{% endif %}">
+            <a href="{{ liked_recipes }}">
+                <span class="icon">
+                    <ion-icon name="thumbs-up-outline"></ion-icon>
+                </span>
+                <span class="title">Liked Recipes</span>
+            </a>
+        </li>
+
         <li class="list {% if request.path == create %}active{% endif %}">
             <a href="{{ create }}">
                 <span class="icon">
@@ -73,17 +83,17 @@
             </a>
         </li>
     </ul>
-    </div>
+</div>
 
-    {#<script>#}
-    {#    const list = document.querySelectorAll('.list');#}
-    {##}
-    {#    function activeLink() {#}
-    {#        list.forEach((item) =>#}
-    {#            item.classList.remove('active'));#}
-    {#        this.classList.add('active');#}
-    {#    }#}
-    {##}
-    {#    list.forEach((item) =>#}
-    {#        item.addEventListener('click', activeLink));#}
-    {#</script>#}
+{#<script>#}
+{#    const list = document.querySelectorAll('.list');#}
+{##}
+{#    function activeLink() {#}
+{#        list.forEach((item) =>#}
+{#            item.classList.remove('active'));#}
+{#        this.classList.add('active');#}
+{#    }#}
+{##}
+{#    list.forEach((item) =>#}
+{#        item.addEventListener('click', activeLink));#}
+{#</script>#}

@@ -9,7 +9,8 @@
     <title>iCook</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
-<body class="dark-mode">
+{#<body class="dark-mode">#}
+<body>
 
 {% if request.user.is_authenticated %}
     {% include 'shared/sidebar.html' %}

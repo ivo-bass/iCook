@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 
 from LetsCook.core.mixins import AddBootstrapFormControlMixin
+from LetsCook.profiles.models import Profile
 
 UserModel = get_user_model()
 
@@ -11,7 +12,7 @@ UserModel = get_user_model()
 class SignUpForm(AddBootstrapFormControlMixin, UserCreationForm):
     class Meta:
         model = UserModel
-        fields = ('email', )
+        fields = ('email',)
 
 
 class SignInForm(AddBootstrapFormControlMixin, AuthenticationForm):
@@ -29,3 +30,18 @@ class SignInForm(AddBootstrapFormControlMixin, AuthenticationForm):
 
     def save(self):
         return self.user
+
+
+class UserUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
+    class Meta:
+        model = UserModel
+        fields = ('email',)
+
+
+class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['image', 'username', 'first_name', 'last_name']
+        widgets = {
+            'image': forms.FileInput()
+        }

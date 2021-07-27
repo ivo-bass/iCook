@@ -48,7 +48,7 @@ class Profile(models.Model):
     )
 
     image = ResizedImageField(
-        size=[680, 382],
+        size=[200, 200],
         crop=['middle', 'center'],
         default='profile-default.jpg',
         upload_to='profiles',
