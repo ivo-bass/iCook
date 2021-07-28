@@ -15,9 +15,23 @@
                                     <small class="text-muted">Joined: {{ user.date_joined|date }}</small>
                                 </p>
                                 <hr>
-                                <p>Rang: {{ user.profile.rang }} </p>
-                                <p>Liked: {{ user.like_set.count }} recipes</p>
-                                <p>Commented: {{ user.comment_set.count }} times</p>
+                                <p>
+                                    <label class="text-muted">
+                                        Rang: <span class="text-primary">{{ user.profile.rang }} </span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label class="text-muted">
+                                        Liked: <span
+                                            class="text-primary">{{ user.like_set.count }} recipes</span>
+                                    </label>
+                                </p>
+                                <p>
+                                    <label class="text-muted">
+                                        Commented: <span
+                                            class="text-primary">{{ user.comment_set.count }} times</span>
+                                    </label>
+                                </p>
                             </div>
 
                             <div class="col profile-image center">
@@ -30,7 +44,7 @@
         </div>
     </div>
 
-    <h2 class="text-center mb-3">{{ user.profile.username }}'s Recipes</h2>
+    <h2 class="text-center mb-3">{{ user.profile.username }}'s Recipes: {{ user.recipe_set.count }}</h2>
 
     <div class="container">
 

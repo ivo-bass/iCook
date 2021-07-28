@@ -20,6 +20,8 @@ urlpatterns = [
     path('liked-recipes/', views.UserLikedRecipesListView.as_view(), name='liked-recipes'),
 
     path('show/<int:pk>', views.ProfileShowView.as_view(), name='show-profile'),
+
+    path('delete/<int:pk>', views.UserDeleteView.as_view(), name='delete-user'),
 ]
 
 

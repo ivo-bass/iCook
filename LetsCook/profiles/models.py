@@ -64,10 +64,16 @@ class Profile(models.Model):
 
     @property
     def rang(self):
-        rang = "newbie"
+        rang = 'Beginner'
         likes = self.user.like_set.count()
         comments = self.user.comment_set.count()
         recipes = self.user.recipe_set.count()
-        if not likes and not comments and not recipes:
-            rang = "newbie"
+        if likes and comments and recipes:
+            rang = 'Intermediate'
+        if likes > 10 and comments > 10 and recipes > 3:
+            rang = 'Advanced'
+        elif likes > 20 and comments > 20 and recipes > 10:
+            rang = 'Expert'
+        elif likes > 30 and comments > 30 and recipes > 20:
+            rang = 'All Star'
         return rang

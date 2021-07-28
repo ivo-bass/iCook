@@ -1,11 +1,9 @@
-import os.path
-
 from django import forms
-from django.conf import settings
 from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 
+from LetsCook.core.delete_previos_image import delete_previous_image
 from LetsCook.core.mixins import AddBootstrapFormControlMixin
 from LetsCook.profiles.models import Profile
 
@@ -44,13 +42,7 @@ class UserUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
 class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
 
     def save(self, commit=True):
-        # delete previous image - works only on frontend
-        db_profile = Profile.objects.get(pk=self.instance.pk)
-        new_image = self.files.get('image')
-        old_image = str(db_profile.image)
-        old_image_path = os.path.join(settings.MEDIA_ROOT, old_image)
-        if commit and new_image and old_image and not old_image == 'profile-default.jpg':
-            os.remove(old_image_path)
+        delete_previous_image(self, commit, model=Profile, file_name='profile-default.jpg')
         return super().save(commit=commit)
 
     class Meta:

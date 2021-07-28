@@ -8,7 +8,7 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import View
-from django.views.generic import CreateView, RedirectView, ListView, UpdateView
+from django.views.generic import CreateView, RedirectView, ListView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin, DetailView
 
 from LetsCook.profiles.forms import SignUpForm, SignInForm, UserUpdateForm, ProfileUpdateForm
@@ -103,6 +103,16 @@ class ProfileUpdateView(LoginRequiredMixin, View):
             messages.success(request, 'Success')
             update_session_auth_hash(request, request.user)
             return redirect('update-profile')
+
+
+class UserDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'sign-in'
+    model = UserModel
+    template_name = 'profiles/delete-user.html'
+
+    def get_success_url(self):
+        logout(self.request)
+        return reverse('index')
 
 
 class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):

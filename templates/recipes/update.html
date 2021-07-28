@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="card" id="card-form">
+                <div class="card-header">
+                    Update Recipe
+                </div>
+                <div class="card-body">
+                    {% crispy form %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

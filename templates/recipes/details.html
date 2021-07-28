@@ -1,5 +1,6 @@
 {% extends 'shared/base.html' %}
 
+
 {% block content %}
     <div class="row">
         <div class="col d-flex justify-content-center">
@@ -98,12 +99,12 @@
 
                     {% if is_owner %}
                         <div class="card-body center">
-                            <a href="#">
+                            <a href="{% url 'update-recipe' recipe.pk %}">
                                 <button class="btn btn-primary btn-sm">
                                     Edit
                                 </button>
                             </a>
-                            <a href="#">
+                            <a href="{% url 'delete-recipe' recipe.pk %}">
                                 <button class="btn btn-danger btn-sm">
                                     Delete
                                 </button>
