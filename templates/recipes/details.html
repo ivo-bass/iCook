@@ -13,6 +13,7 @@
                         <a href="{% url 'show-profile' recipe.author.pk %}" class="text-decoration-none">
                             <img src="{{ recipe.author.profile.image.url }}" alt="Avatar" class="avatar">
                             {{ recipe.author.profile.username }}
+                            <small class="text-muted">| {{ recipe.author.profile.rang }}</small>
                         </a>
                         <hr>
                     </div>
@@ -120,9 +121,10 @@
                                         <div class="col text-start">
                                             <a href="{% url 'show-profile' comment.user.pk %}"
                                                class="text-decoration-none">
-                                                <img src="{{ recipe.author.profile.image.url }}" alt="Avatar"
+                                                <img src="{{ comment.user.profile.image.url }}" alt="Avatar"
                                                      class="avatar">
                                                 {{ comment.user.profile.username }}
+                                                <small class="text-muted">| {{ comment.user.profile.rang }}</small>
                                             </a>
                                         </div>
                                         <div class="col text-end">

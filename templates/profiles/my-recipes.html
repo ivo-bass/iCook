@@ -3,10 +3,10 @@
 
 {% block content %}
     <h2 class="text-center mt-5 mb-3">My Recipes</h2>
-    <hr>
     <div class="container">
         {% if not object_list %}
             <div class="row text-center">
+                <hr>
                 <h5>You don't have any recipes yet.</h5>
                 <form>
                     <button class="btn btn-primary" formaction="{% url 'create-recipe' %}">Add Recipe</button>
@@ -15,6 +15,7 @@
             </div>
         {% else %}
             <div class="row">
+                <hr>
                 {% for recipe in object_list %}
                     <div class="col-lg-4 col-sm-6">
                         {% include 'recipes/short-details.html' with r=recipe %}

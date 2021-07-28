@@ -42,6 +42,7 @@ class UserUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
 
 
 class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
+
     def save(self, commit=True):
         # delete previous image - works only on frontend
         db_profile = Profile.objects.get(pk=self.instance.pk)

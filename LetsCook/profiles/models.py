@@ -61,3 +61,13 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.email
+
+    @property
+    def rang(self):
+        rang = "newbie"
+        likes = self.user.like_set.count()
+        comments = self.user.comment_set.count()
+        recipes = self.user.recipe_set.count()
+        if not likes and not comments and not recipes:
+            rang = "newbie"
+        return rang

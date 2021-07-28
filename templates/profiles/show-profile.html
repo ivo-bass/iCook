@@ -11,10 +11,13 @@
                         <div class="row row-cols-2">
                             <div class="col">
                                 <h4 class="text-primary">{{ user.profile.username }}</h4>
-                                <p class="text-muted">Joined: {{ user.date_joined|date }}</p>
+                                <p>
+                                    <small class="text-muted">Joined: {{ user.date_joined|date }}</small>
+                                </p>
+                                <hr>
+                                <p>Rang: {{ user.profile.rang }} </p>
                                 <p>Liked: {{ user.like_set.count }} recipes</p>
                                 <p>Commented: {{ user.comment_set.count }} times</p>
-                                <p>Level: profile.level </p>
                             </div>
 
                             <div class="col profile-image center">
@@ -28,14 +31,17 @@
     </div>
 
     <h2 class="text-center mb-3">{{ user.profile.username }}'s Recipes</h2>
-    <hr>
+
     <div class="container">
-        {% if not user.recipe_set %}
+
+        {% if not user.recipe_set.count %}
             <div class="row text-center">
+                <hr>
                 <h5>{{ user.profile.username }} doesn't have any recipes yet.</h5>
             </div>
         {% else %}
             <div class="row">
+                <hr>
                 {% for recipe in object_list %}
                     <div class="col-lg-4 col-sm-6">
                         {% include 'recipes/short-details.html' with r=recipe %}

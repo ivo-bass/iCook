@@ -2,9 +2,10 @@
 
 {% block content %}
     <h2 class="text-center mt-5 mb-3">Recipes</h2>
-    <hr>
+
     <div class="container">
         <div class="row">
+            <hr>
             {% for recipe in recipes %}
                 <div class="col-lg-4 col-sm-6">
                     {% include 'recipes/short-details.html' with r=recipe %}
