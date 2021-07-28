@@ -10,7 +10,10 @@
                         <h4 class="card-title text-primary">{{ recipe.title|capfirst }}</h4>
                         <h6 class="card-subtitle text-muted">{{ recipe.meal_type }}</h6>
                         <hr>
-                        <a href="path to profile">{{ recipe.author }}</a>
+                        <a href="{% url 'show-profile' recipe.author.pk %}" class="text-decoration-none">
+                            <img src="{{ recipe.author.profile.image.url }}" alt="Avatar" class="avatar">
+                            {{ recipe.author.profile.username }}
+                        </a>
                         <hr>
                     </div>
 
@@ -115,12 +118,18 @@
                                 <div class="card-body">
                                     <div class="row row-cols-2 justify-content-between">
                                         <div class="col text-start">
-                                            <a href="path to user profile">{{ comment.user.profile.username }}</a>
+                                            <a href="{% url 'show-profile' comment.user.pk %}"
+                                               class="text-decoration-none">
+                                                <img src="{{ recipe.author.profile.image.url }}" alt="Avatar"
+                                                     class="avatar">
+                                                {{ comment.user.profile.username }}
+                                            </a>
                                         </div>
                                         <div class="col text-end">
                                             <small class="text-muted">{{ comment.time|timesince }} ago</small>
                                         </div>
                                     </div>
+                                    <br>
                                     <p>{{ comment.text }}</p>
                                     <hr>
                                 </div>

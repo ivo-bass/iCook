@@ -46,9 +46,10 @@ class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
         # delete previous image - works only on frontend
         db_profile = Profile.objects.get(pk=self.instance.pk)
         new_image = self.files.get('image')
-        old_image = os.path.join(settings.MEDIA_ROOT, str(db_profile.image))
-        if commit and new_image and old_image:
-            os.remove(old_image)
+        old_image = str(db_profile.image)
+        old_image_path = os.path.join(settings.MEDIA_ROOT, old_image)
+        if commit and new_image and old_image and not old_image == 'profile-default.jpg':
+            os.remove(old_image_path)
         return super().save(commit=commit)
 
     class Meta:

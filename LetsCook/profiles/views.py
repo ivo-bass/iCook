@@ -9,9 +9,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.views.generic import CreateView, RedirectView, ListView, UpdateView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic.detail import SingleObjectMixin, DetailView
 
 from LetsCook.profiles.forms import SignUpForm, SignInForm, UserUpdateForm, ProfileUpdateForm
+from LetsCook.profiles.models import Profile
 
 UserModel = get_user_model()
 
@@ -56,12 +57,24 @@ class SignOutView(LoginRequiredMixin, View):
         return redirect('index')
 
 
-@login_required(login_url=reverse_lazy('sign-in'))
-def show_profile(request):
-    context = {
+class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
+    login_url = 'sign-in'
+    model = UserModel
+    template_name = 'profiles/show-profile.html'
+    paginate_by = 3
+    object = None
 
-    }
-    return render(request, 'profiles/show-profile.html', context)
+    def get(self, request, *args, **kwargs):
+        self.object = self.model.objects.get(pk=self.kwargs["pk"])
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.object
+        return context
+
+    def get_queryset(self):
+        return self.object.recipe_set.all()
 
 
 

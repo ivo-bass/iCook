@@ -15,7 +15,10 @@ def user_created(sender, instance, created, **kwargs):
         profile = Profile(
             user=instance,
         )
-        # set default username to be the domain + user's id
-        default_username = instance.email.split('@')[0] + str(instance.pk)
+        # set default username to be the domain name
+        default_username = instance.email.split('@')[0]
+        # if the username exists add pk
+        if Profile.objects.filter(username=default_username).exists():
+            default_username += str(instance.pk)
         profile.username = default_username
         profile.save()

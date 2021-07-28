@@ -13,13 +13,13 @@ urlpatterns = [
 
     path('sign-out/', views.SignOutView.as_view(), name='sign-out'),
 
-    path('my-profile/', views.show_profile, name='my-profile'),
+    path('update/', views.ProfileUpdateView.as_view(), name='update-profile'),
 
     path('my-recipes/', views.UserRecipesListView.as_view(), name='my-recipes'),
 
     path('liked-recipes/', views.UserLikedRecipesListView.as_view(), name='liked-recipes'),
 
-    path('update/', views.ProfileUpdateView.as_view(), name='update-profile'),
+    path('show/<int:pk>', views.ProfileShowView.as_view(), name='show-profile'),
 ]
 
 

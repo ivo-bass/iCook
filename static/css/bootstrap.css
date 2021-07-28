@@ -13805,7 +13805,7 @@ footer {
     position: fixed;
     left: 0;
     color: #ddd;
-    z-index: 2;
+    z-index: 3;
 }
 
 #brand-name {
@@ -13888,7 +13888,7 @@ ion-icon {
 
 .avatar {
   /*vertical-align: middle;*/
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
 }

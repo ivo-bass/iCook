@@ -94,6 +94,9 @@ class Recipe(models.Model):
     def ingredients(self):
         return ', '.join(str(i) for i in self.ingredient_set.all())
 
+    class Meta:
+        ordering = ['-id']
+
 
 class Ingredient(models.Model):
     name = models.CharField(
