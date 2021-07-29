@@ -113,8 +113,6 @@ class RecipeUpdate(LoginRequiredMixin, UpdateView):
         context = self.get_context_data()
         ingredients = context['ingredients']
         with transaction.atomic():
-            # form.instance.author = self.request.user
-            # self.object = form.save()
             if ingredients.is_valid():
                 ingredients.instance = self.object
                 ingredients.save()

@@ -126,6 +126,9 @@
                                                      class="avatar">
                                                 {{ comment.user.profile.username }}
                                                 <small class="text-muted">| {{ comment.user.profile.rang }}</small>
+                                                {% if comment.user == recipe.author %}
+                                                <small class="text-success">| author</small>
+                                                {% endif %}
                                             </a>
                                         </div>
                                         <div class="col text-end">
@@ -142,17 +145,15 @@
                                 <h6>There are no comments for this recipe. </h6>
                             </div>
                         {% endif %}
-                        {% if not is_owner %}
-                            <div class="container">
-                                <form method="post" action="{% url 'comment-recipe' recipe.id %}">
-                                    {% csrf_token %}
-                                    {{ comment_form }}
-                                    <br>
-                                    <button class="btn btn-primary btn-sm" type="submit">Add comment</button>
-                                </form>
-                            </div>
-                            </div>
-                        {% endif %}
+                        <div class="container">
+                            <form method="post" action="{% url 'comment-recipe' recipe.id %}">
+                                {% csrf_token %}
+                                {{ comment_form }}
+                                <br>
+                                <button class="btn btn-primary btn-sm" type="submit">Add comment</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

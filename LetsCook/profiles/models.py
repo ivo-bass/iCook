@@ -1,28 +1,9 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, User
 from django.db import models
 from django_resized import ResizedImageField
 
-from LetsCook.core.managers import ICookUserManager
-
-
-class ICookUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(
-        unique=True,
-    )
-
-    is_staff = models.BooleanField(
-        default=False,
-    )
-
-    date_joined = models.DateTimeField(
-        auto_now_add=True,
-    )
-
-    USERNAME_FIELD = 'email'
-
-    objects = ICookUserManager()
+from LetsCook.auth_icook.models import ICookUser
 
 
 class Profile(models.Model):

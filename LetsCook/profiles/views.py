@@ -1,18 +1,15 @@
-from urllib.parse import quote_from_bytes
-
 from django.contrib import messages
-from django.contrib.auth import login, logout, authenticate, get_user_model, update_session_auth_hash
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView, RedirectView, ListView, UpdateView, DeleteView
-from django.views.generic.detail import SingleObjectMixin, DetailView
+from django.views.generic import ListView
+from django.views.generic.detail import SingleObjectMixin
 
-from LetsCook.profiles.forms import SignUpForm, SignInForm, UserUpdateForm, ProfileUpdateForm
-from LetsCook.profiles.models import Profile
+from LetsCook.auth_icook.forms import UserUpdateForm
+from LetsCook.profiles.forms import ProfileUpdateForm
 
 UserModel = get_user_model()
 
@@ -25,36 +22,6 @@ def home(request):
     return render(request, 'profiles/home.html', context)
 
 
-class SignUpView(CreateView):
-    template_name = 'profiles/sign-up.html'
-    model = UserModel
-    form_class = SignUpForm
-    success_url = reverse_lazy('update-profile')
-
-    def form_valid(self, form):
-        to_return = super().form_valid(form)
-        login(self.request, self.object)
-        return to_return
-
-
-class SignInView(LoginView):
-    template_name = 'profiles/sign-in.html'
-    form_class = SignInForm
-
-    def get_success_url(self):
-        # if self.request.GET.get('next'):
-        #     url = self.request.GET.get('next')
-        #     return redirect(url)
-        return reverse('home')
-
-
-class SignOutView(LoginRequiredMixin, View):
-    login_url = 'sign-in'
-
-    @staticmethod
-    def get(request):
-        logout(request)
-        return redirect('index')
 
 
 class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
@@ -79,7 +46,7 @@ class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
 
 
 class ProfileUpdateView(LoginRequiredMixin, View):
-    login_url = 'login'
+    login_url = 'sign-in'
     redirect_field_name = 'profile'
 
     @staticmethod
@@ -103,16 +70,6 @@ class ProfileUpdateView(LoginRequiredMixin, View):
             messages.success(request, 'Success')
             update_session_auth_hash(request, request.user)
             return redirect('update-profile')
-
-
-class UserDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = 'sign-in'
-    model = UserModel
-    template_name = 'profiles/delete-user.html'
-
-    def get_success_url(self):
-        logout(self.request)
-        return reverse('index')
 
 
 class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):

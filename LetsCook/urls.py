@@ -13,4 +13,6 @@ urlpatterns = [
 
     path('profile/', include('LetsCook.profiles.urls')),
 
+    path('auth/', include('LetsCook.auth_icook.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -7,12 +7,14 @@
         <div class="row">
             <hr>
             {% for recipe in recipes %}
-                <div class="col-lg-4 col-sm-6">
+                <div class="col">
                     {% include 'recipes/short-details.html' with r=recipe %}
                 </div>
             {% endfor %}
         </div>
     </div>
 
-    {% include 'shared/pagination.html' %}
+    {% if page_obj.has_other_pages %}
+        {% include 'shared/pagination.html' %}
+    {% endif %}
 {% endblock %}

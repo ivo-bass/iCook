@@ -57,7 +57,7 @@
             <div class="row">
                 <hr>
                 {% for recipe in object_list %}
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col">
                         {% include 'recipes/short-details.html' with r=recipe %}
                     </div>
                 {% endfor %}

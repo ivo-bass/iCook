@@ -848,6 +848,8 @@ progress {
 }
 
 .row {
+    justify-content: center;
+    align-content: center;
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
     display: -ms-flexbox;
@@ -5182,6 +5184,7 @@ fieldset:disabled .btn {
 .card-container .new-card {
     position: relative;
     width: 340px;
+    min-width: 340px;
     height: 260px;
     background: var(--bs-background-card);
     margin: 10px 10px;
@@ -13887,8 +13890,8 @@ ion-icon {
 }
 
 .avatar {
-  /*vertical-align: middle;*/
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
+    /*vertical-align: middle;*/
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
 }

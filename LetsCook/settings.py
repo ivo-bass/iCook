@@ -42,8 +42,9 @@ INSTALLED_APPS = [
 
     'crispy_forms',
 
-    'LetsCook.recipes',
+    'LetsCook.auth_icook',
     'LetsCook.profiles',
+    'LetsCook.recipes',
     'LetsCook.common',
 ]
 
@@ -83,14 +84,21 @@ WSGI_APPLICATION = 'LetsCook.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'development',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'icookdb.db',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'development',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -150,4 +158,4 @@ DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AUTH_USER_MODEL = 'profiles.ICookUser'
+AUTH_USER_MODEL = 'auth_icook.ICookUser'
