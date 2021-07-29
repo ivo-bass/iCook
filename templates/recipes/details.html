@@ -73,7 +73,7 @@
                         </ul>
                     </div>
 
-{#                    <hr>#}
+                    {#                    <hr>#}
 
                     {% if is_owner %}
                         <div class="card-body center">
@@ -90,11 +90,11 @@
                         </div>
                     {% endif %}
 
-{#                    <hr>#}
+                    {#                    <hr>#}
 
-                    <div class="card-footer row row-cols-2 justify-content-between text-muted ">
+                    <div class="card-footer row row-cols-auto justify-content-between text-muted ">
                         <div class="col text-start">
-                            <small class="mt-2">likes: {{ recipe.likes_count }}</small>
+                            <small class="mt-2">Likes: {{ recipe.likes_count }}</small>
                             <a href="{% url 'like-recipe' recipe.id %}">
                                 {% if is_liked %}
                                     <span>
@@ -111,6 +111,10 @@
 
                         <div class="col text-end">
                             <small>Created: {{ recipe.created_on|timesince }} ago</small>
+                        </div>
+
+                        <div class="col text-start">
+                            <small>Views: {{ recipe.recipe_views }}</small>
                         </div>
                     </div>
 

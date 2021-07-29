@@ -11,11 +11,13 @@ from LetsCook.recipes.forms import RecipeForm, IngredientFormSet, RecipeUpdateFo
 from LetsCook.recipes.models import Recipe, MealType
 
 
-
-
-
 def details_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
+    # increase views count if not own recipe
+    if not recipe.author.id == request.user.id:
+        recipe.recipe_views = recipe.recipe_views + 1
+        recipe.save()
+    # get other data
     recipe.likes_count = recipe.like_set.count()
     ingredients = recipe.ingredients.split(', ')
     is_owner = recipe.author == request.user
