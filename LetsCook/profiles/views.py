@@ -41,7 +41,8 @@ class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
         return context
 
     def get_queryset(self):
-        return self.object.recipe_set.all()
+        public_recipes = self.object.recipe_set.filter(public=True)
+        return public_recipes
 
 
 

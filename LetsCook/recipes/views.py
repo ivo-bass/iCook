@@ -67,6 +67,10 @@ class AllRecipesView(ListView):
     context_object_name = 'recipes'
     paginate_by = 6
 
+    def get_queryset(self):
+        all_public_recipes = Recipe.objects.filter(public=True)
+        return all_public_recipes
+
 
 class RecipeCreate(LoginRequiredMixin, CreateView):
     login_url = 'sign-in'

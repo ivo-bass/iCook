@@ -48,7 +48,7 @@ class Row(Div):
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        exclude = ('author', )
+        exclude = ('author', 'recipe_views',)
 
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)
@@ -99,7 +99,7 @@ class RecipeUpdateForm(forms.ModelForm):
 
     class Meta:
         model = Recipe
-        exclude = ('author', )
+        exclude = ('author', 'recipe_views',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
