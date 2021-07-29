@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 
 from LetsCook.common.forms import CommentForm
-from LetsCook.common.models import Like
+from LetsCook.common.models import Like, Comment
 from LetsCook.recipes.models import Recipe
 
 
@@ -66,7 +67,7 @@ def search(request):
 
 
 
-@login_required
+@login_required(login_url=reverse_lazy('sign-in'))
 def comment_recipe(request, pk):
     form = CommentForm(request.POST)
     if form.is_valid():
@@ -77,7 +78,15 @@ def comment_recipe(request, pk):
     return redirect('details-recipe', pk)
 
 
-@login_required
+@login_required(login_url=reverse_lazy('sign-in'))
+def delete_comment(request, recipe_pk, comment_pk):
+    comment = Comment.objects.get(pk=comment_pk)
+    if request.user.id == comment.user.id:
+        comment.delete()
+    return redirect('details-recipe', recipe_pk)
+
+
+@login_required(login_url=reverse_lazy('sign-in'))
 def like_recipe(request, pk):
     recipe = Recipe.objects.get(pk=pk)
     like_object_by_user = recipe.like_set.filter(user_id=request.user.id).first()

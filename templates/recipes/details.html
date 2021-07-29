@@ -73,7 +73,25 @@
                         </ul>
                     </div>
 
-                    <hr>
+{#                    <hr>#}
+
+                    {% if is_owner %}
+                        <div class="card-body center">
+                            <a href="{% url 'update-recipe' recipe.pk %}">
+                                <button class="btn btn-primary btn-sm">
+                                    Edit
+                                </button>
+                            </a>
+                            <a href="{% url 'delete-recipe' recipe.pk %}">
+                                <button class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+
+{#                    <hr>#}
+
                     <div class="card-footer row row-cols-2 justify-content-between text-muted ">
                         <div class="col text-start">
                             <small class="mt-2">likes: {{ recipe.likes_count }}</small>
@@ -96,22 +114,6 @@
                         </div>
                     </div>
 
-
-                    {% if is_owner %}
-                        <div class="card-body center">
-                            <a href="{% url 'update-recipe' recipe.pk %}">
-                                <button class="btn btn-primary btn-sm">
-                                    Edit
-                                </button>
-                            </a>
-                            <a href="{% url 'delete-recipe' recipe.pk %}">
-                                <button class="btn btn-danger btn-sm">
-                                    Delete
-                                </button>
-                            </a>
-                        </div>
-                    {% endif %}
-
                     <div class="card-body">
                         <h5>Comments</h5>
                         <hr>
@@ -127,7 +129,7 @@
                                                 {{ comment.user.profile.username }}
                                                 <small class="text-muted">| {{ comment.user.profile.rang }}</small>
                                                 {% if comment.user == recipe.author %}
-                                                <small class="text-success">| author</small>
+                                                    <small class="text-success">| author</small>
                                                 {% endif %}
                                             </a>
                                         </div>
@@ -136,7 +138,15 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <p>{{ comment.text }}</p>
+                                    <p class="{% if comment.user.id == request.user.id %}text-primary{% endif %}">
+                                        {{ comment.text }}
+                                    </p>
+                                    {% if comment.user.id == request.user.id %}
+                                        <a href="{% url 'delete-comment' recipe.pk comment.pk %}"
+                                           class="center text-decoration-none">
+                                            <button class="btn btn-outline-danger btn-sm">Delete comment</button>
+                                        </a>
+                                    {% endif %}
                                     <hr>
                                 </div>
                             {% endfor %}
