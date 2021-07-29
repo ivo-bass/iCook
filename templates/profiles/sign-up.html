@@ -1,7 +1,5 @@
 {% extends 'shared/base.html' %}
 
-{% url 'sign-up' as sign_up %}
-
 {% block content %}
 
     <div class="container">
@@ -11,12 +9,17 @@
                     <h3 class="text-center">Sign Up</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ sign_up }}" method="post">
+                    <form action="{% url 'sign-up' %}" method="post">
                         {% csrf_token %}
                         {{ form }}
                         <br>
-                        <button class="btn btn-primary">Sign up</button>
+                        <button class="btn btn-primary center">Sign up</button>
                     </form>
+                </div>
+                <div class="card-footer">
+                    <p class="center">
+                        Already have an account? <a href="{% url 'sign-in' %}" class="center">Sign In</a>
+                    </p>
                 </div>
             </div>
         </div>

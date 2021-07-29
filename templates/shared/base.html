@@ -12,11 +12,12 @@
 {#<body class="dark-mode">#}
 <body>
 
+{% include 'shared/navbar.html' %}
+
 {% if request.user.is_authenticated %}
     {% include 'shared/sidebar.html' %}
+    {% include 'shared/progress.html' %}
 {% endif %}
-
-{% include 'shared/navbar.html' %}
 
 {% block content %}
     This should not appear

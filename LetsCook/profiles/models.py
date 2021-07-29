@@ -15,7 +15,6 @@ class Profile(models.Model):
 
     username = models.CharField(
         max_length=20,
-        blank=True,
     )
 
     first_name = models.CharField(
@@ -58,3 +57,12 @@ class Profile(models.Model):
         elif likes > 30 and comments > 30 and recipes > 20:
             rang = 'All Star'
         return rang
+
+    @property
+    def progress(self):
+        username = 25 if self.username else 0
+        first_name = 25 if self.first_name else 0
+        last_name = 25 if self.last_name else 0
+        image = 25 if not self.image.name == 'profile-default.jpg' else 0
+        value = username + first_name + last_name + image
+        return value

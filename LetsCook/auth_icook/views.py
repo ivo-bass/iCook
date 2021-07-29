@@ -26,12 +26,8 @@ class SignUpView(CreateView):
 class SignInView(LoginView):
     template_name = 'profiles/sign-in.html'
     form_class = SignInForm
-
-    def get_success_url(self):
-        # if self.request.GET.get('next'):
-        #     url = self.request.GET.get('next')
-        #     return redirect(url)
-        return reverse('home')
+    redirect_authenticated_user = True
+    redirect_field_name = 'next'
 
 
 class SignOutView(LoginRequiredMixin, View):
