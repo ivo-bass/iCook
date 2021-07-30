@@ -171,4 +171,4 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGIN_URL = '/auth/sign-in/'
 # needed with CBV LoginView
-LOGIN_REDIRECT_URL = '/profile/update/'
+LOGIN_REDIRECT_URL = '/'

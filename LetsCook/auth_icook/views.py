@@ -55,14 +55,7 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        login(request, user)
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-        context = {
-            'u_form': u_form,
-            'p_form': p_form
-        }
-        return render(request, 'profiles/update-profile.html', context)
+        return render(request, 'auth/sign-in.html', {"form": SignInForm})
     else:
         return render(request, 'auth/activation_invalid.html')
 

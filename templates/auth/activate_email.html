@@ -1,5 +1,10 @@
 {% autoescape off %}
-    Hi {{ user.username }},
+    Hi {{ user.profile.username }},
+
+    Welcome to iCook!
+
+    Creating a profile you are able to add content to the website,
+    to comment, like and more.
 
     Please click on the link to confirm your registration,
     http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
