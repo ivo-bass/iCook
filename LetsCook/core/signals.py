@@ -22,3 +22,5 @@ def user_created(sender, instance, created, **kwargs):
             default_username += str(instance.pk)
         profile.username = default_username
         profile.save()
+    else:
+        a = 5

@@ -159,3 +159,16 @@ DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'auth_icook.ICookUser'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = 'adffagcqcsnynqvo'
+EMAIL_HOST_USER = 'ivailo.ignatoff@gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+LOGIN_URL = '/auth/sign-in/'
+# needed with CBV login
+LOGIN_REDIRECT_URL = '/profile/update/'

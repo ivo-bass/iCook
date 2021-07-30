@@ -1,12 +1,21 @@
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, DeleteView
 
-from LetsCook.auth_icook.forms import SignUpForm, SignInForm
+from LetsCook.auth_icook.forms import SignUpForm, SignInForm, UserUpdateForm
+from LetsCook.profiles.forms import ProfileUpdateForm
 
 UserModel = get_user_model()
 
@@ -18,15 +27,50 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('update-profile')
 
     def form_valid(self, form):
-        to_return = super().form_valid(form)
-        login(self.request, self.object)
-        return to_return
+        user = form.save(commit=False)
+        user.is_active = False
+        user.save()
+        current_site = get_current_site(self.request)
+        mail_subject = 'Activate your account.'
+        message = render_to_string('auth/activate_email.html', {
+            'user': user,
+            'domain': current_site.domain,
+            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+            'token': default_token_generator.make_token(user),
+        })
+        to_email = form.cleaned_data.get('email')
+        email = EmailMessage(
+            mail_subject, message, to=[to_email]
+        )
+        email.send()
+        return render(self.request, 'auth/activation_needed.html')
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = UserModel._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+        context = {
+            'u_form': u_form,
+            'p_form': p_form
+        }
+        return render(request, 'profiles/update-profile.html', context)
+    else:
+        return render(request, 'auth/activation_invalid.html')
 
 
 class SignInView(LoginView):
     template_name = 'profiles/sign-in.html'
     form_class = SignInForm
-    redirect_authenticated_user = True
+    # redirect_authenticated_user = True
     redirect_field_name = 'next'
 
 
