@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import MultipleObjectMixin
 
 from LetsCook.common.forms import CommentForm
 from LetsCook.common.models import Like
@@ -60,15 +61,26 @@ def details_recipe(request, pk):
 #         return context
 
 
-
 class AllRecipesView(ListView):
     model = Recipe
     template_name = 'recipes/recipes.html'
     context_object_name = 'recipes'
     paginate_by = 6
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        categories = MealType.objects.all()
+        context['categories'] = categories
+        return context
+
     def get_queryset(self):
         all_public_recipes = Recipe.objects.filter(public=True)
+        category_name = self.request.GET.get('category')
+        category = None
+        if not category_name in ('', 'All') and category_name is not None:
+            category = MealType.objects.get(name=category_name)
+        if not category == '' and category is not None:
+            all_public_recipes = all_public_recipes.filter(public=True, meal_type=category.id)
         return all_public_recipes
 
 

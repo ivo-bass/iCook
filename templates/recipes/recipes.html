@@ -1,16 +1,49 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h2 class="text-center mt-5 mb-3">Recipes</h2>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <form method="GET" action=".">
+                    <div class="row row-cols-auto align-items-baseline">
+                        <div class="col">
+                            <h5>Filter Recipes</h5>
+                        </div>
+                        <div class="col">
+                            <select id="category" class="form-control w-auto" name="category">
+                                <option selected>All</option>
+                                {% for cat in categories %}
+                                    <option value="{{ cat }}">{{ cat|capfirst }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-primary btn-sm center">Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center mt-5 mb-3">Recipes -
+        {% if request.GET.category %}{{ request.GET.category|capfirst }}{% else %}All{% endif %}</h2>
 
     <div class="container">
         <div class="row">
             <hr>
-            {% for recipe in recipes %}
+            {% if not recipes %}
                 <div class="col">
-                    {% include 'recipes/short-details.html' with r=recipe %}
+                    <h5>There are no recipes.</h5>
                 </div>
-            {% endfor %}
+            {% else %}
+                {% for recipe in recipes %}
+                    <div class="col">
+                        {% include 'recipes/short-details.html' with r=recipe %}
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
 
