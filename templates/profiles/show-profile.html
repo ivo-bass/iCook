@@ -8,12 +8,17 @@
                 <div class="card border-primary mb-3" id="card-big">
 
                     <div class="card-header">
-                        <div class="row row-cols-2">
+                        <div class="row row-cols-auto">
+                            <div class="col profile-image center">
+                                <img src="{{ user.profile.image.url }}">
+                            </div>
+
                             <div class="col">
-                                <h4 class="text-primary">{{ user.profile.username }}</h4>
+                                <h4 class="text-primary mt-3">{{ user.profile.username }}</h4>
                                 <p>
                                     <small class="text-muted">Joined: {{ user.date_joined|date }}</small>
                                 </p>
+                                <h6>{{ user.profile.first_name|capfirst }} {{ user.profile.last_name|capfirst }}</h6>
                                 <hr>
                                 <p>
                                     <label class="text-muted">
@@ -32,10 +37,6 @@
                                             class="text-primary">{{ user.comment_set.count }} times</span>
                                     </label>
                                 </p>
-                            </div>
-
-                            <div class="col profile-image center">
-                                <img src="{{ user.profile.image.url }}">
                             </div>
                         </div>
                     </div>
@@ -65,7 +66,7 @@
         {% endif %}
     </div>
 
-    {% if object_list %}
+    {% if page_obj.has_other_pages %}
         {% include 'shared/pagination.html' %}
     {% endif %}
 
