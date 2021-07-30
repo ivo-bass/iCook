@@ -17,6 +17,8 @@
 {% if request.user.is_authenticated %}
     {% include 'shared/sidebar.html' %}
     {% include 'shared/progress.html' %}
+{% else %}
+    {% include 'shared/suggest-sign-in.html' %}
 {% endif %}
 
 {% block content %}

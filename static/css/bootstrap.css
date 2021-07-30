@@ -5191,7 +5191,7 @@ fieldset:disabled .btn {
     padding: 20px 10px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 20px 5px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 20px 3px rgba(0, 0, 0, 0.5);
     transition: 0.3s ease-in-out;
     border-radius: 5px;
     border: solid 1px black;
@@ -13894,4 +13894,16 @@ ion-icon {
     width: 25px;
     height: 25px;
     border-radius: 50%;
+}
+
+.notification {
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+    color: var(--bs-danger);
+    background: rgba(255, 255, 255, 0.6);
+    padding: 2px 10px 2px 10px;
+    border: solid 1px var(--bs-danger);
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }

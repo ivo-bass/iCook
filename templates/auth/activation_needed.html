@@ -1,20 +1,10 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-            <div class="container-fluid mt-5 mb-5">
-                <div class="card border-primary mb-3" id="card-big">
-                    <div class="card-header">
-                        <h6 class="text-danger text-center">
-                            Please close this page
-                        </h6>
-                        <h6 class="text-danger text-center">
-                            and check your email to activate your profile.
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="text-center text-danger">
+        <span class="notification">
+            Please close this page
+            and check your email to activate your profile.
+        </span>
     </div>
 {% endblock %}

@@ -1,0 +1,11 @@
+{% url 'sign-in' as sign_in %}
+{% url 'sign-up' as sign_up %}
+
+{% if not request.path ==  sign_in and not request.path == sign_up %}
+    <div class="text-center text-danger">
+        <small class="notification">
+            Sign in to get access to all site functionalities: get suggestions, add recipes, comment, like and more -
+            <a href="{% url 'sign-in' %}">SIGN IN</a>
+        </small>
+    </div>
+{% endif %}
