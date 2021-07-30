@@ -170,5 +170,5 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 LOGIN_URL = '/auth/sign-in/'
-# needed with CBV login
+# needed with CBV LoginView
 LOGIN_REDIRECT_URL = '/profile/update/'

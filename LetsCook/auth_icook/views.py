@@ -21,7 +21,7 @@ UserModel = get_user_model()
 
 
 class SignUpView(CreateView):
-    template_name = 'profiles/sign-up.html'
+    template_name = 'auth/sign-up.html'
     model = UserModel
     form_class = SignUpForm
     success_url = reverse_lazy('update-profile')
@@ -68,7 +68,7 @@ def activate(request, uidb64, token):
 
 
 class SignInView(LoginView):
-    template_name = 'profiles/sign-in.html'
+    template_name = 'auth/sign-in.html'
     form_class = SignInForm
     # redirect_authenticated_user = True
     redirect_field_name = 'next'
@@ -86,7 +86,7 @@ class SignOutView(LoginRequiredMixin, View):
 class UserDeleteView(LoginRequiredMixin, DeleteView):
     login_url = 'sign-in'
     model = UserModel
-    template_name = 'profiles/delete-user.html'
+    template_name = 'auth/delete-user.html'
 
     def get_success_url(self):
         logout(self.request)
