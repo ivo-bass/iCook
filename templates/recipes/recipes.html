@@ -33,17 +33,15 @@
     <div class="container">
         <div class="row">
             <hr>
-            {% if not recipes %}
+            {% for recipe in recipes %}
+                <div class="col">
+                    {% include 'recipes/short-details.html' with r=recipe %}
+                </div>
+            {% empty %}
                 <div class="col">
                     <h5>There are no recipes.</h5>
                 </div>
-            {% else %}
-                {% for recipe in recipes %}
-                    <div class="col">
-                        {% include 'recipes/short-details.html' with r=recipe %}
-                    </div>
-                {% endfor %}
-            {% endif %}
+            {% endfor %}
         </div>
     </div>
 

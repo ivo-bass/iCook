@@ -9,8 +9,14 @@
     <title>iCook</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
 </head>
-{#<body class="dark-mode">#}
-<body>
+
+{% if request.user.is_authenticated %}
+    {% if request.user.profile.dark_theme %}
+        <body class="dark-mode">
+    {% endif %}
+{% else %}
+    <body>
+{% endif %}
 
 {% include 'shared/navbar.html' %}
 

@@ -16,7 +16,8 @@ class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['image', 'username', 'first_name', 'last_name']
+        fields = ['image', 'username', 'first_name', 'last_name', 'dark_theme',]
         widgets = {
-            'image': forms.FileInput()
+            'image': forms.FileInput(),
+            'dark_theme': forms.NullBooleanSelect(),
         }
