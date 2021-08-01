@@ -66,3 +66,7 @@ class Profile(models.Model):
         image = 25 if not self.image.name == 'profile-default.jpg' else 0
         value = username + first_name + last_name + image
         return value
+
+
+class Suggestion(models.Model):
+    pass

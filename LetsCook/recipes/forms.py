@@ -26,17 +26,6 @@ IngredientFormSet = inlineformset_factory(
     min_num=1,
     extra=0,
     can_delete=True,
-    # widgets={
-    #     'name': forms.TextInput(
-    #         attrs={'class': 'create-field'}
-    #     ),
-    #     'quantity': forms.NumberInput(
-    #         attrs={'class': 'create-field'}
-    #     ),
-    #     'measure': forms.Select(
-    #         attrs={'class': 'create-field'}
-    #     )
-    # }
 )
 
 
@@ -94,7 +83,7 @@ class RecipeForm(forms.ModelForm):
 
 class RecipeUpdateForm(forms.ModelForm):
     def save(self, commit=True):
-        delete_previous_image(self, commit, model=Recipe, file_name='food-default.png')
+        delete_previous_image(self, commit, Recipe, 'food-default.png')
         return super().save(commit=commit)
 
     class Meta:

@@ -63,7 +63,7 @@ def details_recipe(request, pk):
 
 class AllRecipesView(ListView):
     model = Recipe
-    template_name = 'recipes/recipes.html'
+    template_name = 'recipes/all-recipes.html'
     context_object_name = 'recipes'
     paginate_by = 6
 

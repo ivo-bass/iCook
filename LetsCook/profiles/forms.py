@@ -11,7 +11,7 @@ UserModel = get_user_model()
 class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
 
     def save(self, commit=True):
-        delete_previous_image(self, commit, model=Profile, file_name='profile-default.jpg')
+        delete_previous_image(self, commit, Profile, 'profile-default.jpg')
         return super().save(commit=commit)
 
     class Meta:

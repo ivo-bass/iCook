@@ -1,13 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views import View
-from django.views.generic import ListView, TemplateView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import TemplateView
 
 from LetsCook.common.forms import CommentForm
 from LetsCook.common.models import Like, Comment
+from LetsCook.core.get_search_results import get_search_results
 from LetsCook.recipes.models import Recipe
 
 
@@ -16,55 +14,11 @@ class IndexView(TemplateView):
     template_name = 'common/index.html'
 
 
-def perform_search(request):
-    searched = request.POST['searched'].lower()
-    in_title = Recipe.objects.filter(
-        title__icontains=searched,
-        public=True,
-    )
-    in_description = Recipe.objects.filter(
-        description__icontains=searched,
-        public=True,
-    )
-    in_ingredients = Recipe.objects.filter(
-        ingredient__name__icontains=searched,
-        public=True,
-    )
-    recipes = set(in_title | in_description | in_ingredients)
-    context = {
-        'searched': searched,
-        'recipes': recipes,
-    }
-    return context
-
-
 def search(request):
     context = {}
     if request.method == 'POST':
-        context = perform_search(request)
-    return render(request, 'recipes/search.html', context)
-
-
-# class SearchView(ListView):
-#     model = Recipe
-#     template_name = 'recipes/search.html'
-#     paginate_by = 3
-#
-#
-#     def get(self, request, *args, **kwargs):
-#         super().get(self, request, *args, **kwargs)
-#         return render(request, 'recipes/search.html')
-#
-#     def get_queryset(self):
-#         context = perform_search(self.request)
-#         return context['recipes']
-#
-#     # @staticmethod
-#     def post(self, request):
-#         context = perform_search(request)
-#         return render(request, 'recipes/search.html', context)
-
-
+        context = get_search_results(request)
+    return render(request, 'common/search.html', context)
 
 
 @login_required(login_url=reverse_lazy('sign-in'))
