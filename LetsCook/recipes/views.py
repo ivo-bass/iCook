@@ -1,14 +1,11 @@
-from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.list import MultipleObjectMixin
 
 from LetsCook.common.forms import CommentForm
-from LetsCook.common.models import Like
-from LetsCook.core.constants import MEAL_TYPES, CATEGORIES
+from LetsCook.core.constants import CATEGORIES
 from LetsCook.profiles.views import save_suggestion
 from LetsCook.recipes.forms import RecipeForm, IngredientFormSet, RecipeUpdateForm
 from LetsCook.recipes.models import Recipe
@@ -39,31 +36,6 @@ def details_recipe(request, pk):
         'is_liked': is_liked_by_user,
     }
     return render(request, 'recipes/details.html', context)
-
-
-# class RecipeDetailView(DetailView):
-#     model = Recipe
-#     template_name = 'recipes/details.html'
-#     context_object_name = 'recipes'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         recipe = Recipe.objects.get(pk=pk)
-#         recipe.likes_count = recipe.like_set.count()
-#         ingredients = recipe.ingredients.split(', ')
-#         is_owner = recipe.author == request.user
-#         is_liked_by_user = recipe.like_set.filter(user_id=request.user.id).exists()
-#         context = {
-#             'recipe': recipe,
-#             'ingredients': ingredients,
-#             'comments': recipe.comment_set.all(),
-#             'comment_form': CommentForm(
-#                 initial={'recipe_pk': pk}
-#             ),
-#             'is_owner': is_owner,
-#             'is_liked': is_liked_by_user,
-#         }
-#         return context
 
 
 class AllRecipesView(ListView):

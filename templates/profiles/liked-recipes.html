@@ -3,18 +3,17 @@
 
 {% block content %}
     <h2 class="text-center mt-5 mb-3">Likes</h2>
+    <hr>
     <div class="container">
         {% if not object_list %}
             <div class="row center text-center">
-                <hr>
                 <h5>You don't have any likes yet.</h5>
                 <form>
                     <button class="btn btn-primary" formaction="{% url 'all-recipes' %}">View all recipes</button>
                 </form>
             </div>
         {% else %}
-            <div class="row center">
-                <hr>
+            <div class="row row-cols-auto center">
                 {% for like in object_list %}
                     <div class="col">
                         {% include 'recipes/short-details.html' with r=like.recipe %}

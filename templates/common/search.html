@@ -29,9 +29,9 @@
                 </div>
 
             {% else %}
-                <div class="row">
+                <div class="row row-cols-auto">
                     {% for recipe in recipes %}
-                        <div class="col-lg-4 col-sm-6">
+                        <div class="col">
                             {% include 'recipes/short-details.html' with r=recipe %}
                         </div>
                     {% endfor %}

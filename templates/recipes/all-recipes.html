@@ -31,8 +31,7 @@
         {% if request.GET.category %}{{ request.GET.category|capfirst }}{% else %}All{% endif %}</h2>
 
     <div class="container">
-        <div class="row">
-            <hr>
+        <div class="row row-cols-auto">
             {% for recipe in recipes %}
                 <div class="col">
                     {% include 'recipes/short-details.html' with r=recipe %}

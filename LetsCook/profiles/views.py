@@ -14,6 +14,7 @@ from LetsCook.auth_icook.forms import UserUpdateForm
 from LetsCook.core.constants import CATEGORIES
 from LetsCook.core.save_suggestion import save_suggestion
 from LetsCook.profiles.forms import ProfileUpdateForm
+from LetsCook.profiles.models import Choice
 from LetsCook.recipes.models import Recipe
 
 UserModel = get_user_model()
@@ -46,6 +47,29 @@ class SuggestView(LoginRequiredMixin, View):
     def post(self, request):
         save_suggestion(request)
         return redirect('home')
+
+
+class HistoryView(LoginRequiredMixin, ListView):
+    model = Choice
+    template_name = 'profiles/history.html'
+    paginate_by = 3
+    ordering = None
+    object = None
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.request.user
+        return super().get(request, *args, **kwargs)
+
+    # Todo: filter history by date
+    # def post(self, request, *args, **kwargs):
+    #     pass
+
+    def get_queryset(self):
+        """
+        :return: all choices for the session user ordered by date
+        """
+        related_choices = self.object.choice_set.order_by('-date')
+        return related_choices
 
 
 class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):

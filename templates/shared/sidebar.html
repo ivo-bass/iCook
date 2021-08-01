@@ -5,6 +5,7 @@
 {% url 'liked-recipes' as liked_recipes %}
 {% url 'search' as search %}
 {% url 'suggest' as suggest %}
+{% url 'history' as history %}
 
 <div class="navigation">
     <ul>
@@ -31,7 +32,7 @@
         </li>
 
         <li class="list {% if request.path == history %}active{% endif %}">
-            <a href="#">
+            <a href="{{ history }}">
                 <span class="icon">
                     <ion-icon name="calendar-outline"></ion-icon>
                 </span>

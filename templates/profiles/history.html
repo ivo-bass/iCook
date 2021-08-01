@@ -2,22 +2,23 @@
 
 
 {% block content %}
-    <h2 class="text-center mt-5 mb-3">My Recipes</h2>
-                    <hr>
+    <h2 class="text-center mt-5 mb-3">History</h2>
     <div class="container">
         {% if not object_list %}
             <div class="row text-center">
-                <h5>You don't have any recipes yet.</h5>
+                <hr>
+                <h5>You didn't cook anything yet.</h5>
                 <form>
-                    <button class="btn btn-primary" formaction="{% url 'create-recipe' %}">Add Recipe</button>
+                    <button class="btn btn-primary" formaction="{% url 'suggest' %}">Get suggestion</button>
                 </form>
-
             </div>
         {% else %}
             <div class="row row-cols-auto">
-                {% for recipe in object_list %}
+                {% for choice in object_list %}
                     <div class="col">
-                        {% include 'recipes/short-details.html' with r=recipe %}
+                        <h6 class="center">{{ choice.date|date }}</h6>
+                        <hr>
+                        {% include 'recipes/short-details.html' with r=choice.recipe %}
                     </div>
                 {% endfor %}
             </div>

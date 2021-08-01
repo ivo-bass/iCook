@@ -46,6 +46,7 @@
     </div>
 
     <h2 class="text-center mb-3">{{ user.profile.username }}'s public recipes: {{ object_list.count }}</h2>
+    <hr>
 
     <div class="container">
 
@@ -55,8 +56,7 @@
                 <h5>{{ user.profile.username }} doesn't have any recipes yet.</h5>
             </div>
         {% else %}
-            <div class="row">
-                <hr>
+            <div class="row row-cols-auto">
                 {% for recipe in object_list %}
                     <div class="col">
                         {% include 'recipes/short-details.html' with r=recipe %}
