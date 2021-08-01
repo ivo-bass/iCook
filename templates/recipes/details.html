@@ -7,9 +7,12 @@
 
             <div class="card-header">
                 <h4 class="card-title text-primary">{{ recipe.title|capfirst }}</h4>
-                <h6 class="card-subtitle text-muted">
-                    {{ recipe.meal_type }}{% if recipe.vegetarian %} | vegetarian{% endif %}
-                </h6>
+                <span class="card-subtitle text-muted">
+                    {{ recipe.meal_type }}
+                </span>
+                <span class="text-success">
+                    {% if recipe.vegetarian %}vegetarian{% endif %}
+                </span>
                 <hr>
                 <a href="{% url 'show-profile' recipe.author.pk %}" class="text-decoration-none">
                     <img src="{{ recipe.author.profile.image.url }}" alt="Avatar" class="avatar">
