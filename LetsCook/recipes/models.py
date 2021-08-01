@@ -3,27 +3,10 @@ from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
 from django_resized import ResizedImageField
 
+from LetsCook.core.constants import MEAL_TYPES
 from LetsCook.core.validators import validate_digits_not_in_string
 
-
 UserModel = get_user_model()
-
-
-class MealType(models.Model):
-    name = models.CharField(
-        max_length=20,
-        choices=(
-            ('breakfast', 'breakfast'),
-            ('salad', 'salad'),
-            ('soup', 'soup'),
-            ('appetizer', 'appetizer'),
-            ('main', 'main'),
-            ('dessert', 'dessert'),
-        )
-    )
-
-    def __str__(self):
-        return self.name
 
 
 class Recipe(models.Model):
@@ -40,10 +23,11 @@ class Recipe(models.Model):
         ],
     )
 
-    meal_type = models.ForeignKey(
-        MealType,
-        on_delete=models.PROTECT,
-        null=True,
+    meal_type = models.CharField(
+        max_length=20,
+        choices=(
+            MEAL_TYPES
+        )
     )
 
     # 1920 / 1080

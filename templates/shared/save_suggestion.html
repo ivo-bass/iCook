@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header">
+            <h5 class="text-center">Let's cook it!</h5>
+            <form method="post" action="">
+                {% csrf_token %}
+                <input type="hidden" name="recipe-pk" value="{{ recipe.pk }}"/>
+                <input type="hidden" name="user" value="{{ request.user }}"/>
+                <label>
+                    <input type="date" name="date" value="{% now "Y-m-d" %}" class="form-control"/>
+                </label>
+                <input type="submit" class="btn btn-success btn-sm" value="Save"/>
+            </form>
+        </div>
+    </div>
+</div>

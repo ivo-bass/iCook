@@ -1,3 +1,5 @@
+from random import choice
+
 from django.contrib import messages
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -9,7 +11,10 @@ from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 
 from LetsCook.auth_icook.forms import UserUpdateForm
+from LetsCook.core.constants import CATEGORIES
+from LetsCook.core.save_suggestion import save_suggestion
 from LetsCook.profiles.forms import ProfileUpdateForm
+from LetsCook.recipes.models import Recipe
 
 UserModel = get_user_model()
 
@@ -22,10 +27,28 @@ def home(request):
     return render(request, 'profiles/home.html', context)
 
 
+class SuggestView(LoginRequiredMixin, View):
+    def get(self, request):
+        categories = CATEGORIES
+        recipe = None
+        public_recipes = Recipe.objects.filter(public=True)
+        category_name = request.GET.get('category')
+        if not category_name == '' and not category_name == 'Random' and category_name is not None:
+            public_recipes = public_recipes.filter(meal_type=category_name)
+        if public_recipes:
+            recipe = choice(public_recipes)
+        context = {
+            'recipe': recipe,
+            'categories': categories
+        }
+        return render(request, 'profiles/suggest.html', context)
+
+    def post(self, request):
+        save_suggestion(request)
+        return redirect('home')
 
 
 class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
-    login_url = 'sign-in'
     model = UserModel
     template_name = 'profiles/show-profile.html'
     paginate_by = 3
@@ -45,9 +68,7 @@ class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
         return public_recipes
 
 
-
 class ProfileUpdateView(LoginRequiredMixin, View):
-    login_url = 'sign-in'
     redirect_field_name = 'profile'
 
     @staticmethod
@@ -74,7 +95,6 @@ class ProfileUpdateView(LoginRequiredMixin, View):
 
 
 class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
-    login_url = 'sign-in'
     model = UserModel
     template_name = 'profiles/my-recipes.html'
     object = None
@@ -94,7 +114,6 @@ class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
 
 
 class UserLikedRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
-    login_url = 'sign-in'
     model = UserModel
     template_name = 'profiles/liked-recipes.html'
     object = None

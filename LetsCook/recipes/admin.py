@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from LetsCook.recipes.models import Recipe, Ingredient, MealType
+from LetsCook.recipes.models import Recipe, Ingredient
 
 
 class IngredientInlineAdmin(admin.TabularInline):
@@ -12,8 +12,3 @@ class RecipeAdmin(admin.ModelAdmin):
     list_display = ('title', 'created_on', 'public', 'author')
     inlines = [IngredientInlineAdmin, ]
     readonly_fields = ('author',)
-
-
-@admin.register(MealType)
-class MealTypeAdmin(admin.ModelAdmin):
-    pass

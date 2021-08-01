@@ -5166,7 +5166,7 @@ fieldset:disabled .btn {
     flex-direction: column;
     box-shadow: 0 10px 20px 3px rgba(0, 0, 0, 0.5);
     transition: 0.3s ease-in-out;
-    border-radius: 5px;
+    border-radius: 10px;
     border: solid 1px black;
 }
 
@@ -7790,7 +7790,7 @@ fieldset:disabled .btn {
 }
 
 .border-primary {
-    border-color: #2196f3 !important;
+    border: solid 1px var(--bs-primary) !important;
 }
 
 .border-secondary {

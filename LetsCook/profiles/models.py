@@ -1,14 +1,21 @@
+import datetime
+
+from django.contrib.auth import get_user_model
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, User
 from django.db import models
+from django.utils import timezone
 from django_resized import ResizedImageField
 
-from LetsCook.auth_icook.models import ICookUser
+from LetsCook.recipes.models import Recipe
+
+
+UserModel = get_user_model()
 
 
 class Profile(models.Model):
     user = models.OneToOneField(
-        ICookUser,
+        UserModel,
         on_delete=models.CASCADE,
         primary_key=True,
     )
@@ -68,5 +75,15 @@ class Profile(models.Model):
         return value
 
 
-class Suggestion(models.Model):
-    pass
+class Choice(models.Model):
+    recipe = models.ForeignKey(
+        Recipe,
+        on_delete=models.CASCADE,
+    )
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
+    )
+    date = models.DateField(
+        default=timezone.now
+    )

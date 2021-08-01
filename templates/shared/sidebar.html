@@ -4,6 +4,7 @@
 {% url 'my-recipes' as my_recipes %}
 {% url 'liked-recipes' as liked_recipes %}
 {% url 'search' as search %}
+{% url 'suggest' as suggest %}
 
 <div class="navigation">
     <ul>
@@ -12,7 +13,7 @@
         {#        </li>#}
 
         <li class="list {% if request.path == home %}active{% endif %}">
-            <a href="{% url 'home' %}">
+            <a href="{{ home }}">
                 <span class="icon">
                     <ion-icon name="home-outline"></ion-icon>
                 </span>
@@ -21,7 +22,7 @@
         </li>
 
         <li class="list {% if request.path == suggest %}active{% endif %}">
-            <a href="#">
+            <a href="{{ suggest }}">
                 <span class="icon">
                     <ion-icon name="shuffle-outline"></ion-icon>
                 </span>

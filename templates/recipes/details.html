@@ -2,174 +2,175 @@
 
 
 {% block content %}
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-            <div class="container-fluid mt-5 mb-5">
-                <div class="card border-primary mb-3" id="card-big">
+    <div class="container-fluid mt-5 mb-5">
+        <div class="card border-primary mb-3" id="card-big">
 
-                    <div class="card-header">
-                        <h4 class="card-title text-primary">{{ recipe.title|capfirst }}</h4>
-                        <h6 class="card-subtitle text-muted">{{ recipe.meal_type }}</h6>
-                        <hr>
-                        <a href="{% url 'show-profile' recipe.author.pk %}" class="text-decoration-none">
-                            <img src="{{ recipe.author.profile.image.url }}" alt="Avatar" class="avatar">
-                            {{ recipe.author.profile.username }}
-                            <small class="text-muted">| {{ recipe.author.profile.rang }}</small>
-                        </a>
-                        <hr>
-                    </div>
+            <div class="card-header">
+                <h4 class="card-title text-primary">{{ recipe.title|capfirst }}</h4>
+                <h6 class="card-subtitle text-muted">
+                    {{ recipe.meal_type }}{% if recipe.vegetarian %} | vegetarian{% endif %}
+                </h6>
+                <hr>
+                <a href="{% url 'show-profile' recipe.author.pk %}" class="text-decoration-none">
+                    <img src="{{ recipe.author.profile.image.url }}" alt="Avatar" class="avatar">
+                    {{ recipe.author.profile.username }}
+                    <small class="text-muted">| {{ recipe.author.profile.rang }}</small>
+                </a>
+                <hr>
+            </div>
 
-                    <div class="card-body">
-                        <h6 class="card-title text-primary">Description:</h6>
-                        {{ recipe.description|capfirst }}
-                    </div>
+            <div class="card-body">
+                <h6 class="card-title text-primary">Description:</h6>
+                {{ recipe.description|capfirst }}
+            </div>
 
-                    {% if not recipe.image %}
-                        <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%"
-                             height="200"
-                             aria-label="Placeholder: Image cap" focusable="false" role="img"
-                             preserveAspectRatio="xMidYMid slice"
-                             viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                            <rect width="100%" height="100%" fill="#868e96"></rect>
-                            <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                        </svg>
-                    {% else %}
-                        <img class="img-fluid" src="{{ recipe.image.url }}" alt="image">
-                    {% endif %}
+            {% if not recipe.image %}
+                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%"
+                     height="200"
+                     aria-label="Placeholder: Image cap" focusable="false" role="img"
+                     preserveAspectRatio="xMidYMid slice"
+                     viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
+                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
+                </svg>
+            {% else %}
+                <img class="img-fluid" src="{{ recipe.image.url }}" alt="image">
+            {% endif %}
 
-                    <div class="card-body">
-                        <h6 class="card-title text-primary">Ingredients:</h6>
-                        <ul class="list-group list-group-flush">
-                            {% for ingredient in ingredients %}
-                                <li class="list-group-item">{{ ingredient|capfirst }}</li>
-                            {% endfor %}
+            <div class="card-body">
+                <h6 class="card-title text-primary">Ingredients:</h6>
+                <ul class="list-group list-group-flush">
+                    {% for ingredient in ingredients %}
+                        <li class="list-group-item">{{ ingredient|capfirst }}</li>
+                    {% endfor %}
 
-                        </ul>
-                    </div>
+                </ul>
+            </div>
 
-                    <hr>
-                    <div class="card-body">
-                        <h6 class="card-title text-primary">Preparation:</h6>
-                        <p class="card-text">
-                            {{ recipe.preparation|linebreaksbr }}
-                        </p>
-                    </div>
+            <hr>
+            <div class="card-body">
+                <h6 class="card-title text-primary">Preparation:</h6>
+                <p class="card-text">
+                    {{ recipe.preparation|linebreaksbr }}
+                </p>
+            </div>
 
-                    <hr>
-                    <div class="card-body">
-                        <ul class="list-group list-group-horizontal center">
-                            <li class="list-group-item">
-                                <small class="text-warning">
-                                    <ion-icon name="people-outline"></ion-icon>
-                                    Servings: {{ recipe.servings }}
-                                </small>
-                            </li>
-                            <li class="list-group-item">
-                                <small class="text-success">
-                                    <ion-icon name="time-outline"></ion-icon>
-                                    Time: {{ recipe.time }} min
-                                </small>
-                            </li>
-                        </ul>
-                    </div>
+            <hr>
+            <div class="card-body">
+                <ul class="list-group list-group-horizontal center">
+                    <li class="list-group-item">
+                        <small class="text-warning">
+                            <ion-icon name="people-outline"></ion-icon>
+                            Servings: {{ recipe.servings }}
+                        </small>
+                    </li>
+                    <li class="list-group-item">
+                        <small class="text-success">
+                            <ion-icon name="time-outline"></ion-icon>
+                            Time: {{ recipe.time }} min
+                        </small>
+                    </li>
+                </ul>
+            </div>
 
-                    {#                    <hr>#}
+            {#                    <hr>#}
 
-                    {% if is_owner %}
-                        <div class="card-body center">
-                            <a href="{% url 'update-recipe' recipe.pk %}">
-                                <button class="btn btn-primary btn-sm">
-                                    Edit
-                                </button>
-                            </a>
-                            <a href="{% url 'delete-recipe' recipe.pk %}">
-                                <button class="btn btn-danger btn-sm">
-                                    Delete
-                                </button>
-                            </a>
-                        </div>
-                    {% endif %}
+            {% if is_owner %}
+                <div class="card-body center">
+                    <a href="{% url 'update-recipe' recipe.pk %}">
+                        <button class="btn btn-primary btn-sm">
+                            Edit
+                        </button>
+                    </a>
+                    <a href="{% url 'delete-recipe' recipe.pk %}">
+                        <button class="btn btn-danger btn-sm">
+                            Delete
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
 
-                    {#                    <hr>#}
+            {#                    <hr>#}
 
-                    <div class="card-footer row row-cols-auto justify-content-between text-muted ">
-                        <div class="col text-start">
-                            <small class="mt-2">Likes: {{ recipe.likes_count }}</small>
-                            <a href="{% url 'like-recipe' recipe.id %}">
-                                {% if is_liked %}
-                                    <span>
+            <div class="card-footer row row-cols-auto justify-content-between text-muted ">
+                <div class="col text-start">
+                    <small class="mt-2">Likes: {{ recipe.likes_count }}</small>
+                    <a href="{% url 'like-recipe' recipe.id %}">
+                        {% if is_liked %}
+                            <span>
                                         <ion-icon name="heart"></ion-icon>
                                     </span>
-                                {% else %}
-                                    <span>
+                        {% else %}
+                            <span>
                                         <ion-icon name="heart-outline"></ion-icon>
                                     </span>
-                                {% endif %}
-                            </a>
-
-                        </div>
-
-                        <div class="col text-end">
-                            <small>Created: {{ recipe.created_on|timesince }} ago</small>
-                        </div>
-
-                        <div class="col text-start">
-                            <small>Views: {{ recipe.recipe_views }}</small>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <h5>Comments</h5>
-                        <hr>
-                        {% if comments %}
-                            {% for comment in comments %}
-                                <div class="card-body">
-                                    <div class="row row-cols-2 justify-content-between">
-                                        <div class="col text-start">
-                                            <a href="{% url 'show-profile' comment.user.pk %}"
-                                               class="text-decoration-none">
-                                                <img src="{{ comment.user.profile.image.url }}" alt="Avatar"
-                                                     class="avatar">
-                                                {{ comment.user.profile.username }}
-                                                <small class="text-muted">| {{ comment.user.profile.rang }}</small>
-                                                {% if comment.user == recipe.author %}
-                                                    <small class="text-success">| author</small>
-                                                {% endif %}
-                                            </a>
-                                        </div>
-                                        <div class="col text-end">
-                                            <small class="text-muted">{{ comment.time|timesince }} ago</small>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <p class="{% if comment.user.id == request.user.id %}text-primary{% endif %}">
-                                        {{ comment.text }}
-                                    </p>
-                                    {% if comment.user.id == request.user.id %}
-                                        <a href="{% url 'delete-comment' recipe.pk comment.pk %}"
-                                           class="center text-decoration-none">
-                                            <button class="btn btn-outline-danger btn-sm">Delete comment</button>
-                                        </a>
-                                    {% endif %}
-                                    <hr>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            <div class="container">
-                                <h6>There are no comments for this recipe. </h6>
-                            </div>
                         {% endif %}
-                        <div class="container">
-                            <form method="post" action="{% url 'comment-recipe' recipe.id %}">
-                                {% csrf_token %}
-                                {{ comment_form }}
-                                <br>
-                                <button class="btn btn-primary btn-sm" type="submit">Add comment</button>
-                            </form>
+                    </a>
+
+                </div>
+
+                <div class="col text-end">
+                    <small>Created: {{ recipe.created_on|timesince }} ago</small>
+                </div>
+
+                <div class="col text-start">
+                    <small>Views: {{ recipe.recipe_views }}</small>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h5>Comments</h5>
+                <hr>
+                {% if comments %}
+                    {% for comment in comments %}
+                        <div class="card-body">
+                            <div class="row row-cols-2 justify-content-between">
+                                <div class="col text-start">
+                                    <a href="{% url 'show-profile' comment.user.pk %}"
+                                       class="text-decoration-none">
+                                        <img src="{{ comment.user.profile.image.url }}" alt="Avatar"
+                                             class="avatar">
+                                        {{ comment.user.profile.username }}
+                                        <small class="text-muted">| {{ comment.user.profile.rang }}</small>
+                                        {% if comment.user == recipe.author %}
+                                            <small class="text-success">| author</small>
+                                        {% endif %}
+                                    </a>
+                                </div>
+                                <div class="col text-end">
+                                    <small class="text-muted">{{ comment.time|timesince }} ago</small>
+                                </div>
+                            </div>
+                            <br>
+                            <p class="{% if comment.user.id == request.user.id %}text-primary{% endif %}">
+                                {{ comment.text }}
+                            </p>
+                            {% if comment.user.id == request.user.id %}
+                                <a href="{% url 'delete-comment' recipe.pk comment.pk %}"
+                                   class="center text-decoration-none">
+                                    <button class="btn btn-outline-danger btn-sm">Delete comment</button>
+                                </a>
+                            {% endif %}
+                            <hr>
                         </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="container">
+                        <h6>There are no comments for this recipe. </h6>
                     </div>
+                {% endif %}
+                <div class="container">
+                    <form method="post" action="{% url 'comment-recipe' recipe.id %}">
+                        {% csrf_token %}
+                        {{ comment_form }}
+                        <br>
+                        <button class="btn btn-primary btn-sm" type="submit">Add comment</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+    {% if request.user.is_authenticated %}
+        {% include 'shared/save_suggestion.html' %}
+    {% endif %}
 {% endblock %}

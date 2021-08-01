@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 
 from LetsCook.core.delete_previos_image import delete_previous_image
 from LetsCook.core.mixins import AddBootstrapFormControlMixin
-from LetsCook.profiles.models import Profile
+from LetsCook.profiles.models import Profile, Choice
 
 UserModel = get_user_model()
 

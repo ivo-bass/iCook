@@ -7,6 +7,8 @@ from LetsCook.profiles import views
 urlpatterns = [
     path('home/', views.home, name='home'),
 
+    path('suggest/', views.SuggestView.as_view(), name='suggest'),
+
     path('update/', views.ProfileUpdateView.as_view(), name='update-profile'),
 
     path('my-recipes/', views.UserRecipesListView.as_view(), name='my-recipes'),

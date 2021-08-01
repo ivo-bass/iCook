@@ -1,25 +1,25 @@
 {% extends 'shared/base.html' %}
 
-{% block content %}
 
+{% block content %}
     <div class="container">
         <div class="card border-primary">
             <div class="card-header">
                 <form method="GET" action=".">
                     <div class="row row-cols-auto align-items-baseline">
                         <div class="col">
-                            <h5>Filter Recipes</h5>
+                            <h5>Suggest Recipe</h5>
                         </div>
                         <div class="col">
                             <select id="category" class="form-control w-auto" name="category">
-                                <option selected>All</option>
+                                <option selected>Random</option>
                                 {% for cat in categories %}
                                     <option value="{{ cat }}">{{ cat|capfirst }}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-outline-primary btn-sm center">Filter</button>
+                            <button type="submit" class="btn btn-outline-primary btn-sm center">Suggest</button>
                         </div>
                     </div>
                 </form>
@@ -27,25 +27,22 @@
         </div>
     </div>
 
-    <h2 class="text-center mt-5 mb-3">Recipes -
-        {% if request.GET.category %}{{ request.GET.category|capfirst }}{% else %}All{% endif %}</h2>
+    <h2 class="text-center mt-5 mb-3">
+        {% if request.GET.category %}{{ request.GET.category|capfirst }}{% else %}Random {% endif %}
+        suggestion:
+    </h2>
 
     <div class="container">
         <div class="row">
-            <hr>
-            {% for recipe in recipes %}
-                <div class="col">
-                    {% include 'recipes/short-details.html' with r=recipe %}
-                </div>
-            {% empty %}
-                <div class="col">
-                    <h5>There are no recipes.</h5>
-                </div>
-            {% endfor %}
+            {% if recipe %}
+                {% include 'recipes/short-details.html' with r=recipe %}
+            {% else %}
+                <h5>No recipes in this category...</h5>
+            {% endif %}
         </div>
     </div>
 
-    {% if page_obj.has_other_pages %}
-        {% include 'shared/pagination.html' %}
+    {% if recipe %}
+        {% include 'shared/save_suggestion.html' %}
     {% endif %}
 {% endblock %}

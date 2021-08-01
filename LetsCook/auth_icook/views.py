@@ -5,7 +5,6 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
@@ -14,8 +13,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, DeleteView
 
-from LetsCook.auth_icook.forms import SignUpForm, SignInForm, UserUpdateForm
-from LetsCook.profiles.forms import ProfileUpdateForm
+from LetsCook.auth_icook.forms import SignUpForm, SignInForm
 
 UserModel = get_user_model()
 
@@ -63,21 +61,16 @@ def activate(request, uidb64, token):
 class SignInView(LoginView):
     template_name = 'auth/sign-in.html'
     form_class = SignInForm
-    # redirect_authenticated_user = True
     redirect_field_name = 'next'
 
 
 class SignOutView(LoginRequiredMixin, View):
-    login_url = 'sign-in'
-
-    @staticmethod
-    def get(request):
+    def get(self, request):
         logout(request)
         return redirect('index')
 
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = 'sign-in'
     model = UserModel
     template_name = 'auth/delete-user.html'
 

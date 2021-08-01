@@ -3,7 +3,6 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 from LetsCook.profiles.models import Profile
-from LetsCook.recipes.models import Recipe
 
 UserModel = get_user_model()
 
@@ -12,6 +11,11 @@ UserModel = get_user_model()
 def user_created(sender, instance, created, **kwargs):
     # if the user is initialized attach a new profile to it
     if created:
+        # activate superuser
+        if instance.is_superuser:
+            instance.is_active = True
+            instance.save()
+
         profile = Profile(
             user=instance,
         )
