@@ -11,10 +11,10 @@
                 <p>Are you sure you want to permanently delete {{ object.profile.username }}'s profile?</p>
             </div>
             <div class="card-body center">
-                <form method="post">
-                    {% csrf_token %}
-                    <button class="btn btn-danger">Delete</button>
-                </form>
+                    <form action="" method="post">{% csrf_token %}
+                        <input type="submit" class="btn btn-outline-danger" value="Delete"/>
+                        <input type="submit" class="btn btn-outline-success" name="cancel" value="Cancel"/>
+                    </form>
             </div>
         </div>
     </div>

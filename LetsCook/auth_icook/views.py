@@ -84,3 +84,8 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         logout(self.request)
         return reverse('index')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect('update-profile')
+        return super().post(request, *args, **kwargs)

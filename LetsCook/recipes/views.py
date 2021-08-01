@@ -147,3 +147,8 @@ class RecipeDelete(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('my-recipes')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect('details-recipe', kwargs['pk'])
+        return super().post(request, *args, **kwargs)
