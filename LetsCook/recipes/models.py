@@ -82,6 +82,14 @@ class Recipe(models.Model):
     def ingredients(self):
         return ', '.join(str(i) for i in self.ingredient_set.all())
 
+    @property
+    def likes_count(self):
+        return self.like_set.count()
+
+    @property
+    def comments_count(self):
+        return self.comment_set.count()
+
     class Meta:
         ordering = ['-id']
 

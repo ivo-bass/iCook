@@ -1,0 +1,4 @@
+<li class="">
+    <a class="text-decoration-none" href="{% url 'details-recipe' recipe.pk %}">{{ recipe.title }}</a>
+    <p> - {{ recipe.description|truncatechars:40 }}</p>
+</li>

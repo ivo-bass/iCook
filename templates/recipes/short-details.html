@@ -30,7 +30,12 @@
             <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
                 <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
             </a>
-            <h6 class="card-subtitle text-muted center">{{ r.meal_type }}</h6>
+            <span class="card-subtitle text-muted center">{{ r.meal_type }}</span>
+            {% if r.public %}
+                <span class="card-subtitle text-success center">public</span>
+            {% else %}
+                <span class="card-subtitle text-danger center">private</span>
+            {% endif %}
             <hr>
             <div class="container">
                 <div class="row row-cols-auto justify-content-between">

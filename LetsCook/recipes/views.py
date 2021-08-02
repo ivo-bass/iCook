@@ -21,7 +21,6 @@ def details_recipe(request, pk):
         recipe.recipe_views = recipe.recipe_views + 1
         recipe.save()
     # get other data
-    recipe.likes_count = recipe.like_set.count()
     ingredients = recipe.ingredients.split(', ')
     is_owner = recipe.author == request.user
     is_liked_by_user = recipe.like_set.filter(user_id=request.user.id).exists()

@@ -1,4 +1,107 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
+
+    <h2 class="text-center mt-5 mb-3">Dashboard</h2>
+    <hr>
+    <div class="container">
+        <div class="row row-cols-auto">
+
+            <div class="col">
+                <div class="card border-primary dashboard-card">
+                    <div class="card-header">
+                        <h5 class="center text-danger">Recipes for yesterday:</h5>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        {% if not recipes_for_yesterday %}
+                            <h6 class="center">Nothing for yesterday.</h6>
+                            <br>
+                        {% else %}
+                            <ol>
+                                {% for recipe in recipes_for_yesterday %}
+                                    {% include 'recipes/list-details.html' with recipe=recipe %}
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-primary dashboard-card">
+                    <div class="card-header">
+                        <h5 class="center text-success">Recipes for today:</h5>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        {% if not recipes_for_today %}
+                            <h6 class="center">Nothing for today.</h6>
+                            <br>
+                            <form>
+                                <button class="btn btn-primary btn-sm center" formaction="{% url 'suggest' %}">Get
+                                    suggestion
+                                </button>
+                            </form>
+                        {% else %}
+                            <ol>
+                                {% for recipe in recipes_for_today %}
+                                    {% include 'recipes/list-details.html' with recipe=recipe %}
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-primary dashboard-card">
+                    <div class="card-header">
+                        <h5 class="center text-warning">Recipes for tomorrow:</h5>
+                        <hr>
+                    </div>
+                    <div class="card-body">
+                        {% if not recipes_for_tomorrow %}
+                            <h6 class="center">Nothing for tomorrow.</h6>
+                            <br>
+                            <form>
+                                <button class="btn btn-primary btn-sm center" formaction="{% url 'suggest' %}">Get
+                                    suggestion
+                                </button>
+                            </form>
+                        {% else %}
+                            <ol>
+                                {% for recipe in recipes_for_tomorrow %}
+                                    {% include 'recipes/list-details.html' with recipe=recipe %}
+                                {% endfor %}
+                            </ol>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center mt-5 mb-3">Top Recipes</h2>
+    <hr>
+    <div class="container">
+        <div class="row row-cols-auto">
+            <div class="col">
+                <h5 class="center">Most viewed:</h5>
+                <hr>
+                {% include 'recipes/short-details.html' with r=most_views %}
+            </div>
+            <div class="col">
+                <h5 class="center">Most liked:</h5>
+                <hr>
+                {% include 'recipes/short-details.html' with r=most_likes %}
+            </div>
+            <div class="col">
+                <h5 class="center">Most commented:</h5>
+                <hr>
+                {% include 'recipes/short-details.html' with r=most_comments %}
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

@@ -1,3 +1,4 @@
+import datetime
 from random import choice
 
 from django.contrib import messages
@@ -6,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
@@ -20,10 +22,43 @@ from LetsCook.recipes.models import Recipe
 UserModel = get_user_model()
 
 
+def get_recipes_for_day(request, day):
+    user = request.user
+    choices_for_day = user.choice_set.filter(date=day)
+    recipes = []
+    if choices_for_day:
+        recipes = [ch.recipe for ch in choices_for_day]
+    return recipes
+
+
+def get_top_recipes(request):
+    all_public_recipes = Recipe.objects.filter(public=True)
+    most_views = Recipe.objects.filter(public=True).order_by('recipe_views').last()
+    most_likes = list(sorted(all_public_recipes, key=lambda obj: -obj.likes_count))[0]
+    most_comments = list(sorted(all_public_recipes, key=lambda obj: -obj.comments_count))[0]
+    return most_views, most_likes, most_comments
+
+
 @login_required(login_url=reverse_lazy('sign-in'))
 def home(request):
-    context = {
+    today = datetime.date.today()
+    recipes_today = get_recipes_for_day(request, today)
 
+    yesterday = today - datetime.timedelta(days=1)
+    recipes_yesterday = get_recipes_for_day(request, yesterday)
+
+    tomorrow = today + datetime.timedelta(days=1)
+    recipes_tomorrow = get_recipes_for_day(request, tomorrow)
+
+    most_views, most_likes, most_comments = get_top_recipes(request)
+
+    context = {
+        'recipes_for_today': recipes_today,
+        'recipes_for_yesterday': recipes_yesterday,
+        'recipes_for_tomorrow': recipes_tomorrow,
+        'most_views': most_views,
+        'most_likes': most_likes,
+        'most_comments': most_comments,
     }
     return render(request, 'profiles/home.html', context)
 

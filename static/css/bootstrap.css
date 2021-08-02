@@ -5158,7 +5158,7 @@ fieldset:disabled .btn {
     position: relative;
     width: 340px;
     min-width: 340px;
-    height: 260px;
+    height: 300px;
     background: var(--bs-background-card);
     margin: 10px 10px;
     padding: 20px 10px;
@@ -5171,7 +5171,7 @@ fieldset:disabled .btn {
 }
 
 .card-container .new-card:hover {
-    height: 420px;
+    height: 460px;
 }
 
 .card-container .new-card .imgBx {
@@ -5214,7 +5214,7 @@ fieldset:disabled .btn {
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
-    min-width: 0;
+    min-width: 400px;
     max-width: 700px;
     word-wrap: break-word;
     background: var(--bs-background-card);
@@ -13882,4 +13882,9 @@ ion-icon {
     border: solid 1px var(--bs-danger);
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-card {
+    min-height: 200px;
+    margin-top: 10px;
 }
