@@ -29,7 +29,7 @@
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0));
     --bs-backgroud: var(--bs-gray-light);
-    --bs-backgroud-nav: var(--bs-gray);
+    --bs-backgroud-nav: var(--bs-light);
     --bs-background-card: var(--bs-light);
     --bs-font-color: #222;
     --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0));
@@ -90,7 +90,6 @@ body {
     --bs-bg-gradient: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     --bs-field-bg: var(--bs-gray);
     --bs-field-color: #eee;
-    --bs-primary: #2196f3;
     --bs-font-color: var(--bs-secondary);
     --bs-bg-img: url(/static/images/main-bg-dark.jpg);
 }
@@ -111,7 +110,7 @@ main {
     height: 50%;
     width: 10px;
     background: var(--bs-backgroud-nav);
-    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.30));
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2));
     box-shadow: 5px 0 0 var(--bs-primary), 5px 0 10px 1px black;
     overflow-x: hidden;
     transition: width 0.5s;
@@ -151,11 +150,15 @@ main {
     width: 100%;
     display: flex;
     text-decoration: none;
-    color: white;
+    color: var(--bs-font-color);
 }
 
 .navigation ul li a:hover {
     color: var(--bs-primary);
+}
+
+.navigation ul li.active a {
+    color: var(--bs-light);
 }
 
 .navigation ul li.active a:hover {
@@ -4722,7 +4725,7 @@ fieldset:disabled .btn {
     display: -ms-flexbox;
     z-index: 2;
     background: var(--bs-backgroud-nav);
-    background-image: var(--bs-gradient);
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2));
     border-bottom-right-radius: 2rem;
     margin-bottom: 2rem;
     padding: 0 30px 0 30px;
@@ -5101,7 +5104,7 @@ fieldset:disabled .btn {
 }
 
 .navbar-dark .navbar-brand {
-    color: #fff;
+    color: var(--bs-font-color);
 }
 
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
@@ -5215,7 +5218,7 @@ fieldset:disabled .btn {
     -ms-flex-direction: column;
     flex-direction: column;
     min-width: 400px;
-    max-width: 700px;
+    max-width: 800px;
     word-wrap: break-word;
     background: var(--bs-background-card);
     background-clip: border-box;
@@ -12424,7 +12427,7 @@ fieldset:disabled .btn {
 .nav-link2 {
     display: block;
     padding: 0.5rem 1rem;
-    color: white;
+    color: var(--bs-font-color);
     text-decoration: underline var(--bs-primary);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
@@ -13781,10 +13784,11 @@ footer {
     flex-wrap: wrap;
     -ms-flex-align: center;
     -ms-flex-pack: justify;
-    background-image: var(--bs-gradient);
+    background: var(--bs-backgroud-nav);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
     position: fixed;
     left: 0;
-    color: #ddd;
+    color: var(--bs-font-color);
     z-index: 3;
 }
 

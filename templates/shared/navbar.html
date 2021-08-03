@@ -6,6 +6,7 @@
 {% url 'sign-out' as sign_out %}
 {% url 'update-profile' as update_profile %}
 {% url 'create-recipe' as create_recipe %}
+{% url 'admin-site' as admin_site %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     {#    <div class="container-fluid">#}
@@ -30,6 +31,13 @@
                     Add Recipe
                 </a>
             </li>
+            {% if request.user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link2" href="/admin/">
+                        Admin Site
+                    </a>
+                </li>
+            {% endif %}
         </ul>
 
         <form class="d-flex" method="post" action="{{ search }}">
