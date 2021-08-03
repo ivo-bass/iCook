@@ -99,6 +99,28 @@ main {
     margin-bottom: 100px;
 }
 
+.cover {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0 !important;
+    /*border: 2px solid var(--bs-backgroud);*/
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 120px 100px 60px 100px;
+    background: url(/static/images/cover.jpg) no-repeat;
+    background-size: cover;
+    box-shadow: 50px 0 100px 30px black;
+    color: black;
+}
+
+.after-cover {
+    margin-top: 250px;
+}
+
 .navigation {
     position: fixed;
     display: flex;
@@ -4799,6 +4821,7 @@ fieldset:disabled .btn {
     border: 1px solid transparent;
     border-radius: 0.25rem;
     transition: box-shadow 0.15s ease-in-out;
+    color: var(--bs-primary);
 }
 
 @media (prefers-reduced-motion: reduce) {

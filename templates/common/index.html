@@ -1,4 +1,31 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
+    <div class="cover">
+        <h1>Welcome to iCook</h1>
+    </div>
+
+    <div class="after-cover">
+        <h2 class="text-center mt-5 mb-3">Top Recipes</h2>
+        <hr>
+        <div class="container">
+            <div class="row row-cols-auto">
+                <div class="col">
+                    <h5 class="center">Most viewed:</h5>
+                    <hr>
+                    {% include 'recipes/short-details.html' with r=most_views %}
+                </div>
+                <div class="col">
+                    <h5 class="center">Most liked:</h5>
+                    <hr>
+                    {% include 'recipes/short-details.html' with r=most_likes %}
+                </div>
+                <div class="col">
+                    <h5 class="center">Most commented:</h5>
+                    <hr>
+                    {% include 'recipes/short-details.html' with r=most_comments %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

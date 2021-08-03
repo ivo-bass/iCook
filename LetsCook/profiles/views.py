@@ -15,6 +15,7 @@ from django.views.generic.detail import SingleObjectMixin
 from LetsCook.auth_icook.forms import UserUpdateForm
 from LetsCook.core.constants import CATEGORIES
 from LetsCook.core.save_suggestion import save_suggestion
+from LetsCook.core.utils import get_recipes_for_day, get_top_recipes
 from LetsCook.profiles.forms import ProfileUpdateForm
 from LetsCook.profiles.models import Choice
 from LetsCook.recipes.models import Recipe
@@ -22,21 +23,7 @@ from LetsCook.recipes.models import Recipe
 UserModel = get_user_model()
 
 
-def get_recipes_for_day(request, day):
-    user = request.user
-    choices_for_day = user.choice_set.filter(date=day)
-    recipes = []
-    if choices_for_day:
-        recipes = [ch.recipe for ch in choices_for_day]
-    return recipes
 
-
-def get_top_recipes(request):
-    all_public_recipes = Recipe.objects.filter(public=True)
-    most_views = Recipe.objects.filter(public=True).order_by('recipe_views').last()
-    most_likes = list(sorted(all_public_recipes, key=lambda obj: -obj.likes_count))[0]
-    most_comments = list(sorted(all_public_recipes, key=lambda obj: -obj.comments_count))[0]
-    return most_views, most_likes, most_comments
 
 
 @login_required(login_url=reverse_lazy('sign-in'))
