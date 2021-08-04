@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm, PasswordResetForm, \
+    SetPasswordForm
 from django.core.exceptions import ValidationError
 
 from LetsCook.core.mixins import AddBootstrapFormControlMixin
@@ -34,4 +35,16 @@ class SignInForm(AddBootstrapFormControlMixin, AuthenticationForm):
 class UserUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
     class Meta:
         model = UserModel
-        fields = ('email', 'password')
+        fields = ('email', )
+
+
+class BootstrapChangePasswordForm(AddBootstrapFormControlMixin, PasswordChangeForm):
+    pass
+
+
+class BootstrapResetPasswordForm(AddBootstrapFormControlMixin, PasswordResetForm):
+    pass
+
+
+class BootstrapSetPasswordForm(AddBootstrapFormControlMixin, SetPasswordForm):
+    pass

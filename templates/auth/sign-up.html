@@ -1,7 +1,6 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-
     <div class="container">
         <div class="row">
             <div class="card" id="card-form">
@@ -10,19 +9,25 @@
                 </div>
                 <div class="card-body">
                     <form action="{% url 'sign-up' %}" method="post">
+                        {{ form.non_field_errors }}
                         {% csrf_token %}
-                        {{ form }}
+                        {% for field in form %}
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.errors %}
+                                {{ field.errors }}
+                            {% endif %}
+                        {% endfor %}
                         <br>
                         <button class="btn btn-primary center">Sign up</button>
                     </form>
                 </div>
                 <div class="card-footer">
-                    <p class="center">
-                        Already have an account? <a href="{% url 'sign-in' %}" class="center">Sign In</a>
-                    </p>
+                    <h5 class="center">
+                        Already have an account? <a href="{% url 'sign-in' %}">Sign In</a>
+                    </h5>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}

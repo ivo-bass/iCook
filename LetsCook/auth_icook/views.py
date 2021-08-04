@@ -1,8 +1,9 @@
-from django.contrib.auth import get_user_model, login, logout
+from django.contrib.auth import get_user_model, logout, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect, render
@@ -13,7 +14,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 from django.views.generic import CreateView, DeleteView
 
-from LetsCook.auth_icook.forms import SignUpForm, SignInForm
+from LetsCook.auth_icook.forms import SignUpForm, SignInForm, BootstrapChangePasswordForm, BootstrapResetPasswordForm, \
+    BootstrapSetPasswordForm
 
 UserModel = get_user_model()
 
@@ -82,3 +84,35 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         if "cancel" in request.POST:
             return redirect('update-profile')
         return super().post(request, *args, **kwargs)
+
+
+class CustomPasswordResetView(PasswordResetView):
+    template_name = 'auth/password-reset.html'
+    form_class = BootstrapResetPasswordForm
+
+
+class CustomPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'auth/password-reset-done.html'
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    template_name = 'auth/password-reset-confirm.html'
+    form_class = BootstrapSetPasswordForm
+
+
+class CustomPasswordResetCompleteView(PasswordResetCompleteView):
+    template_name = 'auth/password-reset-complete.html'
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = BootstrapChangePasswordForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return redirect('update-profile')
+    else:
+        form = BootstrapChangePasswordForm(request.user)
+    context = {'form': form}
+    return render(request, 'auth/change-password.html', context)
+
