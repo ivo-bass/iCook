@@ -1,6 +1,5 @@
 from random import choice
 
-from django.contrib import messages
 from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -92,30 +91,6 @@ class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
     def get_queryset(self):
         public_recipes = self.object.recipe_set.filter(public=True)
         return public_recipes
-
-
-class ProfileUpdateView(LoginRequiredMixin, View):
-    redirect_field_name = 'profile'
-
-    def get(self, request):
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-        context = {
-            'u_form': u_form,
-            'p_form': p_form
-        }
-        return render(request, 'profiles/update-profile.html', context)
-
-    def post(self, request):
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            update_session_auth_hash(request, request.user)
-            return redirect('update-profile')
-        return render(request, 'profiles/update-profile.html')
 
 
 def profile_and_user_update(request):
