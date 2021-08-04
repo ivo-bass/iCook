@@ -23,20 +23,17 @@
             </div>
 
             <div class="container">
-            {% if not recipes %}
-                <div class="row">
-                    <p>We have found no results. Please try again.</p>
-                </div>
-
-            {% else %}
                 <div class="row row-cols-auto">
                     {% for recipe in recipes %}
                         <div class="col">
                             {% include 'recipes/short-details.html' with r=recipe %}
                         </div>
+                    {% empty %}
+                        <div class="col">
+                            <p>We have found no results. Please try again.</p>
+                        </div>
                     {% endfor %}
                 </div>
-            {% endif %}
         {% endif %}
         </div>
 

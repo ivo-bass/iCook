@@ -1,3 +1,5 @@
+from django.contrib.postgres.search import TrigramSimilarity
+
 from LetsCook.recipes.models import Recipe
 
 

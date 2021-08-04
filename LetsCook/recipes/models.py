@@ -90,6 +90,10 @@ class Recipe(models.Model):
     def comments_count(self):
         return self.comment_set.count()
 
+    def save(self, *args, **kwargs):
+        self.title = self.title.lower()
+        return super().save(*args, **kwargs)
+
     class Meta:
         ordering = ['-id']
 
