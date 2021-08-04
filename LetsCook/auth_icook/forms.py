@@ -11,7 +11,7 @@ UserModel = get_user_model()
 class SignUpForm(AddBootstrapFormControlMixin, UserCreationForm):
     class Meta:
         model = UserModel
-        fields = ('email',)
+        fields = ('email', )
 
 
 class SignInForm(AddBootstrapFormControlMixin, AuthenticationForm):
@@ -34,4 +34,4 @@ class SignInForm(AddBootstrapFormControlMixin, AuthenticationForm):
 class UserUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
     class Meta:
         model = UserModel
-        fields = ('email',)
+        fields = ('email', 'password')

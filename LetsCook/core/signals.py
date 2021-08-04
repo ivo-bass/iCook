@@ -35,5 +35,5 @@ def user_created(sender, instance, created, **kwargs):
 def user_deleted(sender, instance, **kwargs):
     image = str(instance.profile.image)
     image_path = os.path.join(settings.MEDIA_ROOT, image)
-    if image:
+    if image and not image == 'profile-default.jpg':
         os.remove(image_path)
