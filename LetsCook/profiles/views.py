@@ -97,8 +97,7 @@ class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
 class ProfileUpdateView(LoginRequiredMixin, View):
     redirect_field_name = 'profile'
 
-    @staticmethod
-    def get(request):
+    def get(self, request):
         u_form = UserUpdateForm(instance=request.user)
         p_form = ProfileUpdateForm(instance=request.user.profile)
         context = {
@@ -107,17 +106,36 @@ class ProfileUpdateView(LoginRequiredMixin, View):
         }
         return render(request, 'profiles/update-profile.html', context)
 
-    @staticmethod
-    def post(request):
+    def post(self, request):
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
 
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, 'Success')
             update_session_auth_hash(request, request.user)
             return redirect('update-profile')
+        return render(request, 'profiles/update-profile.html')
+
+
+def profile_and_user_update(request):
+    u_form = UserUpdateForm(instance=request.user)
+    p_form = ProfileUpdateForm(instance=request.user.profile)
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            update_session_auth_hash(request, request.user)
+            return redirect('update-profile')
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'profiles/update-profile.html', context)
+
 
 
 class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):

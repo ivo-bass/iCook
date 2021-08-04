@@ -1,8 +1,10 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Field, Fieldset, HTML, ButtonHolder, Submit, Column
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import inlineformset_factory
 
+from LetsCook.core.constants import VALID_IMAGE_EXTENSIONS
 from LetsCook.core.custom_layout_object import Formset
 from LetsCook.core.mixins import AddBootstrapFormControlMixin
 from LetsCook.core.utils import delete_previous_image
@@ -75,6 +77,14 @@ class RecipeForm(forms.ModelForm):
             ),
 
         )
+
+    def clean_image(self):
+        image = self.cleaned_data['image']
+        if image.name:
+            ext = image.name.split('.')[-1]
+            if ext not in VALID_IMAGE_EXTENSIONS:
+                raise ValidationError('Unsupported file extension.')
+        return image
 
 
 class RecipeUpdateForm(RecipeForm):

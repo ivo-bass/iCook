@@ -15,3 +15,9 @@ CATEGORIES = (
     'main',
     'dessert',
 )
+
+VALID_IMAGE_EXTENSIONS = (
+    'jpg',
+    'jpeg',
+    'png',
+)
