@@ -6,6 +6,28 @@
     </div>
 
     <div class="after-cover">
+
+        <div class="container w-50">
+            <div class="row text-center">
+                <h5>
+                    iCook is a digital cookbook and cooking guide
+                    alike, that helps home cooks of every level discover, save and organize the
+                    best recipes, while also helping them become better.
+                </h5>
+                <br>
+                <h5>
+                    You can find, add, like and comment recipes and also save suggestions
+                    about what to cook.
+                </h5>
+                {% if not request.user.is_authenticated %}
+                    <h5>For full access
+                        <a href="{% url 'sign-in' %}">sign in now</a>
+                    </h5>
+                {% endif %}
+            </div>
+        </div>
+
+
         <h2 class="text-center mt-5 mb-3">Top Recipes</h2>
         <hr>
         <div class="container">

@@ -4,7 +4,9 @@
     <div class="container">
         <form class="d-flex" method="post" action="{{ search }}">
             {% csrf_token %}
-            <input class="form-control me-sm-2" type="search" placeholder="Search..." name="searched">
+            <label>
+                <input class="form-control me-sm-2" type="search" placeholder="Search..." name="searched">
+            </label>
             <button type="submit" class="btn btn-primary btn-sm">
                 <ion-icon name="search-outline" size="large"></ion-icon>
             </button>
