@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from LetsCook.common.forms import CommentForm
 from LetsCook.core.constants import CATEGORIES
-from LetsCook.profiles.views import save_suggestion
+from LetsCook.core.utils import save_suggestion
 from LetsCook.recipes.forms import RecipeForm, IngredientFormSet, RecipeUpdateForm
 from LetsCook.recipes.models import Recipe
 
@@ -72,6 +72,7 @@ class RecipeCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         context = self.get_context_data()
         ingredients = context['ingredients']
+        # .atomic() - If there is an exception, the changes are rolled back.
         with transaction.atomic():
             form.instance.author = self.request.user
             self.object = form.save()

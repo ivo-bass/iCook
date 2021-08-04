@@ -1,24 +1,21 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views import View
 
 from LetsCook.common.forms import CommentForm
 from LetsCook.common.models import Like, Comment
-from LetsCook.core.get_search_results import get_search_results
-from LetsCook.core.utils import get_top_recipes
+from LetsCook.core.utils import get_top_recipes, get_search_results
 from LetsCook.recipes.models import Recipe
 
 
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        most_views, most_likes, most_comments = get_top_recipes()
-        context = {
-            'most_views': most_views,
-            'most_likes': most_likes,
-            'most_comments': most_comments,
-        }
-        return render(request, 'common/index.html', context)
+def index(request):
+    most_views, most_likes, most_comments = get_top_recipes()
+    context = {
+        'most_views': most_views,
+        'most_likes': most_likes,
+        'most_comments': most_comments,
+    }
+    return render(request, 'common/index.html', context)
 
 
 def search(request):

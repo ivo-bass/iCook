@@ -1,4 +1,3 @@
-import datetime
 from random import choice
 
 from django.contrib import messages
@@ -13,8 +12,7 @@ from django.views.generic.detail import SingleObjectMixin
 
 from LetsCook.auth_icook.forms import UserUpdateForm
 from LetsCook.core.constants import CATEGORIES
-from LetsCook.core.save_suggestion import save_suggestion
-from LetsCook.core.utils import get_recipes_for_day, get_top_recipes
+from LetsCook.core.utils import get_top_recipes, get_recipes_for_current_days, save_suggestion
 from LetsCook.profiles.forms import ProfileUpdateForm
 from LetsCook.profiles.models import Choice
 from LetsCook.recipes.models import Recipe
@@ -22,22 +20,10 @@ from LetsCook.recipes.models import Recipe
 UserModel = get_user_model()
 
 
-
-
-
 @login_required(login_url=reverse_lazy('sign-in'))
 def home(request):
-    today = datetime.date.today()
-    recipes_today = get_recipes_for_day(request, today)
-
-    yesterday = today - datetime.timedelta(days=1)
-    recipes_yesterday = get_recipes_for_day(request, yesterday)
-
-    tomorrow = today + datetime.timedelta(days=1)
-    recipes_tomorrow = get_recipes_for_day(request, tomorrow)
-
+    recipes_today, recipes_yesterday, recipes_tomorrow = get_recipes_for_current_days(request)
     most_views, most_likes, most_comments = get_top_recipes()
-
     context = {
         'recipes_for_today': recipes_today,
         'recipes_for_yesterday': recipes_yesterday,
@@ -74,16 +60,11 @@ class HistoryView(LoginRequiredMixin, ListView):
     model = Choice
     template_name = 'profiles/history.html'
     paginate_by = 3
-    ordering = None
     object = None
 
     def get(self, request, *args, **kwargs):
         self.object = self.request.user
         return super().get(request, *args, **kwargs)
-
-    # Todo: filter history by date
-    # def post(self, request, *args, **kwargs):
-    #     pass
 
     def get_queryset(self):
         """

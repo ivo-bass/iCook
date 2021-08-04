@@ -46,20 +46,6 @@ class SignUpView(CreateView):
         return render(self.request, 'auth/activation_needed.html')
 
 
-def activate(request, uidb64, token):
-    try:
-        uid = urlsafe_base64_decode(uidb64).decode()
-        user = UserModel._default_manager.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and default_token_generator.check_token(user, token):
-        user.is_active = True
-        user.save()
-        return render(request, 'auth/sign-in.html', {"form": SignInForm})
-    else:
-        return render(request, 'auth/activation_invalid.html')
-
-
 class SignInView(LoginView):
     template_name = 'auth/sign-in.html'
     form_class = SignInForm
@@ -104,6 +90,20 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'auth/password-reset-complete.html'
 
 
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = UserModel._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return render(request, 'auth/sign-in.html', {"form": SignInForm})
+    else:
+        return render(request, 'auth/activation_invalid.html')
+
+
 def change_password(request):
     if request.method == 'POST':
         form = BootstrapChangePasswordForm(request.user, request.POST)
@@ -115,4 +115,3 @@ def change_password(request):
         form = BootstrapChangePasswordForm(request.user)
     context = {'form': form}
     return render(request, 'auth/change-password.html', context)
-

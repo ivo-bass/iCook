@@ -1,14 +1,11 @@
-import os
-
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Field, Fieldset, HTML, ButtonHolder, Submit, Column
 from django import forms
-from django.conf import settings
 from django.forms import inlineformset_factory
 
 from LetsCook.core.custom_layout_object import Formset
-from LetsCook.core.delete_previos_image import delete_previous_image
 from LetsCook.core.mixins import AddBootstrapFormControlMixin
+from LetsCook.core.utils import delete_previous_image
 from LetsCook.recipes.models import Recipe, Ingredient
 
 
@@ -30,8 +27,7 @@ IngredientFormSet = inlineformset_factory(
 
 
 class Row(Div):
-    css_class = "row d-flex flex-row justify-content-between align-items-bottom"
-    pass
+    css_class = "row"
 
 
 class RecipeForm(forms.ModelForm):
