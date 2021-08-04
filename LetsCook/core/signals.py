@@ -1,5 +1,8 @@
+import os
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, post_delete, pre_delete
 from django.dispatch import receiver
 
 from LetsCook.profiles.models import Profile
@@ -26,3 +29,11 @@ def user_created(sender, instance, created, **kwargs):
             default_username += str(instance.pk)
         profile.username = default_username
         profile.save()
+
+
+@receiver(pre_delete, sender=UserModel)
+def user_deleted(sender, instance, **kwargs):
+    image = str(instance.profile.image)
+    image_path = os.path.join(settings.MEDIA_ROOT, image)
+    if image:
+        os.remove(image_path)

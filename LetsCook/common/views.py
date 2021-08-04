@@ -12,7 +12,7 @@ from LetsCook.recipes.models import Recipe
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
-        most_views, most_likes, most_comments = get_top_recipes(request)
+        most_views, most_likes, most_comments = get_top_recipes()
         context = {
             'most_views': most_views,
             'most_likes': most_likes,

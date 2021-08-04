@@ -10,7 +10,7 @@ def get_recipes_for_day(request, day):
     return recipes
 
 
-def get_top_recipes(request):
+def get_top_recipes():
     all_public_recipes = Recipe.objects.filter(public=True)
     most_views = Recipe.objects.filter(public=True).order_by('recipe_views').last()
     most_likes = list(sorted(all_public_recipes, key=lambda obj: -obj.likes_count))[0]

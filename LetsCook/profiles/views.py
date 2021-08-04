@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.views import View
 from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
@@ -37,7 +36,7 @@ def home(request):
     tomorrow = today + datetime.timedelta(days=1)
     recipes_tomorrow = get_recipes_for_day(request, tomorrow)
 
-    most_views, most_likes, most_comments = get_top_recipes(request)
+    most_views, most_likes, most_comments = get_top_recipes()
 
     context = {
         'recipes_for_today': recipes_today,
