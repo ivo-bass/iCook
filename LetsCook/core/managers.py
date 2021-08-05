@@ -3,6 +3,10 @@ from django.contrib.auth.hashers import make_password
 
 
 class ICookUserManager(BaseUserManager):
+    """
+    Custom user manager normalizing the email and hashing the password on creation
+    Sets the regular user's fields 'is_staff' and 'is_superuser' as False.
+    """
     def _create_user(self, email, password, **extra_fields):
         if not email:
             raise ValueError('The given email must be set')

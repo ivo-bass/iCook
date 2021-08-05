@@ -21,6 +21,10 @@ UserModel = get_user_model()
 
 @login_required(login_url=reverse_lazy('sign-in'))
 def home(request):
+    """
+    Home View which shows current days history for the user
+    and the top public recipes in the db
+    """
     recipes_today, recipes_yesterday, recipes_tomorrow = get_recipes_for_current_days(request)
     most_views, most_likes, most_comments = get_top_recipes()
     context = {
@@ -35,12 +39,18 @@ def home(request):
 
 
 class SuggestView(LoginRequiredMixin, View):
+    """
+    This view renders a suggestion for a recipe,
+    filtered by meal_type/category
+    """
     def get(self, request):
         categories = CATEGORIES
         recipe = None
         public_recipes = Recipe.objects.filter(public=True)
         category_name = request.GET.get('category')
-        if not category_name == '' and not category_name == 'Random' and category_name is not None:
+        if not category_name == ''\
+                and not category_name == 'Random'\
+                and category_name is not None:
             public_recipes = public_recipes.filter(meal_type=category_name)
         if public_recipes:
             recipe = choice(public_recipes)
@@ -56,6 +66,9 @@ class SuggestView(LoginRequiredMixin, View):
 
 
 class HistoryView(LoginRequiredMixin, ListView):
+    """
+    This view shows all choices made by the authenticated user
+    """
     model = Choice
     template_name = 'profiles/history.html'
     paginate_by = 3
@@ -67,13 +80,17 @@ class HistoryView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         """
-        :return: all choices for the session user ordered by date
+        Retrns all choices for the session user ordered by date
         """
         related_choices = self.object.choice_set.order_by('-date')
         return related_choices
 
 
 class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
+    """
+    This view shows foreign profile information with all
+    public recipes created by the given user
+    """
     model = UserModel
     template_name = 'profiles/show-profile.html'
     paginate_by = 3
@@ -94,6 +111,9 @@ class ProfileShowView(LoginRequiredMixin, SingleObjectMixin, ListView):
 
 
 def profile_and_user_update(request):
+    """
+    This view updates user and profile information altogether
+    """
     u_form = UserUpdateForm(instance=request.user)
     p_form = ProfileUpdateForm(instance=request.user.profile)
     if request.method == 'POST':
@@ -103,6 +123,7 @@ def profile_and_user_update(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
+            # should update the session with the new email if changed
             update_session_auth_hash(request, request.user)
             return redirect('update-profile')
     context = {
@@ -114,6 +135,9 @@ def profile_and_user_update(request):
 
 
 class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
+    """
+    View for recipes created by the current user
+    """
     model = UserModel
     template_name = 'profiles/my-recipes.html'
     object = None
@@ -133,6 +157,9 @@ class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
 
 
 class UserLikedRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
+    """
+    View for recipes liked by the current user
+    """
     model = UserModel
     template_name = 'profiles/liked-recipes.html'
     object = None

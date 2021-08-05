@@ -12,6 +12,10 @@ from LetsCook.recipes.models import Recipe
 
 
 def details_recipe(request, pk):
+    """
+    This view shows the recipe for the given pk.
+    Has a vary basic view count.
+    """
     if request.method == 'POST':
         save_suggestion(request)
         return redirect('home')
@@ -38,6 +42,10 @@ def details_recipe(request, pk):
 
 
 class AllRecipesView(ListView):
+    """
+    This view shows all public recipes
+    and provides filtering by meal_type/category
+    """
     model = Recipe
     template_name = 'recipes/all-recipes.html'
     context_object_name = 'recipes'
@@ -57,6 +65,10 @@ class AllRecipesView(ListView):
 
 
 class RecipeCreate(LoginRequiredMixin, CreateView):
+    """
+    This view shows recipe creation form with ingredients inline formset.
+    On success redirects to recipe details view
+    """
     model = Recipe
     template_name = 'recipes/create.html'
     form_class = RecipeForm
@@ -70,6 +82,9 @@ class RecipeCreate(LoginRequiredMixin, CreateView):
         return data
 
     def form_valid(self, form):
+        """
+        If recipe form is valid validates the ingredients formset
+        """
         context = self.get_context_data()
         ingredients = context['ingredients']
         # .atomic() - If there is an exception, the changes are rolled back.
@@ -86,6 +101,9 @@ class RecipeCreate(LoginRequiredMixin, CreateView):
 
 
 class RecipeUpdate(LoginRequiredMixin, UpdateView):
+    """
+    Updates the recipe and all of the ingredients
+    """
     model = Recipe
     template_name = 'recipes/update.html'
     form_class = RecipeUpdateForm
@@ -112,6 +130,9 @@ class RecipeUpdate(LoginRequiredMixin, UpdateView):
 
 
 class RecipeDelete(LoginRequiredMixin, DeleteView):
+    """
+    Confirmation view for recipe deletion.
+    """
     model = Recipe
     template_name = 'recipes/delete.html'
 

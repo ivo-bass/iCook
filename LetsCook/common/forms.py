@@ -6,6 +6,9 @@ from LetsCook.recipes.models import Recipe
 
 
 class CommentForm(AddBootstrapFormControlMixin, forms.ModelForm):
+    """
+    Form for creating a comment. Relates the comment to a recipe object
+    """
     recipe_pk = forms.IntegerField(
         widget=forms.HiddenInput()
     )
@@ -15,6 +18,10 @@ class CommentForm(AddBootstrapFormControlMixin, forms.ModelForm):
         fields = ('text', 'recipe_pk')
 
     def save(self, commit=True):
+        """
+        On save gets the recipe_pk from the view and
+        assigns it to the comment
+        """
         recipe_pk = self.cleaned_data['recipe_pk']
         recipe = Recipe.objects.get(pk=recipe_pk)
         comment = Comment(

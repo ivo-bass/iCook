@@ -9,6 +9,9 @@ class IngredientInlineAdmin(admin.TabularInline):
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
+    """
+    Author field should not be changed
+    """
     list_display = ('title', 'created_on', 'public', 'author')
     inlines = [IngredientInlineAdmin, ]
-    readonly_fields = ('author',)
+    readonly_fields = ('author', 'recipe_views')

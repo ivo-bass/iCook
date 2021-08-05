@@ -1,4 +1,7 @@
 class AddBootstrapFormControlMixin:
+    """
+    Adds boostrap classes on form fields
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.add_form_control()
@@ -12,7 +15,7 @@ class AddBootstrapFormControlMixin:
                     field.widget.attrs['class'] += ' form-select'
                 except:
                     continue
-            if name in ('public', 'vegetarian'):
+            elif name in ('public', 'vegetarian'):
                 try:
                     if 'class' not in field.widget.attrs:
                         field.widget.attrs['class'] = ''

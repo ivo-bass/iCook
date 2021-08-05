@@ -142,10 +142,6 @@ files - profile images and recipe images.
 The images are cropped to occupy less space in the cloud - 200x200 for profiles and 580x326 for recipes.  
 ***Static*** directory contain default images which are rendered by the template if no image is uploaded in the cloud.
 
-### 3.2 Celery
-
-TODO
-
 ## 4. Requirements Met
 
 [| link to exam requirements |](https://softuni.bg/trainings/resources/officedocument/60950/project-requirements-python-web-framework-july-2021/3356)

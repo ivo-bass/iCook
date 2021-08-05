@@ -6,6 +6,10 @@ from LetsCook.core.managers import ICookUserManager
 
 
 class ICookUser(AbstractBaseUser, PermissionsMixin):
+    """
+    Custom user model. Overrides AbstractBaseUser
+    changing the username field to email.
+    """
     email = models.EmailField(
         unique=True,
     )

@@ -1,14 +1,18 @@
 import datetime
-import os
 
 from cloudinary import uploader
-from django.conf import settings
 
 from LetsCook.profiles.models import Choice
 from LetsCook.recipes.models import Recipe
 
 
 def get_recipes_for_day(request, day):
+    """
+    Filters the choices of the user by date
+    and returns the recipes chosen for that day
+    :param day: datetime instance
+    :return: list of recipes
+    """
     user = request.user
     choices_for_day = user.choice_set.filter(date=day)
     recipes = []
@@ -18,6 +22,9 @@ def get_recipes_for_day(request, day):
 
 
 def get_recipes_for_current_days(request):
+    """
+    Returns the chosen recipes for yesterday, today and tomorrow
+    """
     today = datetime.date.today()
     yesterday = today - datetime.timedelta(days=1)
     tomorrow = today + datetime.timedelta(days=1)
@@ -28,6 +35,10 @@ def get_recipes_for_current_days(request):
 
 
 def get_top_recipes():
+    """
+    Filters recipes by likes count, comments count
+    and views count than returns the top recipes
+    """
     all_public_recipes = Recipe.objects.filter(public=True)
     most_views = Recipe.objects.filter(public=True).order_by('recipe_views').last()
     most_likes = list(sorted(all_public_recipes, key=lambda obj: -obj.likes_count))[0]
@@ -36,6 +47,10 @@ def get_top_recipes():
 
 
 def get_search_results(request):
+    """
+    Performs search using a keyword case insensitive in
+    title, description and ingredients fields and returns set union
+    """
     searched = request.POST['searched'].lower()
     in_title = Recipe.objects.filter(
         title__icontains=searched,
@@ -57,7 +72,11 @@ def get_search_results(request):
     return context
 
 
-def delete_previous_image(self, commit, model, default_file_name):
+def delete_previous_image(self, model):
+    """
+    Deletes the old image from cloudinary database
+    after uploading a new one
+    """
     db_profile = model.objects.get(pk=self.instance.pk)
     new_image = self.files.get('image')
     if new_image:
@@ -69,6 +88,10 @@ def delete_previous_image(self, commit, model, default_file_name):
 
 
 def save_suggestion(request):
+    """
+    Takes the request and saves the choice of recipe
+    with the given date for the current user
+    """
     recipe_pk = request.POST.get('recipe-pk')
     recipe = Recipe.objects.get(pk=recipe_pk)
     user = request.user

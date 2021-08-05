@@ -3,6 +3,11 @@ from django.template.loader import render_to_string
 
 
 class Formset(LayoutObject):
+    """
+    Allows to set the order of the fields,
+    wraps them in divs or other structures,
+    adds html, sets ids, classes or attributes.
+    """
     template = "shared/formset.html"
 
     def __init__(self, formset_name_in_context, template=None):

@@ -13,6 +13,10 @@ UserModel = get_user_model()
 
 
 class Profile(models.Model):
+    """
+    User profile model related to the user by on-to-one relation,
+    deleted on user deletion.
+    """
     user = models.OneToOneField(
         UserModel,
         on_delete=models.CASCADE,
@@ -33,7 +37,9 @@ class Profile(models.Model):
         blank=True,
     )
 
-    image = CloudinaryField('image')
+    image = CloudinaryField(
+        'image',
+    )
 
     dark_theme = models.BooleanField(
         default=False,
@@ -69,6 +75,9 @@ class Profile(models.Model):
 
 
 class Choice(models.Model):
+    """
+    Choice made by user with a recipe for a given date
+    """
     recipe = models.ForeignKey(
         Recipe,
         on_delete=models.CASCADE,

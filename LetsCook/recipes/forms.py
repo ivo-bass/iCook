@@ -13,23 +13,33 @@ from LetsCook.recipes.models import Recipe, Ingredient
 
 
 class IngredientForm(AddBootstrapFormControlMixin, forms.ModelForm):
+    """
+    Create and update ingredient form
+    """
     class Meta:
         model = Ingredient
         fields = '__all__'
 
     def clean_quantity(self):
-        data = self.cleaned_data['quantity']
-        if not data:
-            data = 0
-        return data
+        """
+        Sets the quantity value to 0 if not provided
+        """
+        quantity = self.cleaned_data['quantity']
+        if not quantity:
+            quantity = 0
+        return quantity
 
     def clean_measure(self):
-        data = self.cleaned_data['quantity']
-        if not data:
-            data = ''
-        return data
+        """
+        Sets the measure value to empty string if not provided
+        """
+        measure = self.cleaned_data['measure']
+        if not measure:
+            measure = ''
+        return measure
 
 
+# inline formset creation
 IngredientFormSet = inlineformset_factory(
     Recipe,
     Ingredient,
@@ -42,24 +52,37 @@ IngredientFormSet = inlineformset_factory(
 
 
 class Row(Div):
+    """
+    Inherits layout div class and
+    Adds css class 'row' to its
+    """
     css_class = "row"
 
 
 class RecipeForm(forms.ModelForm):
+    """
+    This is recipe creation form that allows adding the ingredients formset
+    and setting the Cloudinary field to crop and store the image file
+    """
     class Meta:
         model = Recipe
         exclude = ('author', 'recipe_views',)
 
     image = CloudinaryFileField(
+        required=False,
         options={
             'crop': 'fill',
+            'gravity': 'center',
             'width': 580,
             'height': 326,
-            'folder': 'recipes'
+            'folder': 'recipes',
         },
     )
 
     def __init__(self, *args, **kwargs):
+        """
+        Recipe html layout including ingredients formset layout
+        """
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = True
@@ -105,6 +128,10 @@ class RecipeForm(forms.ModelForm):
 
 
 class RecipeUpdateForm(RecipeForm):
+    """
+    Inherits the RecipeForm and extends save method
+    to delete previous image if exists
+    """
     def save(self, commit=True):
-        delete_previous_image(self, commit, Recipe, 'food-default.png')
+        delete_previous_image(self, Recipe)
         return super().save(commit=commit)

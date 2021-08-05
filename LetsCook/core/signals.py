@@ -13,6 +13,11 @@ UserModel = get_user_model()
 
 @receiver(post_save, sender=UserModel)
 def user_created(sender, instance, created, **kwargs):
+    """
+    Activates superuser without email activation.
+    Sets the default profile username using the user's email
+    Adds the user's pk to the username if such exists in the db
+    """
     # if the user is initialized attach a new profile to it
     if created:
         # activate superuser
@@ -34,6 +39,9 @@ def user_created(sender, instance, created, **kwargs):
 
 @receiver(pre_delete, sender=UserModel)
 def user_deleted(sender, instance, **kwargs):
+    """
+    Deletes the profile image on user deletion
+    """
     image = instance.profile.image
     if image:
         image_path = image.public_id

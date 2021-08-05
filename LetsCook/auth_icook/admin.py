@@ -7,6 +7,11 @@ UserModel = get_user_model()
 
 @admin.register(UserModel)
 class ICookUserAdmin(UserAdmin):
+    """
+    Custom class which overrides UserAdmin
+    to show email instead of username
+    and make date_joined readonly
+    """
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Permissions', {

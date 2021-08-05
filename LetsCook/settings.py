@@ -124,13 +124,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
-# django-resized settings
-DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]
-DJANGORESIZED_DEFAULT_QUALITY = 75
-DJANGORESIZED_DEFAULT_KEEP_META = True
-DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'
-DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}
-DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -149,6 +142,7 @@ LOGIN_URL = '/auth/sign-in/'
 # needed with CBV LoginView
 LOGIN_REDIRECT_URL = 'home'
 
+# cloudinary configuration
 cloudinary.config(
     cloud_name="dmcijbogb",
     api_key=os.environ.get('CLOUDINARY_API_KEY'),

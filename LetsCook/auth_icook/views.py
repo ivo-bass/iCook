@@ -21,12 +21,21 @@ UserModel = get_user_model()
 
 
 class SignUpView(CreateView):
+    """
+    Overrides CreateView to register the user,
+    loads custom user creation form and
+    sends activation email
+    """
     template_name = 'auth/sign-up.html'
     model = UserModel
     form_class = SignUpForm
-    success_url = reverse_lazy('update-profile')
 
     def form_valid(self, form):
+        """
+        Sets the user to inactive and sends activation email
+        :param form:
+        :return: activation template
+        """
         user = form.save(commit=False)
         user.is_active = False
         user.save()
@@ -47,26 +56,46 @@ class SignUpView(CreateView):
 
 
 class SignInView(LoginView):
+    """
+    User login view rendering the sign-in form.
+    If the view is called by unauthorized url
+    it redirects back to it on success.
+    """
     template_name = 'auth/sign-in.html'
     form_class = SignInForm
     redirect_field_name = 'next'
 
 
 class SignOutView(LoginRequiredMixin, View):
+    """
+    Simply signs out the user and redirects to index
+    """
     def get(self, request):
         logout(request)
         return redirect('index')
 
 
 class UserDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    Simple confirmation view for user deletion.
+    """
     model = UserModel
     template_name = 'auth/delete-user.html'
 
     def get_success_url(self):
+        """
+        Cleans the session on success
+        :return: index url
+        """
         logout(self.request)
         return reverse('index')
 
     def post(self, request, *args, **kwargs):
+        """
+        If 'cancel' in request redirects to update-profile view
+        otherwise continues to success_url and user deletion
+        :return:
+        """
         if "cancel" in request.POST:
             return redirect('update-profile')
         return super().post(request, *args, **kwargs)
@@ -91,6 +120,11 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
 
 
 def activate(request, uidb64, token):
+    """
+    Decodes the user id from activation link ans checks the token.
+    Sets the user as active and renders the sign-in view on success.
+    Otherwise error msg is rendered.
+    """
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = UserModel._default_manager.get(pk=uid)
@@ -105,6 +139,10 @@ def activate(request, uidb64, token):
 
 
 def change_password(request):
+    """
+    Password change view which updates the session with the new credentials
+    Uses custom form and redirects to update-profile url.
+    """
     if request.method == 'POST':
         form = BootstrapChangePasswordForm(request.user, request.POST)
         if form.is_valid():

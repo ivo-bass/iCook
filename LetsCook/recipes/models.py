@@ -31,7 +31,9 @@ class Recipe(models.Model):
         )
     )
 
-    image = CloudinaryField('image')
+    image = CloudinaryField(
+        'image',
+    )
 
     description = models.CharField(
         max_length=100,
@@ -83,6 +85,9 @@ class Recipe(models.Model):
         return self.comment_set.count()
 
     def save(self, *args, **kwargs):
+        """
+        Sets the title to be lowercase in order to unify db fields
+        """
         self.title = self.title.lower()
         return super().save(*args, **kwargs)
 
