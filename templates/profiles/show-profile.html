@@ -1,4 +1,5 @@
 {% extends 'shared/base.html' %}
+{% load static %}
 
 
 {% block content %}
@@ -10,7 +11,11 @@
                     <div class="card-header">
                         <div class="row row-cols-auto">
                             <div class="col profile-image center">
-                                <img src="{{ user.profile.image.url }}">
+                                {% if user.profile.image %}
+                                    <img src="{{ user.profile.image.url }}" alt="image">
+                                {% else %}
+                                    <img src="{% static 'images/profile-default.jpg' %}" alt="image">
+                                {% endif %}
                             </div>
 
                             <div class="col">

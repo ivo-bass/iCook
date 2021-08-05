@@ -8,12 +8,12 @@ Deployed on ...
 
 [![Cars Game Video](https://img.youtube.com/vi/R9M6HYdyTB0/default.jpg)](https://youtu.be/R9M6HYdyTB0)
 
-# Software Requirements Specification
+# Software Documentation
 
 ## iCook
 
-Version 0.1  
-Prepared by Ivailo Ignatov 05.08.2021
+Prepared by Ivailo Ignatov  
+05.08.2021
 
 Table of Contents
 =================
@@ -70,11 +70,9 @@ but does not see the sidebar.
 
 All registered users by default are regular users.
 
-This user can sign-in with email and password. Post authentication the user is able to navigate through the sidebar.
-
+This user can sign-in with email and password. Post authentication the user is able to navigate through the sidebar.  
 The user has their own ***profile*** with username, image, first name and last name and all CRUD operations related to
-it.
-
+it.  
 This user has all CRUD permissions to their own recipes. They can like and comment to all public recipes in the system.
 
 #### 2.2.1 Admin User
@@ -86,10 +84,8 @@ authentication this user can access the admin site through the top navigation pa
 
 ### 2.3 Profile Objects
 
-**Profile** is created on user creation with auto-generated username.
-
-The user profile has a profile completion ***progress*** based on filled profile fields.
-
+**Profile** is created on user creation with auto-generated username.  
+The user profile has a profile completion ***progress*** based on filled profile fields.  
 The user profiles has a ***rang***. The ***rang*** is based on the count of likes, comments and recipes created by the
 user.
 

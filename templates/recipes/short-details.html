@@ -1,8 +1,14 @@
+{% load static %}
+
 <div class="card-container">
     <div class="new-card border-primary">
         <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
             <div class="imgBx">
-                <img src="{{ r.image.url }}">
+                {% if not recipe.image %}
+                    <img src="{% static 'images/food-default.png' %}" alt="image">
+                {% else %}
+                    <img src="{{ r.image.url }}" alt="image">
+                {% endif %}
             </div>
         </a>
         <div class="card-content">

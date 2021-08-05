@@ -35,9 +35,9 @@ class Profile(models.Model):
     image = ResizedImageField(
         size=[200, 200],
         crop=['middle', 'center'],
-        default='profile-default.jpg',
         upload_to='profiles',
         blank=True,
+        null=True,
     )
 
     dark_theme = models.BooleanField(

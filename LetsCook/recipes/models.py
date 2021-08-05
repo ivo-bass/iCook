@@ -36,9 +36,9 @@ class Recipe(models.Model):
     image = ResizedImageField(
         size=[680, 382],
         crop=['middle', 'center'],
-        default='food-default.png',
         upload_to='recipes',
         blank=True,
+        null=True,
     )
 
     description = models.CharField(
