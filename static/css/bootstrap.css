@@ -2532,9 +2532,7 @@ progress {
     font-weight: 400;
     line-height: 1.5;
     color: var(--bs-font-color) !important;
-    /*background-color: transparent;*/
     background-clip: padding-box;
-    /*border: 0 solid transparent;*/
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -2802,7 +2800,7 @@ textarea.form-control-lg {
 }
 
 .form-select:disabled {
-    background-color: #eee;
+    /*background-color: #eee;*/
 }
 
 .form-select:-moz-focusring {
@@ -13381,7 +13379,7 @@ select.form-control {
     background-size: 8px 4px;
     background-repeat: no-repeat;
     background-position: right center;
-    box-shadow: inset 0 -1px 0 #ddd;
+    /*box-shadow: inset 0 -1px 0 #ddd;*/
 }
 
 select::-ms-expand,
@@ -13914,4 +13912,8 @@ ion-icon {
 .dashboard-card {
     min-height: 200px;
     margin-top: 10px;
+}
+
+option {
+    background: var(--bs-background-card) !important;
 }
