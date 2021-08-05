@@ -6,9 +6,9 @@ Deployed on ...
 
 ## Video Presentation
 
-[![Cars Game Video](https://img.youtube.com/vi/R9M6HYdyTB0/default.jpg)](https://youtu.be/R9M6HYdyTB0)
+[![Presentation Video](https://img.youtube.com/vi/zMhGDAGEAIM/default.jpg)](https://youtu.be/zMhGDAGEAIM)
 
-# Software Documentation
+# Documentation
 
 ## iCook
 
@@ -20,7 +20,7 @@ Table of Contents
 
 * 1 [Introduction](#1-introduction)
 * 2 [Product Overview](#2-product-overview)
-    * 2.1 [Product Functions](#21-product-functions)
+    * 2.1 [Product Features ](#21-product-features)
     * 2.2 [User Characteristics](#22-user-characteristics)
     * 2.3 [Profile objects](#23-profile-objects)
     * 2.4 [Recipe objects](#24-recipe-objects)
@@ -42,7 +42,7 @@ the system, the interfaces of the system, what the system will do.
 iCook is a digital cookbook and cooking guide alike, that helps home cooks of every level discover, save and organize
 the best recipes, while also helping them become better.
 
-### 2.1 Product Functions
+### 2.1 Product Features
 
 * A database of cooking recipes
 * Perform search for recipes by keywords
