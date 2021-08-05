@@ -176,5 +176,5 @@ TODO
 - [x] Class-based views
 - [x] Extended Django user
 - [x] Documentation/ Swagger
-- [ ] Use a file storage cloud API e.g., Cloudinary, Dropbox, Google Drive or other for storing the files
-- [ ] Implement Microservice architecture in your application.
+- [x] Use a file storage cloud API e.g., **Cloudinary**, Dropbox, Google Drive or other for storing the files
+- [ ] Implement Microservice architecture in your application. *(I'm not sure what do you mean by that)*
