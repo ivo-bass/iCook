@@ -95,7 +95,7 @@ user.
 - Username - *char-field auto-generated based on the email of the user*
 - First name - *char-field*
 - Last name - *char-field*
-- Image - *resized-image-field - [link](https://pypi.org/project/django-resized/)*
+- Image - *cloudinary-field*
 - Dark theme - *boolean-field*
 - Rang - *property*
 - Progress - *property*
@@ -111,7 +111,7 @@ and deleted only by its author.
 - Title - *char-field*
 - Type - *char-field with choices*
 - Short description - *char-field*
-- Image - *resized-image-field - [link](https://pypi.org/project/django-resized/)*
+- Image - *cloudinary-field*
 - Time of preparation - *integer-field*
 - Count fo servings - *integer-field*
 - Preparation methods - *textarea*
@@ -137,11 +137,14 @@ The ***Ingredient*** objects are created on recipe creation.
 
 ### 3.1 Cloudianry
 
-asdasdasdasdasdasd
+The system uses [**Cloudinary's** Python SDK](https://cloudinary.com/documentation/django_integration) to store all media
+files - profile images and recipe images.  
+The images are cropped to occupy less space in the cloud - 200x200 for profiles and 580x326 for recipes.  
+***Static*** directory contain default images which are rendered by the template if no image is uploaded in the cloud.
 
 ### 3.2 Celery
 
-asdasdasdasdasasda
+TODO
 
 ## 4. Requirements Met
 

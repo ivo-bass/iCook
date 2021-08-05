@@ -1,3 +1,4 @@
+from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
@@ -11,6 +12,15 @@ UserModel = get_user_model()
 
 
 class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
+    image = CloudinaryFileField(
+        options={
+            'crop': 'thumb',
+            'gravity': 'face',
+            'width': 200,
+            'height': 200,
+            'folder': 'profiles'
+        },
+    )
 
     def save(self, commit=True):
         delete_previous_image(self, commit, Profile, 'profile-default.jpg')
@@ -20,14 +30,5 @@ class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
         model = Profile
         fields = ['image', 'username', 'first_name', 'last_name', 'dark_theme']
         widgets = {
-            'image': forms.FileInput(),
             'dark_theme': forms.NullBooleanSelect(),
         }
-
-    def clean_image(self):
-        image = self.cleaned_data['image']
-        if image.name:
-            ext = image.name.split('.')[-1]
-            if ext not in VALID_IMAGE_EXTENSIONS:
-                raise ValidationError('Unsupported file extension.')
-        return image

@@ -1,6 +1,7 @@
 import datetime
 import os
 
+from cloudinary import uploader
 from django.conf import settings
 
 from LetsCook.profiles.models import Choice
@@ -57,14 +58,14 @@ def get_search_results(request):
 
 
 def delete_previous_image(self, commit, model, default_file_name):
-    # db_profile = model.objects.get(pk=self.instance.pk)
-    # new_image = self.files.get('image')
-    # old_image = str(db_profile.image)
-    # old_image_path = os.path.join(settings.MEDIA_ROOT, old_image)
-    # if os.path.exists(old_image_path):
-    #     if commit and new_image and old_image and not old_image == default_file_name:
-    #         os.remove(old_image_path)
-    pass
+    db_profile = model.objects.get(pk=self.instance.pk)
+    new_image = self.files.get('image')
+    if new_image:
+        try:
+            old_image = db_profile.image.public_id
+            uploader.destroy(old_image)
+        except Exception as exc:
+            print(exc)
 
 
 def save_suggestion(request):

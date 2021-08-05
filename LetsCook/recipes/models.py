@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
@@ -30,16 +31,7 @@ class Recipe(models.Model):
         )
     )
 
-    # 1920 / 1080
-    # 340 / 191
-    # 680 / 382
-    image = ResizedImageField(
-        size=[680, 382],
-        crop=['middle', 'center'],
-        upload_to='recipes',
-        blank=True,
-        null=True,
-    )
+    image = CloudinaryField('image')
 
     description = models.CharField(
         max_length=100,

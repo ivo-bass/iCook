@@ -1,3 +1,4 @@
+from cloudinary.forms import CloudinaryJsFileField, CloudinaryFileField
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Div, Field, Fieldset, HTML, ButtonHolder, Submit, Column
 from django import forms
@@ -49,6 +50,15 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         exclude = ('author', 'recipe_views',)
 
+    image = CloudinaryFileField(
+        options={
+            'crop': 'fill',
+            'width': 580,
+            'height': 326,
+            'folder': 'recipes'
+        },
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -91,16 +101,7 @@ class RecipeForm(forms.ModelForm):
                 Column(Field('public')),
                 Column(ButtonHolder(Submit('submit', 'save'))),
             ),
-
         )
-
-    def clean_image(self):
-        image = self.cleaned_data['image']
-        if image and not image == 'food-default.png':
-            ext = image.name.split('.')[-1]
-            if ext not in VALID_IMAGE_EXTENSIONS:
-                raise ValidationError('Unsupported file extension.')
-        return image
 
 
 class RecipeUpdateForm(RecipeForm):

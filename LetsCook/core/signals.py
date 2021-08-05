@@ -1,5 +1,6 @@
 import os
 
+from cloudinary import uploader
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save, pre_delete
@@ -33,7 +34,8 @@ def user_created(sender, instance, created, **kwargs):
 
 @receiver(pre_delete, sender=UserModel)
 def user_deleted(sender, instance, **kwargs):
-    image = str(instance.profile.image)
-    image_path = os.path.join(settings.MEDIA_ROOT, image)
-    if image and not image == 'profile-default.jpg':
-        os.remove(image_path)
+    image = instance.profile.image
+    if image:
+        image_path = image.public_id
+        uploader.destroy(image_path)
+

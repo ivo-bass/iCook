@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, User
@@ -32,16 +33,10 @@ class Profile(models.Model):
         blank=True,
     )
 
-    image = ResizedImageField(
-        size=[200, 200],
-        crop=['middle', 'center'],
-        upload_to='profiles',
-        blank=True,
-        null=True,
-    )
+    image = CloudinaryField('image')
 
     dark_theme = models.BooleanField(
-        default=True,
+        default=False,
     )
 
     def __str__(self):

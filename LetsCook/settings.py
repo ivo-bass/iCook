@@ -1,6 +1,10 @@
 import os
 from pathlib import Path
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
@@ -23,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
+    'cloudinary',
 
     'LetsCook.auth_icook',
     'LetsCook.profiles',
@@ -143,3 +148,10 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 LOGIN_URL = '/auth/sign-in/'
 # needed with CBV LoginView
 LOGIN_REDIRECT_URL = 'home'
+
+cloudinary.config(
+    cloud_name="dmcijbogb",
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+    secure=True,
+)
