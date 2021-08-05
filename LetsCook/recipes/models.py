@@ -106,11 +106,13 @@ class Ingredient(models.Model):
     quantity = models.FloatField(
         blank=True,
         default=0.0,
+        null=True,
     )
 
     measure = models.CharField(
         max_length=20,
         blank=True,
+        null=True,
         default='by taste',
         choices=(
             ('g', 'g'),

@@ -16,6 +16,18 @@ class IngredientForm(AddBootstrapFormControlMixin, forms.ModelForm):
         model = Ingredient
         fields = '__all__'
 
+    def clean_quantity(self):
+        data = self.cleaned_data['quantity']
+        if not data:
+            data = 0
+        return data
+
+    def clean_measure(self):
+        data = self.cleaned_data['quantity']
+        if not data:
+            data = ''
+        return data
+
 
 IngredientFormSet = inlineformset_factory(
     Recipe,
@@ -45,6 +57,10 @@ class RecipeForm(forms.ModelForm):
         self.helper.form_group_wrapper_class = 'form-control'
         self.helper.help_text_inline = True
         self.helper.error_text_inline = True
+        self.fields['description'].help_text = "Short description"
+        self.fields['image'].help_text = ".jpg, .jpeg, .png"
+        self.fields['time'].help_text = "Total time in minutes"
+        self.fields['servings'].help_text = "Servings number"
         self.helper.layout = Layout(
             Row(
                 Column(Field('title')),
@@ -80,7 +96,7 @@ class RecipeForm(forms.ModelForm):
 
     def clean_image(self):
         image = self.cleaned_data['image']
-        if image.name:
+        if image and not image == 'food-default.png':
             ext = image.name.split('.')[-1]
             if ext not in VALID_IMAGE_EXTENSIONS:
                 raise ValidationError('Unsupported file extension.')
