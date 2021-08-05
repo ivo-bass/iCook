@@ -49,8 +49,20 @@
                         <br>
                         <form action="{{ update_profile }}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            {{ p_form }}
-                            {{ u_form }}
+                            {% for field in p_form %}
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {% if field.errors %}
+                                    <small class="text-danger">{{ field.errors }}</small>
+                                {% endif %}
+                            {% endfor %}
+                            {% for field in u_form %}
+                                {{ field.label_tag }}
+                                {{ field }}
+                                {% if field.errors %}
+                                    <small class="text-danger">{{ field.errors }}</small>
+                                {% endif %}
+                            {% endfor %}
                             <br>
                             <button class="btn btn-primary center">Update Profile</button>
                         </form>
