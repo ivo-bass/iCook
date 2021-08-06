@@ -2,7 +2,6 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
-from django_resized import ResizedImageField
 
 from LetsCook.core.constants import MEAL_TYPES
 from LetsCook.core.validators import validate_digits_not_in_string

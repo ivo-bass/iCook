@@ -4,7 +4,6 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, User
 from django.db import models
 from django.utils import timezone
-from django_resized import ResizedImageField
 
 from LetsCook.recipes.models import Recipe
 
