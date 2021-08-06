@@ -1,14 +1,10 @@
-from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
-from django.core.validators import MinLengthValidator, MinValueValidator
-from django.db import models
+from django.test import TestCase
 
-from LetsCook.core.constants import MEAL_TYPES, MEASURES
-from LetsCook.core.validators import validate_digits_not_in_string
+from LetsCook.core.constants import CATEGORIES
+from tests.base.create_recipe_objects import create_public_recipe
 
-UserModel = get_user_model()
-
-
+"""
 class Recipe(models.Model):
     author = models.ForeignKey(
         UserModel,
@@ -84,39 +80,35 @@ class Recipe(models.Model):
         return self.comment_set.count()
 
     def save(self, *args, **kwargs):
-        """
-        Sets the title to be lowercase in order to unify db fields
-        """
         self.title = self.title.lower()
         return super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['-id']
+"""
+
+UserModel = get_user_model()
 
 
-class Ingredient(models.Model):
-    name = models.CharField(
-        max_length=30
-    )
+class RecipeModelTest(TestCase):
+    def setUp(self):
+        self.recipe = create_public_recipe()
 
-    quantity = models.FloatField(
-        blank=True,
-        default=0.0,
-        null=True,
-    )
+    def test_recipe_init(self):
+        user = UserModel.objects.first()
+        self.assertEqual(user, self.recipe.author)
+        self.assertEqual('test title', self.recipe.title)
+        self.assertEqual('test description', self.recipe.description)
+        self.assertEqual('test preparation', self.recipe.preparation)
+        self.assertEqual(CATEGORIES[0], self.recipe.meal_type)
+        self.assertEqual(1, self.recipe.time)
+        self.assertEqual(1, self.recipe.servings)
+        self.assertFalse(self.recipe.vegetarian)
+        self.assertTrue(self.recipe.public)
+        self.assertEqual(0, self.recipe.recipe_views)
+        self.assertEqual(0, self.recipe.likes_count)
+        self.assertEqual(0, self.recipe.comments_count)
 
-    measure = models.CharField(
-        max_length=20,
-        blank=True,
-        null=True,
-        default='by taste',
-        choices=MEASURES,
-    )
-
-    recipe = models.ForeignKey(
-        Recipe,
-        on_delete=models.CASCADE
-    )
-
-    def __str__(self):
-        return f"{self.name} - {self.quantity} {self.measure}"
+    def test_recipeTitleOnSave_isLower(self):
+        is_lowercase = self.recipe.title.islower()
+        self.assertTrue(is_lowercase)

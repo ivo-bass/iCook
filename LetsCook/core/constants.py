@@ -16,6 +16,17 @@ CATEGORIES = (
     'dessert',
 )
 
+MEASURES = (
+    ('g', 'g'),
+    ('kg', 'kg'),
+    ('ml', 'ml'),
+    ('l', 'l'),
+    ('tsp', 'tsp'),
+    ('tbsp', 'tbsp'),
+    ('cup', 'cup'),
+    ('pcs', 'pcs'),
+)
+
 VALID_IMAGE_EXTENSIONS = (
     'jpg',
     'jpeg',
