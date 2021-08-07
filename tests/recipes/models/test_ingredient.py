@@ -9,7 +9,7 @@ class IngredientModelTest(TestCase):
     def test_ingredientInit_withAllFieldsFilled(self):
         ingredient = create_ingredient_with_all_fields()
         recipe = Recipe.objects.first()
-        self.assertEqual(recipe, ingredient.recipe)
+        self.assertEqual(recipe.id, ingredient.recipe_id)
         self.assertEqual('test name', ingredient.name)
         self.assertEqual(1, ingredient.quantity)
         self.assertEqual(MEASURES[0][0], ingredient.measure)

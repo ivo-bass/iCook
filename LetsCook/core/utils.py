@@ -93,12 +93,14 @@ def save_suggestion(request):
     with the given date for the current user
     """
     recipe_pk = request.POST.get('recipe-pk')
-    recipe = Recipe.objects.get(pk=recipe_pk)
-    user = request.user
-    choice_made = Choice(
-        recipe=recipe,
-        user=user,
-    )
-    if request.POST.get('date'):
-        choice_made.date = request.POST.get('date')
-    choice_made.save()
+    if recipe_pk:
+        recipe = Recipe.objects.get(pk=recipe_pk)
+        user = request.user
+        choice_made = Choice(
+            recipe=recipe,
+            user=user,
+        )
+        date = request.POST.get('date')
+        if date:
+            choice_made.date = date
+        choice_made.save()

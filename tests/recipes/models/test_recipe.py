@@ -96,7 +96,7 @@ class RecipeModelTest(TestCase):
 
     def test_recipe_init(self):
         user = UserModel.objects.first()
-        self.assertEqual(user, self.recipe.author)
+        self.assertEqual(user.id, self.recipe.author_id)
         self.assertEqual('test title', self.recipe.title)
         self.assertEqual('test description', self.recipe.description)
         self.assertEqual('test preparation', self.recipe.preparation)

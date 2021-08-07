@@ -12,5 +12,5 @@ class LikeModelTest(TestCase):
         like = create_like()
         user = UserModel.objects.first()
         recipe = Recipe.objects.first()
-        self.assertEqual(user, like.user)
-        self.assertEqual(recipe, like.recipe)
+        self.assertEqual(user.id, like.user_id)
+        self.assertEqual(recipe.id, like.recipe_id)

@@ -12,6 +12,6 @@ class CommentModelTest(TestCase):
         comment = create_comment()
         user = UserModel.objects.first()
         recipe = Recipe.objects.first()
-        self.assertEqual(user, comment.user)
-        self.assertEqual(recipe, comment.recipe)
+        self.assertEqual(user.id, comment.user_id)
+        self.assertEqual(recipe.id, comment.recipe_id)
         self.assertEqual('test text', comment.text)

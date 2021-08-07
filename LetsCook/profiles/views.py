@@ -38,33 +38,6 @@ def home(request):
     return render(request, 'profiles/home.html', context)
 
 
-class SuggestView(LoginRequiredMixin, View):
-    """
-    This view renders a suggestion for a recipe,
-    filtered by meal_type/category
-    """
-    def get(self, request):
-        categories = CATEGORIES
-        recipe = None
-        public_recipes = Recipe.objects.filter(public=True)
-        category_name = request.GET.get('category')
-        if not category_name == ''\
-                and not category_name == 'Random'\
-                and category_name is not None:
-            public_recipes = public_recipes.filter(meal_type=category_name)
-        if public_recipes:
-            recipe = choice(public_recipes)
-        context = {
-            'recipe': recipe,
-            'categories': categories
-        }
-        return render(request, 'profiles/suggest.html', context)
-
-    def post(self, request):
-        save_suggestion(request)
-        return redirect('home')
-
-
 class HistoryView(LoginRequiredMixin, ListView):
     """
     This view shows all choices made by the authenticated user
@@ -133,7 +106,6 @@ def profile_and_user_update(request):
     return render(request, 'profiles/update-profile.html', context)
 
 
-
 class UserRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
     """
     View for recipes created by the current user
@@ -176,3 +148,31 @@ class UserLikedRecipesListView(LoginRequiredMixin, SingleObjectMixin, ListView):
 
     def get_queryset(self):
         return self.object.like_set.all()
+
+
+class SuggestView(LoginRequiredMixin, View):
+    """
+    This view renders a suggestion for a recipe,
+    filtered by meal_type/category
+    """
+
+    def get(self, request):
+        categories = CATEGORIES
+        recipe = None
+        public_recipes = Recipe.objects.filter(public=True)
+        category_name = request.GET.get('category')
+        if not category_name == '' \
+                and not category_name == 'Random' \
+                and category_name is not None:
+            public_recipes = public_recipes.filter(meal_type=category_name)
+        if public_recipes:
+            recipe = choice(public_recipes)
+        context = {
+            'recipe': recipe,
+            'categories': categories
+        }
+        return render(request, 'profiles/suggest.html', context)
+
+    def post(self, request):
+        save_suggestion(request)
+        return redirect('home')
