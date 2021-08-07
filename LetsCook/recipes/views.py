@@ -1,3 +1,4 @@
+from cloudinary import uploader
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
@@ -6,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from LetsCook.common.forms import CommentForm
 from LetsCook.core.constants import CATEGORIES
-from LetsCook.core.utils import save_suggestion
+from LetsCook.core.utils import save_suggestion, add_view_count, check_image_in_cloudinary
 from LetsCook.recipes.forms import RecipeForm, IngredientFormSet, RecipeUpdateForm
 from LetsCook.recipes.models import Recipe
 
@@ -16,14 +17,15 @@ def details_recipe(request, pk):
     This view shows the recipe for the given pk.
     Has a vary basic view count.
     """
+
     if request.method == 'POST':
         save_suggestion(request)
         return redirect('home')
     recipe = Recipe.objects.get(pk=pk)
     # increase views count if not own recipe
-    if not recipe.author.id == request.user.id:
-        recipe.recipe_views = recipe.recipe_views + 1
-        recipe.save()
+    add_view_count(request, recipe)
+    # check if image is in cloudinary
+    check_image_in_cloudinary(recipe)
     # get other data
     ingredients = recipe.ingredients.split(', ')
     is_owner = recipe.author == request.user
@@ -58,6 +60,9 @@ class AllRecipesView(ListView):
 
     def get_queryset(self):
         public_recipes = Recipe.objects.filter(public=True)
+        # avoid missing images
+        for recipe in public_recipes:
+            check_image_in_cloudinary(recipe)
         category_name = self.request.GET.get('category')
         if not category_name == '' and not category_name == 'All' and category_name is not None:
             public_recipes = public_recipes.filter(meal_type=category_name)

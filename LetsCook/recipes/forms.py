@@ -76,6 +76,8 @@ class RecipeForm(forms.ModelForm):
             'width': 580,
             'height': 326,
             'folder': 'recipes',
+            'quality': 90,
+            'format': 'webp',
         },
     )
 

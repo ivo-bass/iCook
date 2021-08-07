@@ -104,3 +104,25 @@ def save_suggestion(request):
         if date:
             choice_made.date = date
         choice_made.save()
+
+
+def add_view_count(request, recipe):
+    """
+    If user is not author add view count to recipe
+    """
+    if not recipe.author.id == request.user.id:
+        recipe.recipe_views = recipe.recipe_views + 1
+        recipe.save()
+
+
+def check_image_in_cloudinary(recipe):
+    """
+    Try to find recipe image in cloudinary and
+    if does not exist set recipe image to None
+    """
+    try:
+        uploader.explicit(recipe.image.public_id, type='upload')
+    except Exception as exc:
+        print(exc)
+        recipe.image = None
+        recipe.save()

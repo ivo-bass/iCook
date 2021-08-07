@@ -24,6 +24,8 @@ class ProfileUpdateForm(AddBootstrapFormControlMixin, forms.ModelForm):
             'width': 200,
             'height': 200,
             'folder': 'profiles',
+            'quality': 80,
+            'format': 'webp',
         },
     )
 
