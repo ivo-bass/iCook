@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
@@ -127,7 +128,7 @@ def activate(request, uidb64, token):
     """
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
-        user = UserModel._default_manager.get(pk=uid)
+        user = UserModel.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
     if user is not None and default_token_generator.check_token(user, token):
@@ -138,6 +139,7 @@ def activate(request, uidb64, token):
         return render(request, 'auth/activation_invalid.html')
 
 
+@login_required(login_url=reverse_lazy('sign-in'))
 def change_password(request):
     """
     Password change view which updates the session with the new credentials
