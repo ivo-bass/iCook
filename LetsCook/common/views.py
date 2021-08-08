@@ -15,7 +15,11 @@ def index(request):
     :param request: get method only
     :return: index.html
     """
-    most_views, most_likes, most_comments = get_top_recipes()
+    try:
+        most_views, most_likes, most_comments = get_top_recipes()
+    except Exception as exc:
+        print(exc)
+        most_views, most_likes, most_comments = None, None, None
     context = {
         'most_views': most_views,
         'most_likes': most_likes,
