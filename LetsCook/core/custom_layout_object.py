@@ -4,6 +4,7 @@ from django.template.loader import render_to_string
 
 class Formset(LayoutObject):
     """
+    Finds keyword in context and applies html.
     Allows to set the order of the fields,
     wraps them in divs or other structures,
     adds html, sets ids, classes or attributes.

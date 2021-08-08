@@ -1,7 +1,4 @@
-import os
-
 from cloudinary import uploader
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
@@ -14,7 +11,7 @@ UserModel = get_user_model()
 @receiver(post_save, sender=UserModel)
 def user_created(sender, instance, created, **kwargs):
     """
-    Activates superuser without email activation.
+    Activates superuser without email verification.
     Sets the default profile username using the user's email
     Adds the user's pk to the username if such exists in the db
     """

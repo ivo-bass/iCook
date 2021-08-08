@@ -8,24 +8,10 @@ class AddBootstrapFormControlMixin:
 
     def add_form_control(self):
         for name, field in self.fields.items():
-            if name in ('meal_type',):
-                try:
-                    if 'class' not in field.widget.attrs:
-                        field.widget.attrs['class'] = ''
-                    field.widget.attrs['class'] += ' form-select'
-                except:
-                    continue
-            elif name in ('public', 'vegetarian'):
-                try:
-                    if 'class' not in field.widget.attrs:
-                        field.widget.attrs['class'] = ''
-                    field.widget.attrs['class'] += ' form-check-input'
-                except:
-                    continue
-            else:
-                try:
-                    if 'class' not in field.widget.attrs:
-                        field.widget.attrs['class'] = ''
-                    field.widget.attrs['class'] += ' form-control'
-                except:
-                    continue
+            try:
+                if 'class' not in field.widget.attrs:
+                    field.widget.attrs['class'] = ''
+                field.widget.attrs['class'] += ' form-control'
+            except Exception as exc:
+                print(exc)
+                continue

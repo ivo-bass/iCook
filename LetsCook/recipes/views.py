@@ -1,4 +1,3 @@
-from cloudinary import uploader
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
