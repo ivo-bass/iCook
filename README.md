@@ -1,23 +1,14 @@
-# iCook
-
-**Django Template Project** with responsive design.
-
-Deployed on ...
-
-## Video Presentation
-
-[![Presentation Video](https://img.youtube.com/vi/zMhGDAGEAIM/default.jpg)](https://youtu.be/zMhGDAGEAIM)
-
 # Documentation
 
 ## iCook
 
-Prepared by Ivailo Ignatov  
-05.08.2021
+by **Ivailo Ignatov** - *IvoBass*  
+09.08.2021
 
 Table of Contents
 =================
 
+* [Video Presentation](#video-presentation)
 * 1 [Introduction](#1-introduction)
 * 2 [Product Overview](#2-product-overview)
     * 2.1 [Product Features ](#21-product-features)
@@ -31,7 +22,11 @@ Table of Contents
 * 4 [Requirements Met](#4-requirements-met)
     * 4.1 [Mandatory Requirements](#41-mandatory-requirements--must-haves)
     * 4.2 [Optional Requirements](#42-optional--bonuses)
-* 5 [Tests Coverage](#5-tests-coverage)
+* 5 [Tests Coverage!](#5-tests-coverage)
+
+## Video Presentation
+
+[![Presentation Video](https://img.youtube.com/vi/zMhGDAGEAIM/default.jpg)](https://youtu.be/zMhGDAGEAIM)
 
 ## 1. Introduction
 
