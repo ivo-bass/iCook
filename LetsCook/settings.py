@@ -9,8 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
 
-SECRET_KEY = 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
-# SECRET_KEY = os.environ.get('KEY')
+SECRET_KEY = os.environ.get('KEY')
 
 DEBUG = True
 
@@ -52,8 +51,7 @@ ROOT_URLCONF = 'LetsCook.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,23 +66,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'LetsCook.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'icookdb.db',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'development',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'icookdb.db',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'icookdb',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
