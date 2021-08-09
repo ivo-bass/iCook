@@ -32,21 +32,27 @@
         <hr>
         <div class="container">
             <div class="row row-cols-auto">
-                <div class="col">
-                    <h5 class="center">Most viewed:</h5>
-                    <hr>
-                    {% include 'recipes/short-details.html' with r=most_views %}
-                </div>
-                <div class="col">
-                    <h5 class="center">Most liked:</h5>
-                    <hr>
-                    {% include 'recipes/short-details.html' with r=most_likes %}
-                </div>
-                <div class="col">
-                    <h5 class="center">Most commented:</h5>
-                    <hr>
-                    {% include 'recipes/short-details.html' with r=most_comments %}
-                </div>
+                {% if most_views and most_comments and most_likes %}
+                    <div class="col">
+                        <h5 class="center">Most viewed:</h5>
+                        <hr>
+                        {% include 'recipes/short-details.html' with r=most_views %}
+                    </div>
+                    <div class="col">
+                        <h5 class="center">Most liked:</h5>
+                        <hr>
+                        {% include 'recipes/short-details.html' with r=most_likes %}
+                    </div>
+                    <div class="col">
+                        <h5 class="center">Most commented:</h5>
+                        <hr>
+                        {% include 'recipes/short-details.html' with r=most_comments %}
+                    </div>
+                {% else %}
+                    <div class="col">
+                        <h5 class="center">No recipes in database</h5>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

@@ -1,18 +1,9 @@
-from django.contrib.auth import get_user_model
-from django.test import TestCase, Client
 from django.urls import reverse
 
+from tests.base.main_test_case import MainTestCase
 
-class SignInViewTest(TestCase):
 
-    def setUp(self):
-        self.user = get_user_model().objects.create_user(email='test@test.test', password='qwe987qwe987',)
-        self.user.is_active = True
-        self.user.save()
-
-    def tearDown(self):
-        self.user.delete()
-
+class SignInViewTest(MainTestCase):
     def test_signInSuccess_shouldRedirectToHome(self):
         response = self.client.post(reverse('sign-in'), data={'username': 'test@test.test', 'password': 'qwe987qwe987'})
         self.assertEqual(302, response.status_code)

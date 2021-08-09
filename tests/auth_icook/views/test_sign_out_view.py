@@ -1,23 +1,12 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
 from django.urls import reverse
 
+from tests.base.main_test_case import MainTestCase
 
 UserModel = get_user_model()
 
 
-class SignOutViewTest(TestCase):
-    EMAIL = 'test@test.test'
-    PASSWORD = 'qwe987qwe987'
-
-    def setUp(self):
-        self.user = UserModel.objects.create_user(
-            email=self.EMAIL,
-            password=self.PASSWORD,
-        )
-        self.user.is_active = True
-        self.user.save()
-
+class SignOutViewTest(MainTestCase):
     def tearDown(self):
         self.user.delete()
 

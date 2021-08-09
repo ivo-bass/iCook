@@ -1,26 +1,12 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
 from django.urls import reverse
 
+from tests.base.main_test_case import MainTestCase
 
 UserModel = get_user_model()
 
 
-class DeleteUserViewTest(TestCase):
-    EMAIL = 'test@test.test'
-    PASSWORD = 'qwe987qwe987'
-
-    def setUp(self):
-        self.user = UserModel.objects.create_user(
-            email=self.EMAIL,
-            password=self.PASSWORD,
-        )
-        self.user.is_active = True
-        self.user.save()
-
-    def tearDown(self):
-        self.user.delete()
-
+class DeleteUserViewTest(MainTestCase):
     def test_deleteUser_whenUserIsNotLoggedIn_shouldRedirectToSignIn(self):
         response = self.client.post(reverse('delete-user', args=(self.user.id, )))
         self.assertEqual(302, response.status_code)
@@ -33,7 +19,6 @@ class DeleteUserViewTest(TestCase):
         self.assertIsNone(user)
         self.assertEqual(302, response.status_code)
         self.assertEqual(reverse('index'), response.headers['location'])
-
 
     def test_deleteUserCancel_shouldRedirectToUpdateProfile(self):
         self.client.login(username=self.EMAIL, password=self.PASSWORD)
