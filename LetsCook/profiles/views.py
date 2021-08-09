@@ -98,7 +98,7 @@ def profile_and_user_update(request):
             p_form.save()
             # should update the session with the new email if changed
             update_session_auth_hash(request, request.user)
-            return redirect('update-profile')
+            # return redirect('update-profile')
     context = {
         'u_form': u_form,
         'p_form': p_form
