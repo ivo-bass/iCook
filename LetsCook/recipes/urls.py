@@ -5,7 +5,7 @@ from LetsCook.recipes import views
 urlpatterns = [
     path('create/', views.RecipeCreate.as_view(), name='create-recipe'),
 
-    path('details/<int:pk>', views.details_recipe, name='details-recipe'),
+    path('details/<int:pk>', views.DetailsRecipe.as_view(), name='details-recipe'),
 
     path('update/<int:pk>', views.RecipeUpdate.as_view(), name='update-recipe'),
 

@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView, DeleteView, UpdateView
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from LetsCook.common.forms import CommentForm
@@ -11,35 +11,40 @@ from LetsCook.recipes.forms import RecipeForm, IngredientFormSet, RecipeUpdateFo
 from LetsCook.recipes.models import Recipe
 
 
-def details_recipe(request, pk):
+class DetailsRecipe(DetailView):
     """
     This view shows the recipe for the given pk.
-    Has a vary basic view count.
+    Has a vary basic view counter.
     """
+    template_name = 'recipes/details.html'
+    model = Recipe
 
-    if request.method == 'POST':
-        save_suggestion(request)
+    def post(self, request, *args, **kwargs):
+        save_suggestion(self.request)
         return redirect('home')
-    recipe = Recipe.objects.get(pk=pk)
-    # increase views count if not own recipe
-    add_view_count(request, recipe)
-    # check if image is in cloudinary
-    check_image_in_cloudinary(recipe)
-    # get other data
-    ingredients = recipe.ingredients.split(', ')
-    is_owner = recipe.author == request.user
-    is_liked_by_user = recipe.like_set.filter(user_id=request.user.id).exists()
-    context = {
-        'recipe': recipe,
-        'ingredients': ingredients,
-        'comments': recipe.comment_set.all(),
-        'comment_form': CommentForm(
-            initial={'recipe_pk': pk}
-        ),
-        'is_owner': is_owner,
-        'is_liked': is_liked_by_user,
-    }
-    return render(request, 'recipes/details.html', context)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # increase views count if not own recipe
+        add_view_count(self.request, self.object)
+        # check if image is in cloudinary
+        check_image_in_cloudinary(self.object)
+        # get other data
+        ingredients = self.object.ingredients.split(', ')
+        is_owner = self.object.author == self.request.user
+        is_liked_by_user = self.object.like_set.filter(user_id=self.request.user.id).exists()
+        context.update({
+            'recipe': self.object,
+            'ingredients': ingredients,
+            'comments': self.object.comment_set.all(),
+            'comment_form': CommentForm(
+                initial={'recipe_pk': self.object.pk}
+            ),
+            'is_owner': is_owner,
+            'is_liked': is_liked_by_user,
+        })
+        return context
+
 
 
 class AllRecipesView(ListView):
