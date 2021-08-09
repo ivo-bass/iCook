@@ -8,25 +8,31 @@ by **Ivailo Ignatov** - *IvoBass*
 Table of Contents
 =================
 
-* [Video Presentation](#video-presentation)
 * 1 [Introduction](#1-introduction)
+
+
 * 2 [Product Overview](#2-product-overview)
     * 2.1 [Product Features ](#21-product-features)
     * 2.2 [User Characteristics](#22-user-characteristics)
     * 2.3 [Profile objects](#23-profile-objects)
     * 2.4 [Recipe objects](#24-recipe-objects)
     * 2.5 [Ingredient objects](#25-ingredient-objects)
+
+
 * 3 [Additional Sevices](#3-additional-services)
     * 3.1 [Claudianry](#31-cloudianry)
-    * 3.2 [Celery](#32-celery)
+
+[comment]: <> (    * 3.2 [Celery]&#40;#32-celery&#41;)
+
 * 4 [Requirements Met](#4-requirements-met)
     * 4.1 [Mandatory Requirements](#41-mandatory-requirements--must-haves)
     * 4.2 [Optional Requirements](#42-optional--bonuses)
-* 5 [Tests Coverage!](#5-tests-coverage)
 
-## Video Presentation
 
-[![Presentation Video](https://img.youtube.com/vi/zMhGDAGEAIM/default.jpg)](https://youtu.be/zMhGDAGEAIM)
+* 5 [Test Coverage](#5-tests-coverage)
+
+
+* 6 [Video Presentation](#video-presentation)
 
 ## 1. Introduction
 
@@ -178,3 +184,7 @@ The images are cropped to occupy less space in the cloud - 200x200 for profiles 
 ![Models Coverage](/github-images/models_coverage.png)
 
 ![Forms Coverage](/github-images/forms_coverage.png)
+
+## 6. Video Presentation
+
+[![Presentation Video](https://img.youtube.com/vi/zMhGDAGEAIM/default.jpg)](https://youtu.be/zMhGDAGEAIM)
