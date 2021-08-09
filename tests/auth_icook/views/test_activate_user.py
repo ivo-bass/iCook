@@ -40,9 +40,9 @@ class ActivateUserTest(TestCase):
     If you think, it's not you, then just ignore this email.
 """
         token_regex = r"activate/MQ\/([A-Za-z0-9:\-]+)\/"
-        email_content = mail.outbox[0].body
-        match = re.search(token_regex, email_content)
-        token = match.group(1)
+        # email_content = mail.outbox[0].body
+        # match = re.search(token_regex, email_content)
+        # token = match.group(1)
 
         # user_id = get_user_model().objects.first().id
         # uidb64 = int_to_base36(user_id)

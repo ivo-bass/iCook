@@ -10,7 +10,7 @@ class UpdateRecipeViewTest(MainTestCase):
         self.create_recipe()
         response = self.client.get(reverse('update-recipe', args=(self.recipe.pk,)))
         self.assertEqual(302, response.status_code)
-        self.assertRedirects(response, '/auth/sign-in/?next=/recipe/update/1')
+        self.assertRedirects(response, f'/auth/sign-in/?next=/recipe/update/{self.recipe.pk}')
 
     def test_updateRecipeGet_whenLoggedIn_shouldRenderTemplate(self):
         self.client.force_login(self.user)

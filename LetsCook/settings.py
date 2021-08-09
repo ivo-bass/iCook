@@ -8,8 +8,8 @@ import cloudinary.api
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
-
-SECRET_KEY = os.environ.get('KEY')
+SECRET_KEY = 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
+# SECRET_KEY = os.environ.get('KEY')
 
 DEBUG = True
 

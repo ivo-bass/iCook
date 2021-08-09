@@ -10,7 +10,7 @@ class CommentRecipeViewTest(MainTestCase):
             reverse('comment-recipe', args=(self.recipe.pk,)),
             data={'recipe_pk': self.recipe.pk, 'text': 'test text'}
         )
-        self.assertRedirects(response, '/auth/sign-in/?next=/comment/1')
+        self.assertRedirects(response, f'/auth/sign-in/?next=/comment/{self.recipe.pk}')
 
     def test_comment_whenLoggedIn_shouldAddCommentRedirectToDetails(self):
         self.client.force_login(self.user)
@@ -22,6 +22,6 @@ class CommentRecipeViewTest(MainTestCase):
         )
         new_count = self.recipe.comments_count
         self.assertNotEqual(old_count, new_count)
-        self.assertRedirects(response, '/recipe/details/1')
+        self.assertRedirects(response, f'/recipe/details/{self.recipe.pk}')
 
     # empty text for comment is invalid but the frontend handles it with client-side error

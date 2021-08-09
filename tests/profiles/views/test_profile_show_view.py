@@ -6,7 +6,7 @@ from tests.base.main_test_case import MainTestCase
 class ProfileShowViewTest(MainTestCase):
     def test_profileShow_whenNotLoggedIn_shouldRedirectToSignInWithNext(self):
         response = self.client.get(reverse('show-profile', args=(self.user.id,)))
-        self.assertRedirects(response, '/auth/sign-in/?next=/profile/show/1')
+        self.assertRedirects(response, f'/auth/sign-in/?next=/profile/show/{self.user.id}')
 
 
     def test_profileShow_whenLoggedIn_shouldRenderTemplate(self):

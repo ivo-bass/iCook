@@ -17,7 +17,7 @@ class LikedRecipesViewTest(MainTestCase):
         self.client.force_login(self.user)
 
         response = self.client.get(reverse('liked-recipes'))
-        recipe_pk = response.context.get('object_list')[0].pk
+        recipe_pk = response.context.get('object_list')[0].recipe.pk
 
         self.assertEqual(200, response.status_code)
         self.assertTemplateUsed(response, 'profiles/liked-recipes.html')

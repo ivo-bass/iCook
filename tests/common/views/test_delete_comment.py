@@ -15,7 +15,7 @@ class DeleteCommentViewTest(MainTestCase):
         response = self.client.post(
             reverse('delete-comment', args=(self.recipe.pk, self.comment.pk))
         )
-        self.assertRedirects(response, '/auth/sign-in/?next=/delete-comment/1/1')
+        self.assertRedirects(response, f'/auth/sign-in/?next=/delete-comment/{self.recipe.pk}/{self.comment.pk}')
 
     def test_deleteComment_whenUserIsOwner_shouldDeleteComment(self):
         self.create_recipe()
@@ -27,7 +27,7 @@ class DeleteCommentViewTest(MainTestCase):
         )
         new_comment_set_count = self.recipe.comment_set.count()
         self.assertNotEqual(old_comment_set_count, new_comment_set_count)
-        self.assertRedirects(response, '/recipe/details/1')
+        self.assertRedirects(response, f'/recipe/details/{self.recipe.pk}')
 
     def test_deleteComment_whenUserIsNotOwner_shouldNotDeleteComment(self):
         self.create_recipe()
@@ -45,4 +45,4 @@ class DeleteCommentViewTest(MainTestCase):
         )
         new_comment_set_count = self.recipe.comment_set.count()
         self.assertEqual(old_comment_set_count, new_comment_set_count)
-        self.assertRedirects(response, '/recipe/details/1')
+        self.assertRedirects(response, f'/recipe/details/{self.recipe.pk}')

@@ -21,6 +21,9 @@ class MainTestCase(TestCase):
         self.user.is_active = True
         self.user.save()
 
+    def tearDown(self):
+        self.user.delete()
+
     def create_new_user(self):
         self.new_user = UserModel.objects.create_user(
             email='new@new.new',

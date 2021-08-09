@@ -10,7 +10,7 @@ class DeleteUserViewTest(MainTestCase):
     def test_deleteUser_whenUserIsNotLoggedIn_shouldRedirectToSignIn(self):
         response = self.client.post(reverse('delete-user', args=(self.user.id, )))
         self.assertEqual(302, response.status_code)
-        self.assertEqual('/auth/sign-in/?next=/auth/delete/1', response.headers['location'])
+        self.assertEqual(f'/auth/sign-in/?next=/auth/delete/{self.user.id}', response.headers['location'])
 
     def test_deleteUserSuccess_shouldDeleteUserAndRedirectToIndex(self):
         self.client.login(username=self.EMAIL, password=self.PASSWORD)

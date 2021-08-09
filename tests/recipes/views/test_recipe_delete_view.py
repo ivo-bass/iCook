@@ -8,7 +8,7 @@ class DeleteRecipeViewTest(MainTestCase):
         self.create_recipe()
         response = self.client.post(reverse('delete-recipe', args=(self.recipe.pk,)))
         self.assertEqual(302, response.status_code)
-        self.assertRedirects(response, '/auth/sign-in/?next=/recipe/delete/1')
+        self.assertRedirects(response, f'/auth/sign-in/?next=/recipe/delete/{self.recipe.pk}')
 
     def test_deleteRecipe_whenLoggedIn_shouldDelete(self):
         self.create_recipe()
@@ -31,5 +31,5 @@ class DeleteRecipeViewTest(MainTestCase):
         recipes_count = self.user.recipe_set.count()
         self.assertEqual(1, recipes_count)
         self.assertEqual(302, response.status_code)
-        self.assertRedirects(response, '/recipe/details/1')
+        self.assertRedirects(response, f'/recipe/details/{self.recipe.pk}')
 
