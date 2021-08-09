@@ -41,6 +41,19 @@ class MainTestCase(TestCase):
             image=None,
         )
 
+    def create_private_recipe(self):
+        self.recipe = Recipe.objects.create(
+            author=self.user,
+            title='private title',
+            meal_type=CATEGORIES[0],
+            description='test description',
+            preparation='test preparation',
+            time=1,
+            servings=1,
+            image=None,
+            public=False,
+        )
+
     def create_ingredient(self):
         self.ingredient = Ingredient.objects.create(
             recipe=self.recipe,

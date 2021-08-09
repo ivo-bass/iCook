@@ -64,7 +64,7 @@ class AllRecipesView(ListView):
 
     def get_queryset(self):
         public_recipes = Recipe.objects.filter(public=True)
-        # avoid missing images
+        # avoid missing images if missing in the cloud set to None
         for recipe in public_recipes:
             check_image_in_cloudinary(recipe)
         category_name = self.request.GET.get('category')
