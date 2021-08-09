@@ -49,18 +49,18 @@ class Profile(models.Model):
 
     @property
     def rang(self):
-        rang = 'Beginner'
+        rang = 'Newbie'
         likes = self.user.like_set.count()
         comments = self.user.comment_set.count()
         recipes = self.user.recipe_set.count()
-        if likes and comments and recipes:
-            rang = 'Intermediate'
-        if likes > 10 and comments > 10 and recipes > 3:
-            rang = 'Advanced'
+        if likes > 3 and comments > 3 and recipes:
+            rang = 'Cook'
+        elif likes > 10 and comments > 10 and recipes > 3:
+            rang = 'Sous-Chef'
         elif likes > 20 and comments > 20 and recipes > 10:
-            rang = 'Expert'
+            rang = 'Chef'
         elif likes > 30 and comments > 30 and recipes > 20:
-            rang = 'All Star'
+            rang = 'Master-Chef'
         return rang
 
     @property

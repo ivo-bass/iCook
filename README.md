@@ -46,17 +46,29 @@ the best recipes, while also helping them become better.
 
 ### 2.1 Product Features
 
-* A database of cooking recipes
+* Custom user
+* Cloud storage
+* Dark/Light Mode
+* Email verification
+
+
+* Create private recipes
 * Perform search for recipes by keywords
-* Create, read, update and delete recipes
-* Like and comment recipes
 * Classify recipes by view, like and comment counts
+* Create, read, update, delete, like and comment recipes
+
+
 * Provide suggestions to the authenticated users (***Suggest***)
+* Keep track on liked recipes (***Liked Recipes***)
 * Save suggestion as a todo item (***Choice***)
 * Keep track on user choices (***History***)
-* Keep track on liked recipes (***Liked Recipes***)
+
+
 * Create update and delete own user profile
-* View foreign profiles
+* Develop profile rating (***Rang***)
+* Change or Reset password
+* View other profiles
+
 
 ### 2.2 User Characteristics
 
