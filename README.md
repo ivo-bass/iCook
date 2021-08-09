@@ -51,18 +51,21 @@ the best recipes, while also helping them become better.
 * Dark/Light Mode
 * Email verification
 
+---
 
 * Create private recipes
 * Perform search for recipes by keywords
 * Classify recipes by view, like and comment counts
 * Create, read, update, delete, like and comment recipes
 
+---
 
 * Provide suggestions to the authenticated users (***Suggest***)
 * Keep track on liked recipes (***Liked Recipes***)
 * Save suggestion as a todo item (***Choice***)
 * Keep track on user choices (***History***)
 
+---
 
 * Create update and delete own user profile
 * Develop profile rating (***Rang***)
