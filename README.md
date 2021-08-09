@@ -31,6 +31,7 @@ Table of Contents
 * 4 [Requirements Met](#4-requirements-met)
     * 4.1 [Mandatory Requirements](#41-mandatory-requirements--must-haves)
     * 4.2 [Optional Requirements](#42-optional--bonuses)
+* 5 [Tests Coverage](#5-tests-coverage)
 
 ## 1. Introduction
 
@@ -137,8 +138,8 @@ The ***Ingredient*** objects are created on recipe creation.
 
 ### 3.1 Cloudianry
 
-The system uses [**Cloudinary's** Python SDK](https://cloudinary.com/documentation/django_integration) to store all media
-files - profile images and recipe images.  
+The system uses [**Cloudinary's** Python SDK](https://cloudinary.com/documentation/django_integration) to store all
+media files - profile images and recipe images.  
 The images are cropped to occupy less space in the cloud - 200x200 for profiles and 580x326 for recipes.  
 ***Static*** directory contain default images which are rendered by the template if no image is uploaded in the cloud.
 
@@ -174,3 +175,11 @@ The images are cropped to occupy less space in the cloud - 200x200 for profiles 
 - [x] Documentation/ Swagger
 - [x] Use a file storage cloud API e.g., **Cloudinary**, Dropbox, Google Drive or other for storing the files
 - [ ] Implement Microservice architecture in your application. *(I'm not sure what do you mean by that)*
+
+## 5. Tests Coverage
+
+![Views Coverage](/github-images/views_coverage.png)
+
+![Models Coverage](/github-images/models_coverage.png)
+
+![Forms Coverage](/github-images/forms_coverage.png)
