@@ -1,5 +1,5 @@
 from LetsCook.profiles.models import Choice
-from tests.base.create_recipe_objects import create_public_recipe
+from tests.base.testing_utils.create_recipe_objects import create_public_recipe
 
 
 def create_choice():

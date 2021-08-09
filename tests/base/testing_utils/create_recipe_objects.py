@@ -1,6 +1,6 @@
 from LetsCook.core.constants import CATEGORIES
 from LetsCook.recipes.models import Recipe
-from tests.base.create_user_objects import create_regular_active_user
+from tests.base.testing_utils.create_user_objects import create_regular_active_user
 
 
 def create_public_recipe():

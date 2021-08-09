@@ -4,8 +4,7 @@ import requests
 from django.test import TestCase
 
 from LetsCook.core.utils import get_recipes_for_day
-from LetsCook.profiles.models import Choice
-from tests.base.create_choice_object import create_choice
+from tests.base.testing_utils.create_choice_object import create_choice
 
 """
 def get_recipes_for_day(request, day):

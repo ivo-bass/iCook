@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from tests.base.create_user_objects import create_regular_user
+from tests.base.testing_utils.create_user_objects import create_regular_user
 
 
 class UserModelTest(TestCase):

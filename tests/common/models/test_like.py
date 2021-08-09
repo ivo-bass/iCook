@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from LetsCook.recipes.models import Recipe
-from tests.base.create_like_object import create_like
+from tests.base.testing_utils.create_like_object import create_like
 
 UserModel = get_user_model()
 

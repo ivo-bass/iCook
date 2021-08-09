@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from LetsCook.recipes.models import Recipe
-from tests.base.create_comment_objects import create_comment
+from tests.base.testing_utils.create_comment_objects import create_comment
 
 UserModel = get_user_model()
 

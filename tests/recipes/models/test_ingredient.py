@@ -2,7 +2,7 @@ from django.test import TestCase
 
 from LetsCook.core.constants import MEASURES
 from LetsCook.recipes.models import Recipe
-from tests.base.create_ingredient_objects import create_ingredient_with_all_fields, create_ingredient_with_name_only
+from tests.base.testing_utils.create_ingredient_objects import create_ingredient_with_all_fields, create_ingredient_with_name_only
 
 
 class IngredientModelTest(TestCase):

@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase
 
 from LetsCook.core.constants import CATEGORIES
-from tests.base.create_recipe_objects import create_public_recipe
+from tests.base.testing_utils.create_recipe_objects import create_public_recipe
 
 """
 class Recipe(models.Model):
