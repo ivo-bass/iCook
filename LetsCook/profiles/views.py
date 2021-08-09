@@ -1,3 +1,4 @@
+import random
 from random import choice
 
 from django.contrib.auth import get_user_model, update_session_auth_hash
@@ -10,13 +11,17 @@ from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 
 from LetsCook.auth_icook.forms import UserUpdateForm
-from LetsCook.core.constants import CATEGORIES
+from LetsCook.core.constants import CATEGORIES, FUN_FACTS
 from LetsCook.core.utils import get_top_recipes, get_recipes_for_current_days, save_suggestion
 from LetsCook.profiles.forms import ProfileUpdateForm
 from LetsCook.profiles.models import Choice
 from LetsCook.recipes.models import Recipe
 
 UserModel = get_user_model()
+
+
+def generate_fun_fact():
+    return random.choice(FUN_FACTS)
 
 
 @login_required(login_url=reverse_lazy('sign-in'))
@@ -26,7 +31,10 @@ def home(request):
     and the top public recipes in the db
     """
     recipes_today, recipes_yesterday, recipes_tomorrow = get_recipes_for_current_days(request)
-    most_views, most_likes, most_comments = get_top_recipes()
+    top_recipes = get_top_recipes()
+    most_views, most_likes, most_comments = top_recipes
+    from randfacts import get_fact
+    fun_fact = get_fact()
     context = {
         'recipes_for_today': recipes_today,
         'recipes_for_yesterday': recipes_yesterday,
@@ -34,6 +42,7 @@ def home(request):
         'most_views': most_views,
         'most_likes': most_likes,
         'most_comments': most_comments,
+        'fun_fact': fun_fact,
     }
     return render(request, 'profiles/home.html', context)
 

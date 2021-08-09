@@ -39,12 +39,13 @@ def get_top_recipes():
     Filters recipes by likes count, comments count
     and views count than returns the top recipes
     """
+    most_views, most_likes, most_comments = None, None, None
     all_public_recipes = Recipe.objects.filter(public=True)
     if all_public_recipes:
         most_views = Recipe.objects.filter(public=True).order_by('recipe_views').last()
         most_likes = list(sorted(all_public_recipes, key=lambda obj: -obj.likes_count))[0]
         most_comments = list(sorted(all_public_recipes, key=lambda obj: -obj.comments_count))[0]
-        return most_views, most_likes, most_comments
+    return most_views, most_likes, most_comments
 
 
 def get_search_results(request):

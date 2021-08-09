@@ -68,7 +68,7 @@ class Profile(models.Model):
         username = 25 if self.username else 0
         first_name = 25 if self.first_name else 0
         last_name = 25 if self.last_name else 0
-        image = 25 if not self.image.name == 'profile-default.jpg' else 0
+        image = 25 if not None else 0
         value = username + first_name + last_name + image
         return value
 

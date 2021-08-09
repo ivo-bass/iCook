@@ -1,8 +1,8 @@
 {% if request.user.profile.progress < 100 %}
-<div class="text-center text-danger">
-    <small class="notification">
-        Your profile is {{ request.user.profile.progress }}% complete. Get it done
-        <a href="{% url 'update-profile' %}">HERE</a>.
-    </small>
-</div>
+    <div class="text-center text-danger">
+        <small class="notification">
+            Your profile is {{ request.user.profile.progress }}% complete. Get it done
+            <a href="{% url 'update-profile' %}">HERE</a>.
+        </small>
+    </div>
 {% endif %}

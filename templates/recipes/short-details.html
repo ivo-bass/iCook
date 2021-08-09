@@ -1,62 +1,64 @@
 {% load static %}
 
-<div class="card-container">
-    <div class="new-card border-primary">
-        <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
-            <div class="imgBx">
-                {% if r.image %}
-                    <img src="{{ r.image.url }}" alt="image">
-                {% else %}
-                    <img src="{% static 'images/food-default.png' %}" alt="image">
-                {% endif %}
-            </div>
-        </a>
-        <div class="card-content">
-            <p class="card-text">
-                {{ r.description|capfirst|truncatechars:35 }}
-            </p>
-            <hr>
-            <ul class="list-group list-group-horizontal center">
-                <li class="list-group-item">
-                    <small class="text-warning">
-                        <ion-icon name="people-outline"></ion-icon>
-                        {{ r.servings }}
-                    </small>
-                </li>
-                <li class="list-group-item">
-                    <small class="text-success">
-                        <ion-icon name="time-outline"></ion-icon>
-                        {{ r.time }} min
-                    </small>
-                </li>
-            </ul>
-            <hr>
-        </div>
-        <div>
+{% if r %}
+    <div class="card-container">
+        <div class="new-card border-primary">
             <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
-                <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
+                <div class="imgBx">
+                    {% if r.image %}
+                        <img src="{{ r.image.url }}" alt="image">
+                    {% else %}
+                        <img src="{% static 'images/food-default.png' %}" alt="image">
+                    {% endif %}
+                </div>
             </a>
-            <span class="card-subtitle text-muted center">{{ r.meal_type }}</span>
-            {% if r.public %}
-                <span class="card-subtitle text-success center">public</span>
-            {% else %}
-                <span class="card-subtitle text-danger center">private</span>
-            {% endif %}
-            <hr>
-            <div class="container">
-                <div class="row row-cols-auto justify-content-between">
-                    <div class="col text-center">
-                        <small class="text-muted">likes: {{ r.like_set.count }}</small>
-                    </div>
-                    <div class="col text-center">
-                        <small class="text-muted">comments: {{ r.comment_set.count }}</small>
-                    </div>
-                    <div class="col text-center">
-                        <small class="text-muted">views: {{ r.recipe_views }}</small>
+            <div class="card-content">
+                <p class="card-text">
+                    {{ r.description|capfirst|truncatechars:35 }}
+                </p>
+                <hr>
+                <ul class="list-group list-group-horizontal center">
+                    <li class="list-group-item">
+                        <small class="text-warning">
+                            <ion-icon name="people-outline"></ion-icon>
+                            {{ r.servings }}
+                        </small>
+                    </li>
+                    <li class="list-group-item">
+                        <small class="text-success">
+                            <ion-icon name="time-outline"></ion-icon>
+                            {{ r.time }} min
+                        </small>
+                    </li>
+                </ul>
+                <hr>
+            </div>
+            <div>
+                <a href="{% url 'details-recipe' r.pk %}" class="text-decoration-none">
+                    <h5 class="card-title text-primary center">{{ r.title|capfirst }}</h5>
+                </a>
+                <span class="card-subtitle text-muted center">{{ r.meal_type }}</span>
+                {% if r.public %}
+                    <span class="card-subtitle text-success center">public</span>
+                {% else %}
+                    <span class="card-subtitle text-danger center">private</span>
+                {% endif %}
+                <hr>
+                <div class="container">
+                    <div class="row row-cols-auto justify-content-between">
+                        <div class="col text-center">
+                            <small class="text-muted">likes: {{ r.like_set.count }}</small>
+                        </div>
+                        <div class="col text-center">
+                            <small class="text-muted">comments: {{ r.comment_set.count }}</small>
+                        </div>
+                        <div class="col text-center">
+                            <small class="text-muted">views: {{ r.recipe_views }}</small>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
+{% endif %}
