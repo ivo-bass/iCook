@@ -2,12 +2,10 @@ FROM python:3
 
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /web
+WORKDIR /app
 
-RUN pip install --upgrade pip
-
-COPY ./requirements.txt /web/
+COPY ./requirements.txt /app/
 
 RUN pip install -r requirements.txt
 
-COPY . /web/
+COPY . /app/
