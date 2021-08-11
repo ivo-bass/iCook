@@ -10,13 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
 SECRET_KEY = os.environ.get('KEY')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'testserver',
-    '3338f667023f.ngrok.io',
-]
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(', ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
