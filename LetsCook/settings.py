@@ -8,11 +8,11 @@ import cloudinary.api
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
-SECRET_KEY = os.environ.get('KEY')
+SECRET_KEY = os.environ.get('KEY', 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb\=%!m3u)z-z@')
 
 DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1 testserver').split(' ')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,11 +64,11 @@ WSGI_APPLICATION = 'LetsCook.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
+        'NAME': os.environ.get('DB_NAME', 'icookdb'),
+        'USER': os.environ.get('DB_USER', 'admin'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'admin'),
+        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('DB_PORT', 465),
     }
 }
 
@@ -120,10 +120,10 @@ AUTH_USER_MODEL = 'auth_icook.ICookUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'hluwjzgekomnemgk')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'ivailo.ignatoff@gmail.com')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 465)
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -133,8 +133,8 @@ LOGIN_REDIRECT_URL = 'home'
 
 # cloudinary configuration
 cloudinary.config(
-    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    api_key=os.environ.get('CLOUDINARY_API_KEY'),
-    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
+    cloud_name='dmcijbogb',
+    api_key='131115758974547',
+    api_secret='-ZwZS3zkKJ6WRIZGbT3DJkjJuzM',
     secure=True,
 )
