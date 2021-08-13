@@ -32,7 +32,10 @@ Table of Contents
 * 5 [Test Coverage](#5-tests-coverage)
 
 
-* 6 [Video Presentation](#video-presentation)
+* 6 [Video Presentation](#6-video-presentation)
+
+
+* 7 [Video Presentation](#7-deployment)
 
 ## 1. Introduction
 
@@ -203,3 +206,10 @@ The images are cropped to occupy less space in the cloud - 200x200 for profiles 
 ## 6. Video Presentation
 
 [![Presentation Video](https://img.youtube.com/vi/zMhGDAGEAIM/default.jpg)](https://youtu.be/zMhGDAGEAIM)
+
+
+## 7. Deployment
+
+[icook.gq](https://icook.gq/)
+
+Docker, AWS - EC2, Nginx, Certbot
