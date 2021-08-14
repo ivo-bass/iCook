@@ -8,7 +8,7 @@ import cloudinary.api
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb=%!m3u)z-z@'
-SECRET_KEY = os.environ.get('KEY', 'django-insecure-cyn1c4ob$q4vn@q4#t#w)7#fl9#0_cpw6_n*-bb\=%!m3u)z-z@')
+SECRET_KEY = os.environ.get('KEY')
 
 DEBUG = os.environ.get('DEBUG', True)
 
@@ -107,11 +107,8 @@ STATIC_ROOT = '/tmp/staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# BS_ICONS_CACHE = os.path.join(STATIC_ROOT, 'icon_cache')
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# SOUTH_DATABASE_ADAPTERS = {'default': 'south.db.postgresql_psycopg2'}
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -133,8 +130,8 @@ LOGIN_REDIRECT_URL = 'home'
 
 # cloudinary configuration
 cloudinary.config(
-    cloud_name='dmcijbogb',
-    api_key='131115758974547',
-    api_secret='-ZwZS3zkKJ6WRIZGbT3DJkjJuzM',
+    cloud_name=os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret=os.environ.get('CLOUDINARY_API_SECRET'),
     secure=True,
 )
