@@ -1,5 +1,6 @@
 venv
-env
+.env
+.env.prod
 
 .idea
 
@@ -10,3 +11,4 @@ media/
 .vscode/
 
 access.txt
+
