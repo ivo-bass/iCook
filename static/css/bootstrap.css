@@ -128,16 +128,15 @@ main {
     justify-content: center;
     z-index: 3;
     top: 20%;
-    right: 0;
     height: 60%;
     width: 20px;
     background: var(--bs-backgroud-nav);
     background-image: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2));
-    box-shadow: -5px 0 0 var(--bs-primary), -5px 0 10px 1px black;
+    box-shadow: 5px 0 0 var(--bs-primary), 5px 0 10px 1px black;
     overflow-x: hidden;
     transition: width 0.5s;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .navigation:hover {
@@ -13905,9 +13904,9 @@ ion-icon {
     color: var(--bs-danger);
     background: rgba(255, 255, 255, 0.6);
     padding: 2px 10px 2px 10px;
-    border: solid 1px var(--bs-danger);
+    /*border: solid 1px var(--bs-danger);*/
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);*/
 }
 
 .dashboard-card {

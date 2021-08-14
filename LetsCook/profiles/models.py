@@ -53,13 +53,13 @@ class Profile(models.Model):
         likes = self.user.like_set.count()
         comments = self.user.comment_set.count()
         recipes = self.user.recipe_set.count()
-        if likes > 3 and comments > 3 and recipes:
+        if recipes:
             rang = 'Cook'
-        elif likes > 10 and comments > 10 and recipes > 3:
+        elif likes and comments and recipes > 5:
             rang = 'Sous-Chef'
-        elif likes > 20 and comments > 20 and recipes > 10:
+        elif likes > 20 or comments > 20 and recipes > 10:
             rang = 'Chef'
-        elif likes > 30 and comments > 30 and recipes > 20:
+        elif likes > 30 or comments > 30 and recipes > 20:
             rang = 'Master-Chef'
         return rang
 
