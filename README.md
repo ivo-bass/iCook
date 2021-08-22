@@ -190,7 +190,7 @@ The images are cropped to occupy less space in the cloud - 200x200 for profiles 
 - [x] Extended Django user
 - [x] Documentation/ Swagger
 - [x] Use a file storage cloud API e.g., **Cloudinary**, Dropbox, Google Drive or other for storing the files
-- [ ] Implement Microservice architecture in your application. _(I'm not sure what do you mean by that)_
+- [x] Implement Microservice architecture in your application.
 
 ## 5. Tests Coverage
 
